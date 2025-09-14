@@ -21,6 +21,7 @@ const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE; //(3+10+3) = 16
 struct Coordenada {
   int i;
   int j;
+  int mov_anterior;
 };
 
 // auxiliares para la construccion del puente
@@ -34,21 +35,33 @@ char32_t **crear_puente(char32_t **mapa) {
     random = (actual->i == 0)                 ? rand() % 2 + 1
              : (actual->i == LARGO_TOTAL - 1) ? rand() % 2
                                               : rand() % 3;
+    // cout << random << ", ";
+
+    random += (random == 0 && actual->mov_anterior == 2)   ? 1
+              : (random == 2 && actual->mov_anterior == 0) ? -2
+                                                           : 0;
+
     actual->i += random == 0 ? -1 : random == 2 ? 1
                                                 : 0;
     actual->j += random == 1 ? 1 : 0;
     mapa[actual->i][actual->j] = puente;
+    actual->mov_anterior = random;
   }
+  cout << endl;
   return mapa;
 }
 
 char32_t punta_del_puente(int i, int j) {
   int primera = ANCHO_PLATAFORMAS;
-  if (j == primera || (j - 1) == primera) {
-    actual->i = i;
-    actual->j = j;
-    return (i == inicio_del_puente ? puente : agua);
-  } else
+  if (j == primera || (j - 1) == primera)
+    if (i == inicio_del_puente) {
+      actual->i = i;
+      actual->j = j;
+      actual->mov_anterior = 1;
+      return puente;
+    } else
+      return agua;
+  else
     return agua;
   // return j%2 == 0 ? agua2 : vacio;
 }
@@ -71,7 +84,7 @@ char32_t **crear_plataformas() {
         mapa[i][j] = plataforma;
     }
   }
-
+  // cout << actual->i << " - " << actual->j << endl;
   return mapa;
 }
 
@@ -87,9 +100,9 @@ void imprimir_mapa(char32_t **mapa) {
 int main() {
   char32_t **mapa = crear_plataformas();
   mapa = crear_puente(mapa);
-  mapa[LARGO_TOTAL/2][ANCHO_TOTAL-2] = rosa;
-  mapa[LARGO_TOTAL/2][ANCHO_TOTAL-1] = ' ';
-  mapa[LARGO_TOTAL/2][1] = jugador;
+  mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 2] = rosa;
+  mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 1] = ' ';
+  mapa[LARGO_TOTAL / 2][1] = jugador;
   imprimir_mapa(mapa);
   return 0;
 }
