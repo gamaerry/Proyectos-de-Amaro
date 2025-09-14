@@ -35,17 +35,16 @@ char32_t **crear_puente(char32_t **mapa) {
     random = (actual->i == 0)                 ? rand() % 2 + 1
              : (actual->i == LARGO_TOTAL - 1) ? rand() % 2
                                               : rand() % 3;
-    // cout << random << ", ";
-
-    random += (random == 0 && actual->mov_anterior == 2)   ? 1
-              : (random == 2 && actual->mov_anterior == 0) ? -2
-                                                           : 0;
-
-    actual->i += random == 0 ? -1 : random == 2 ? 1
-                                                : 0;
-    actual->j += random == 1 ? 1 : 0;
+    bool nuevo_mov_redundante = (random == 0 && actual->mov_anterior == 2) || (random == 2 && actual->mov_anterior == 0);
+    if (nuevo_mov_redundante)
+      actual->j++;
+    else {
+      actual->i += random == 0 ? -1 : random == 2 ? 1
+                                                  : 0;
+      actual->j += random == 1 ? 1 : 0;
+    }
     mapa[actual->i][actual->j] = puente;
-    actual->mov_anterior = random;
+    actual->mov_anterior = nuevo_mov_redundante ? 1 : random;
   }
   cout << endl;
   return mapa;
