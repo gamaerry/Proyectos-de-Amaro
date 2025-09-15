@@ -11,11 +11,11 @@ char32_t rosa_feliz = U'🌹';
 char32_t puente = U'⧥';
 char32_t plataforma = U'_';
 char32_t agua = U' ';
-char32_t agua2 = U'︴';
+char32_t agua2 = U'⦚';
 char32_t vacio;
-const int LARGO_TOTAL = 5;
-const int ANCHO_PLATAFORMAS = 3;
-const int ANCHO_PUENTE = 10;
+const int LARGO_TOTAL = 7;
+const int ANCHO_PLATAFORMAS = 5;
+const int ANCHO_PUENTE = 30;
 const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE; //(3+10+3) = 16
 
 // Estructura simple
@@ -41,7 +41,6 @@ char32_t **crear_puente_separado(char32_t **mapa) {
     if (nuevo_mov_redundante || random == 1 || actual->espacio_requerido > 0) {
       actual->j++;
       actual->espacio_requerido--;
-      cout << actual->espacio_requerido << ", ";
     } else {
       actual->i += random == 0 ? -1 : 1;
       actual->espacio_requerido = 2;
@@ -49,7 +48,6 @@ char32_t **crear_puente_separado(char32_t **mapa) {
     mapa[actual->i][actual->j] = puente;
     actual->mov_anterior = nuevo_mov_redundante ? 1 : random;
   }
-  cout << endl;
   return mapa;
 }
 
@@ -84,10 +82,10 @@ char32_t punta_del_puente(int i, int j) {
       actual->mov_anterior = 1;
       return puente;
     } else
-      return agua;
+      return agua2;
   else
-    return agua;
-  // return j%2 == 0 ? agua2 : vacio;
+    // return agua;
+    return j%2 == 1 ? agua2 : agua;
 }
 
 char32_t **crear_plataformas() {
