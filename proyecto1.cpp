@@ -1,12 +1,13 @@
 #include <cstdlib>
 #include <iostream>
-#include <system_error>
 #include <time.h>
 
 using namespace std;
 
-char32_t jugador = U'♡';
-char32_t rosa = U'𓍯';
+char32_t jugador = U'♥';
+char32_t jugador_feliz = U'💓';
+char32_t rosa = U'🥀';
+char32_t rosa_feliz = U'🌹';
 char32_t puente = U'⧥';
 char32_t plataforma = U'_';
 char32_t agua = U' ';
