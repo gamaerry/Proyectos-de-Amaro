@@ -23,11 +23,35 @@ struct Coordenada {
   int i;
   int j;
   int mov_anterior;
+  int espacio_requerido = 0;
 };
 
 // auxiliares para la construccion del puente
 int inicio_del_puente;
 Coordenada *actual = (Coordenada *)calloc(1, sizeof(Coordenada));
+
+char32_t **crear_puente_separado(char32_t **mapa) {
+  int random;
+  int ultima = ANCHO_TOTAL - ANCHO_PLATAFORMAS - 1;
+  while (actual->j < ultima) {
+    random = (actual->i == 0)                 ? rand() % 2 + 1
+             : (actual->i == LARGO_TOTAL - 1) ? rand() % 2
+                                              : rand() % 3;
+    bool nuevo_mov_redundante = (random == 0 && actual->mov_anterior == 2) || (random == 2 && actual->mov_anterior == 0);
+    if (nuevo_mov_redundante || random == 1 || actual->espacio_requerido > 0) {
+      actual->j++;
+      actual->espacio_requerido--;
+      cout << actual->espacio_requerido << ", ";
+    } else {
+      actual->i += random == 0 ? -1 : 1;
+      actual->espacio_requerido = 2;
+    }
+    mapa[actual->i][actual->j] = puente;
+    actual->mov_anterior = nuevo_mov_redundante ? 1 : random;
+  }
+  cout << endl;
+  return mapa;
+}
 
 char32_t **crear_puente(char32_t **mapa) {
   int random;
@@ -99,7 +123,7 @@ void imprimir_mapa(char32_t **mapa) {
 
 int main() {
   char32_t **mapa = crear_plataformas();
-  mapa = crear_puente(mapa);
+  mapa = crear_puente_separado(mapa);
   mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 2] = rosa;
   mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 1] = ' ';
   mapa[LARGO_TOTAL / 2][1] = jugador;
