@@ -14,7 +14,7 @@ char32_t agua = U' ';
 char32_t agua2 = U'⦚';
 char32_t vacio;
 const int LARGO_TOTAL = 7;
-const int ANCHO_PLATAFORMAS = 5;
+const int ANCHO_PLATAFORMAS = 3;
 const int ANCHO_PUENTE = 30;
 const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE; //(3+10+3) = 16
 
@@ -120,6 +120,7 @@ void imprimir_mapa(char32_t **mapa) {
 }
 
 int main() {
+  cout << "Ayuda al principito a encontrarse con su Rosa..." << endl;
   char32_t **mapa = crear_plataformas();
   mapa = crear_puente_separado(mapa);
   mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 2] = rosa;
