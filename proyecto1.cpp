@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
+#include <type_traits>
 
 using namespace std;
 const string INSTRUCCIONES = "~ Comandos ~ \nUse WASD para moverse, puede combinar y presionar varias veces en un solo comando, así como indicar cuantos pasos moverse (pe. para dos arriba y tres derecha puede escribir \"2w3d\" o bien \"wwddd\")\n";
@@ -15,10 +16,11 @@ const char32_t puente = U'⧥';
 const char32_t plataforma = U'_';
 const char32_t agua = U' ';
 const char32_t agua2 = U'⦚';
-const int LARGO_TOTAL = 7;
+const int LARGO_TOTAL = 5;
 const int ANCHO_PLATAFORMAS = 3;
-const int ANCHO_PUENTE = 30;
-const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE; //(3+10+3) = 16
+const int ANCHO_PUENTE = 10;
+const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE;
+bool fin = false;
 
 // Estructura simple
 struct Coordenada {
@@ -145,26 +147,42 @@ void imprimir_mapa(char32_t **mapa) {
       bool es_posicion_de_la_rosa = i == rosa->i && j == rosa->j;
       if (es_posicion_del_jugador)
         printf("%lc", (wint_t)jugador->simbolo);
-      else if (es_posicion_de_la_rosa) 
+      else if (es_posicion_de_la_rosa)
         printf("%lc", (wint_t)rosa->simbolo);
-      else 
+      else
         printf("%lc", (wint_t)mapa[i][j]);
     }
     printf("\n");
   }
 }
 
+bool es_agua(char32_t punto_en_el_mapa) {
+  return punto_en_el_mapa == agua || punto_en_el_mapa == agua2;
+}
+
+bool se_reunieron() {
+  return jugador->j == ANCHO_TOTAL - 1 || jugador->j == ANCHO_TOTAL - 2 && jugador->i == LARGO_TOTAL / 2;
+}
+
 void dibujar_juego(char32_t **mapa) {
   system("clear");
-  cout << LEYENDA << endl;
-  imprimir_mapa(mapa);
+  if (se_reunieron()){
+    cout << "―He aquí mi secreto: Solo con el corazón se puede ver bien; lo escencial es invisible a los ojos.\n\n―Sólo con el corazón... Lo escencial es invisible a los ojos...―repitió el principito para recordarlo.\n\n―Lo que hace importante a tu rosa, es el tiempo que le has dedicado.\n\n―...es el tiempo que le he dedicado...―repitió el principito con el fin de recordarlo." << endl;
+    fin = true;
+  } else {
+      cout << LEYENDA << endl;
+      if (es_agua(mapa[jugador->i][jugador->j])) {
+        set_jugador(false);
+      }
+      imprimir_mapa(mapa);
+  }
 }
 
 void escuchar_input(char32_t **mapa) {
   char input;
-  while (true) {
+  while (!fin) {
     dibujar_juego(mapa);
-    cout << INSTRUCCIONES;
+    cout << (fin ? " " : INSTRUCCIONES);
     cin >> input;
     switch (input) {
     case 'w':
@@ -189,7 +207,7 @@ void escuchar_input(char32_t **mapa) {
       break;
     case 'q':
     case 'Q':
-      system("clear");
+      // system("clear");
       cout << DESPEDIDA << endl;
       return;
     }
