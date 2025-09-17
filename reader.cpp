@@ -31,14 +31,13 @@ int main() {
     cout << aviso_de_datos << endl;
     int tamano_del_mensaje = datos[0];
     cout << "arreglo de " << tamano_del_mensaje << " caracteres recibido:" << endl;
-    for (int i = 1; i < tamano_del_mensaje + 1; i++) {
+    for (int i = 1; i < tamano_del_mensaje + 1; i++)
       cout << datos[i] << " ";
-    }
-    cout << endl
-         << "Traducción: " << endl;
-    for (int i = 1; i < tamano_del_mensaje + 1; i++) {
+
+    // Traducir de ascii a caracteres
+    cout << "\nTraducción: " << endl;
+    for (int i = 1; i < tamano_del_mensaje + 1; i++)
       cout << (char)datos[i] << " ";
-    }
     cout << endl;
   }
 

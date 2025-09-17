@@ -12,7 +12,7 @@ using namespace std;
 // Variables necesarias
 const size_t tamano_del_shm = 1024; // shm: Shared Memory
 const char *nombre_del_shm = "/MiMemoriaCompartida";
-const string msj_introduzca = "Escriba el mensaje a enviar a la memoria compartida:";
+const string msj_introduzca = "Escriba el mensaje a compartir con el receptor:";
 const string msj_exito = "Mensaje escrito, presione enter para finalizar.";
 string cadena_a_enviar;
 int mi_fd;
