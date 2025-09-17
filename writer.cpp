@@ -44,7 +44,17 @@ int main() {
   // Escribir datos en la memoria compartida
   cout << msj_introduzca << endl;
   getline(cin, cadena_a_enviar);
-  strcpy(datos, cadena_a_enviar.c_str());
+  int tamano_del_msj = cadena_a_enviar.size() + 1;
+
+  // Traducir a ascii
+  int* arreglo_a_enviar = (int*) malloc(tamano_del_msj * sizeof(int));
+  arreglo_a_enviar[0]=cadena_a_enviar.size();
+  for(int i=0; i<tamano_del_msj; i++){
+    arreglo_a_enviar[i+1] = static_cast<int>(cadena_a_enviar[i]);
+  }
+
+  // Enviar al shared memory (donde lo leerá el receptor)
+  memcpy((int*) datos, arreglo_a_enviar, tamano_del_msj * sizeof(int));
   cout << msj_exito << endl;
   cin.get();
 
