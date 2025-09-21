@@ -2,37 +2,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
-
+#include "constantes.h"
 using namespace std;
-const string INSTRUCCIONES = "~ Comandos ~ \nUse WASD para moverse, puede combinar y presionar varias veces en un solo comando, así como indicar cuantos pasos moverse (pe. para dos arriba y tres derecha puede escribir \"2w3d\" o bien \"wwddd\")\n";
-const string LEYENDA = "Ayuda al principito a encontrarse con su Rosa...";
-const string FINAL_FELIZ = "―He aquí mi secreto: Solo con el corazón se puede ver bien; lo escencial es invisible a los ojos.\n\n―Sólo con el corazón... Lo escencial es invisible a los ojos...―repitió el principito para recordarlo.\n\n―Lo que hace importante a tu rosa, es el tiempo que le has dedicado.\n\n―...es el tiempo que le he dedicado...―repitió el principito con el fin de recordarlo.";
-const string FINAL_TRISTE = "―Adiós― le dijo a la flor, pero ella no respondió.\n―Adiós― repitió el principito.\nLa flor tosió aunque no estaba resfriada y al fin dijo:\n―He sido una tonta, perdóname y procura ser feliz.";
-const char32_t jugador_neutral = U'♥';
-// const char32_t jugador_feliz = U'💛';
-const char32_t rosa_neutral = U'🥀';
-// const char32_t rosa_feliz = U'🌹';
-const char32_t puente = U'⧥';
-const char32_t plataforma = U'_';
-const char32_t agua = U' ';
-const char32_t agua2 = U'⦚';
-const int LARGO_TOTAL = 5;
-const int ANCHO_PLATAFORMAS = 3;
-const int ANCHO_PUENTE = 10;
-const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE;
-bool fin = false;
-
-// Estructura simple
-struct Coordenada {
-  int i;
-  int j;
-  int mov_anterior;
-  int espacio_requerido = 0;
-  char32_t simbolo;
-};
 
 Coordenada *jugador = (Coordenada *)calloc(1, sizeof(Coordenada));
-Coordenada *rosa = (Coordenada *)calloc(1, sizeof(Coordenada));
 
 // auxiliares para la construccion del puente
 int inicio_del_puente;
@@ -60,27 +33,27 @@ char32_t **crear_puente_separado(char32_t **mapa) {
   return mapa;
 }
 
-char32_t **crear_puente(char32_t **mapa) {
-  int random;
-  int ultima = ANCHO_TOTAL - ANCHO_PLATAFORMAS - 1;
-  while (puente_actual->j < ultima) {
-    random = (puente_actual->i == 0)                 ? rand() % 2 + 1
-             : (puente_actual->i == LARGO_TOTAL - 1) ? rand() % 2
-                                                     : rand() % 3;
-    bool nuevo_mov_redundante = (random == 0 && puente_actual->mov_anterior == 2) || (random == 2 && puente_actual->mov_anterior == 0);
-    if (nuevo_mov_redundante)
-      puente_actual->j++;
-    else {
-      puente_actual->i += random == 0 ? -1 : random == 2 ? 1
-                                                         : 0;
-      puente_actual->j += random == 1 ? 1 : 0;
-    }
-    mapa[puente_actual->i][puente_actual->j] = puente;
-    puente_actual->mov_anterior = nuevo_mov_redundante ? 1 : random;
-  }
-  cout << endl;
-  return mapa;
-}
+// char32_t **crear_puente(char32_t **mapa) {
+//   int random;
+//   int ultima = ANCHO_TOTAL - ANCHO_PLATAFORMAS - 1;
+//   while (puente_actual->j < ultima) {
+//     random = (puente_actual->i == 0)                 ? rand() % 2 + 1
+//              : (puente_actual->i == LARGO_TOTAL - 1) ? rand() % 2
+//                                                      : rand() % 3;
+//     bool nuevo_mov_redundante = (random == 0 && puente_actual->mov_anterior == 2) || (random == 2 && puente_actual->mov_anterior == 0);
+//     if (nuevo_mov_redundante)
+//       puente_actual->j++;
+//     else {
+//       puente_actual->i += random == 0 ? -1 : random == 2 ? 1
+//                                                          : 0;
+//       puente_actual->j += random == 1 ? 1 : 0;
+//     }
+//     mapa[puente_actual->i][puente_actual->j] = puente;
+//     puente_actual->mov_anterior = nuevo_mov_redundante ? 1 : random;
+//   }
+//   cout << endl;
+//   return mapa;
+// }
 
 char32_t punta_del_puente(int i, int j) {
   int primera = ANCHO_PLATAFORMAS;
@@ -121,27 +94,27 @@ char32_t **crear_plataformas() {
 
 
 void set_jugador_al_inicio() {
-  jugador->simbolo = jugador_neutral;
+  jugador->simbolo = prince;
   jugador->i = LARGO_TOTAL / 2;
   jugador->j = 1;
 }
 
-void set_rosa() {
-  rosa->simbolo = rosa_neutral;
-  rosa->i = LARGO_TOTAL / 2;
-  rosa->j = ANCHO_TOTAL - 2;
-}
+// void set_rosa() {
+//   rosa->simbolo = beauty;
+//   rosa->i = LARGO_TOTAL / 2;
+//   rosa->j = ANCHO_TOTAL - 2;
+// }
 
 void imprimir_mapa(char32_t **mapa) {
   setlocale(LC_ALL, ""); // Habilita UTF-8 en la terminal
   for (int i = 0; i < LARGO_TOTAL; i++) {
     for (int j = 0; j < ANCHO_TOTAL; j++) {
       bool es_posicion_del_jugador = i == jugador->i && j == jugador->j;
-      bool es_posicion_de_la_rosa = i == rosa->i && j == rosa->j;
+      bool es_posicion_de_la_rosa = i == LARGO_TOTAL / 2 && j == ANCHO_TOTAL - 2;
       if (es_posicion_del_jugador)
         printf("%lc", (wint_t)jugador->simbolo);
       else if (es_posicion_de_la_rosa)
-        printf("%lc", (wint_t)rosa->simbolo);
+        printf("%lc", (wint_t)beauty);
       else
         printf("%lc", (wint_t)mapa[i][j]);
     }
@@ -155,7 +128,7 @@ bool es_agua(char32_t punto_en_el_mapa) {
 
 void finalizar(bool feliz) {
   cout << (feliz ? FINAL_FELIZ : FINAL_TRISTE) << endl;
-  fin = true;
+  jugador->mov_anterior = 1;
 }
 
 bool se_reunieron() {
@@ -171,16 +144,15 @@ void dibujar_juego(char32_t **mapa) {
     if (es_agua(mapa[jugador->i][jugador->j])) {
       set_jugador_al_inicio();
     }
-
     imprimir_mapa(mapa);
   }
 }
 
 void escuchar_input(char32_t **mapa) {
   char input;
-  while (!fin) {
+  while (jugador->mov_anterior == 0) {
     dibujar_juego(mapa);
-    cout << (fin ? " " : INSTRUCCIONES);
+    cout << (jugador->mov_anterior == 0 ? INSTRUCCIONES : "");
     cin >> input;
     switch (input) {
     case 'w':
@@ -214,7 +186,6 @@ int main() {
   char32_t **mapa = crear_plataformas();
   mapa = crear_puente_separado(mapa);
   set_jugador_al_inicio();
-  set_rosa();
   escuchar_input(mapa);
   return 0;
 }
