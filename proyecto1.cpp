@@ -2,16 +2,16 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
-#include <type_traits>
 
 using namespace std;
 const string INSTRUCCIONES = "~ Comandos ~ \nUse WASD para moverse, puede combinar y presionar varias veces en un solo comando, así como indicar cuantos pasos moverse (pe. para dos arriba y tres derecha puede escribir \"2w3d\" o bien \"wwddd\")\n";
 const string LEYENDA = "Ayuda al principito a encontrarse con su Rosa...";
-const string DESPEDIDA = "¡Hasta pronto!";
+const string FINAL_FELIZ = "―He aquí mi secreto: Solo con el corazón se puede ver bien; lo escencial es invisible a los ojos.\n\n―Sólo con el corazón... Lo escencial es invisible a los ojos...―repitió el principito para recordarlo.\n\n―Lo que hace importante a tu rosa, es el tiempo que le has dedicado.\n\n―...es el tiempo que le he dedicado...―repitió el principito con el fin de recordarlo.";
+const string FINAL_TRISTE = "―Adiós― le dijo a la flor, pero ella no respondió.\n―Adiós― repitió el principito.\nLa flor tosió aunque no estaba resfriada y al fin dijo:\n―He sido una tonta, perdóname y procura ser feliz.";
 const char32_t jugador_neutral = U'♥';
-const char32_t jugador_feliz = U'💓';
+// const char32_t jugador_feliz = U'💛';
 const char32_t rosa_neutral = U'🥀';
-const char32_t rosa_feliz = U'🌹';
+// const char32_t rosa_feliz = U'🌹';
 const char32_t puente = U'⧥';
 const char32_t plataforma = U'_';
 const char32_t agua = U' ';
@@ -119,24 +119,17 @@ char32_t **crear_plataformas() {
   return mapa;
 }
 
-void set_jugador(bool vio_a_su_rosa) {
-  if (vio_a_su_rosa) {
-    jugador->simbolo = jugador->simbolo == jugador_feliz ? jugador_neutral : jugador_feliz;
-  } else {
-    jugador->simbolo = jugador_neutral;
-    jugador->i = LARGO_TOTAL / 2;
-    jugador->j = 1;
-  }
+
+void set_jugador_al_inicio() {
+  jugador->simbolo = jugador_neutral;
+  jugador->i = LARGO_TOTAL / 2;
+  jugador->j = 1;
 }
 
-void set_rosa(bool vio_a_jugador) {
-  if (vio_a_jugador) {
-    rosa->simbolo = rosa->simbolo == rosa_feliz ? rosa_neutral : rosa_feliz;
-  } else {
-    rosa->simbolo = rosa_neutral;
-    rosa->i = LARGO_TOTAL / 2;
-    rosa->j = ANCHO_TOTAL - 2;
-  }
+void set_rosa() {
+  rosa->simbolo = rosa_neutral;
+  rosa->i = LARGO_TOTAL / 2;
+  rosa->j = ANCHO_TOTAL - 2;
 }
 
 void imprimir_mapa(char32_t **mapa) {
@@ -160,21 +153,26 @@ bool es_agua(char32_t punto_en_el_mapa) {
   return punto_en_el_mapa == agua || punto_en_el_mapa == agua2;
 }
 
+void finalizar(bool feliz) {
+  cout << (feliz ? FINAL_FELIZ : FINAL_TRISTE) << endl;
+  fin = true;
+}
+
 bool se_reunieron() {
-  return jugador->j == ANCHO_TOTAL - 1 || jugador->j == ANCHO_TOTAL - 2 && jugador->i == LARGO_TOTAL / 2;
+  return (jugador->j == ANCHO_TOTAL - 1 || jugador->j == ANCHO_TOTAL - 2) && jugador->i == LARGO_TOTAL / 2;
 }
 
 void dibujar_juego(char32_t **mapa) {
   system("clear");
-  if (se_reunieron()){
-    cout << "―He aquí mi secreto: Solo con el corazón se puede ver bien; lo escencial es invisible a los ojos.\n\n―Sólo con el corazón... Lo escencial es invisible a los ojos...―repitió el principito para recordarlo.\n\n―Lo que hace importante a tu rosa, es el tiempo que le has dedicado.\n\n―...es el tiempo que le he dedicado...―repitió el principito con el fin de recordarlo." << endl;
-    fin = true;
-  } else {
-      cout << LEYENDA << endl;
-      if (es_agua(mapa[jugador->i][jugador->j])) {
-        set_jugador(false);
-      }
-      imprimir_mapa(mapa);
+  if (se_reunieron())
+    finalizar(true);
+  else {
+    cout << LEYENDA << endl;
+    if (es_agua(mapa[jugador->i][jugador->j])) {
+      set_jugador_al_inicio();
+    }
+
+    imprimir_mapa(mapa);
   }
 }
 
@@ -207,9 +205,7 @@ void escuchar_input(char32_t **mapa) {
       break;
     case 'q':
     case 'Q':
-      // system("clear");
-      cout << DESPEDIDA << endl;
-      return;
+      finalizar(false);
     }
   }
 }
@@ -217,8 +213,8 @@ void escuchar_input(char32_t **mapa) {
 int main() {
   char32_t **mapa = crear_plataformas();
   mapa = crear_puente_separado(mapa);
-  set_jugador(false);
-  set_rosa(false);
+  set_jugador_al_inicio();
+  set_rosa();
   escuchar_input(mapa);
   return 0;
 }
