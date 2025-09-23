@@ -88,7 +88,7 @@ char32_t **crear_plataformas() {
         mapa[i][j] = plataforma;
     }
   }
-  mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 1] = ' ';
+  mapa[LARGO_TOTAL / 2][ANCHO_TOTAL - 1] = U'\t';
   return mapa;
 }
 
