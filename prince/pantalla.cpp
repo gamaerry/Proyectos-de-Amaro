@@ -1,12 +1,12 @@
+#include "constantes.h"
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <time.h>
-#include "constantes.h"
+#include <time.h>
 using namespace std;
 
 Coordenada *jugador = (Coordenada *)calloc(1, sizeof(Coordenada));
-
+int frame_actual = 0;
 // auxiliares para la construccion del puente
 int inicio_del_puente;
 Coordenada *puente_actual = (Coordenada *)calloc(1, sizeof(Coordenada));
@@ -92,7 +92,6 @@ char32_t **crear_plataformas() {
   return mapa;
 }
 
-
 void set_jugador_al_inicio() {
   jugador->simbolo = prince;
   jugador->i = LARGO_TOTAL / 2;
@@ -135,8 +134,21 @@ bool se_reunieron() {
   return (jugador->j == ANCHO_TOTAL - 1 || jugador->j == ANCHO_TOTAL - 2) && jugador->i == LARGO_TOTAL / 2;
 }
 
+void cambiar_olas(char32_t **mapa) {
+  for (int i = 0; i < LARGO_TOTAL; i++) {
+    for (int j = 0; j < ANCHO_TOTAL; j++) {
+      if (es_agua(mapa[i][j]) && j > ANCHO_PLATAFORMAS + 1)
+        mapa[i][j] = mapa[i][j] == agua ? agua2 : agua;
+    }
+  }
+}
+
 void dibujar_juego(char32_t **mapa) {
   system("clear");
+  frame_actual++;
+  if (frame_actual % 3 == 0 || frame_actual % 3 == 1) {
+    cambiar_olas(mapa);
+  }
   if (se_reunieron())
     finalizar(true);
   else {
