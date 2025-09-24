@@ -18,6 +18,8 @@ const int LARGO_TOTAL = 5;
 const int ANCHO_PLATAFORMAS = 3;
 const int ANCHO_PUENTE = 10;
 const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE;
+const string nombre_del_shm = "/Jugador";
+const size_t tamano_del_shm = 1024;
 
 // Estructura simple
 struct Coordenada {
