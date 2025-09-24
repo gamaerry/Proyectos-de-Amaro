@@ -3,12 +3,17 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
+#include <fcntl.h>
+#include <iostream>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 using namespace std;
 
 Coordenada *jugador = (Coordenada *)calloc(1, sizeof(Coordenada));
 int frame_actual = 0;
-// auxiliares para la construccion del puente
-int inicio_del_puente;
+int inicio_del_puente; // auxiliares para la construccion del puente
 Coordenada *puente_actual = (Coordenada *)calloc(1, sizeof(Coordenada));
 
 char32_t **crear_puente_separado(char32_t **mapa) {
@@ -32,28 +37,6 @@ char32_t **crear_puente_separado(char32_t **mapa) {
   }
   return mapa;
 }
-
-// char32_t **crear_puente(char32_t **mapa) {
-//   int random;
-//   int ultima = ANCHO_TOTAL - ANCHO_PLATAFORMAS - 1;
-//   while (puente_actual->j < ultima) {
-//     random = (puente_actual->i == 0)                 ? rand() % 2 + 1
-//              : (puente_actual->i == LARGO_TOTAL - 1) ? rand() % 2
-//                                                      : rand() % 3;
-//     bool nuevo_mov_redundante = (random == 0 && puente_actual->mov_anterior == 2) || (random == 2 && puente_actual->mov_anterior == 0);
-//     if (nuevo_mov_redundante)
-//       puente_actual->j++;
-//     else {
-//       puente_actual->i += random == 0 ? -1 : random == 2 ? 1
-//                                                          : 0;
-//       puente_actual->j += random == 1 ? 1 : 0;
-//     }
-//     mapa[puente_actual->i][puente_actual->j] = puente;
-//     puente_actual->mov_anterior = nuevo_mov_redundante ? 1 : random;
-//   }
-//   cout << endl;
-//   return mapa;
-// }
 
 char32_t punta_del_puente(int i, int j) {
   int primera = ANCHO_PLATAFORMAS;
@@ -97,12 +80,6 @@ void set_jugador_al_inicio() {
   jugador->i = LARGO_TOTAL / 2;
   jugador->j = 1;
 }
-
-// void set_rosa() {
-//   rosa->simbolo = beauty;
-//   rosa->i = LARGO_TOTAL / 2;
-//   rosa->j = ANCHO_TOTAL - 2;
-// }
 
 void imprimir_mapa(char32_t **mapa) {
   setlocale(LC_ALL, ""); // Habilita UTF-8 en la terminal
@@ -160,44 +137,38 @@ void dibujar_juego(char32_t **mapa) {
   }
 }
 
-void escuchar_input(char32_t **mapa) {
+int* datos;
+
+void update(char32_t **mapa) {
   char input;
   while (jugador->mov_anterior == 0) {
+    usleep(1000000);
     dibujar_juego(mapa);
-    cout << (jugador->mov_anterior == 0 ? INSTRUCCIONES : "");
-    cin >> input;
-    switch (input) {
-    case 'w':
-    case 'W':
-      if (jugador->i > 0)
-        jugador->i--;
-      break;
-    case 's':
-    case 'S':
-      if (jugador->i < LARGO_TOTAL - 1)
-        jugador->i++;
-      break;
-    case 'a':
-    case 'A':
-      if (jugador->j > 0)
-        jugador->j--;
-      break;
-    case 'd':
-    case 'D':
-      if (jugador->j < ANCHO_TOTAL - 1)
-        jugador->j++;
-      break;
-    case 'q':
-    case 'Q':
+    jugador->i = datos[0];
+    jugador->j = datos[1];
+    if (datos[0] == -1)
       finalizar(false);
-    }
+    cout << (jugador->mov_anterior == 0 ? INSTRUCCIONES : "");
   }
 }
+
+int mi_fd;
+
+int* leer_shm() {
+  mi_fd = shm_open(nombre_del_shm.data(), O_RDONLY, 0666);
+  datos = (int *)mmap(0, tamano_del_shm, PROT_READ, MAP_SHARED, mi_fd, 0);
+  return datos;
+}
+
 
 int main() {
   char32_t **mapa = crear_plataformas();
   mapa = crear_puente_separado(mapa);
   set_jugador_al_inicio();
-  escuchar_input(mapa);
+  datos = leer_shm();
+  update(mapa);
+  // Limpiar recursos
+  munmap(datos, tamano_del_shm);
+  close(mi_fd);
   return 0;
 }
