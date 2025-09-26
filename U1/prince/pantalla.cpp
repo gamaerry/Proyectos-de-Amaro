@@ -9,7 +9,7 @@
 #include <thread>
 #include <time.h>
 
-#include <unistd.h>
+#include <unistd.h>
 
 using namespace std::chrono;
 using namespace std;
@@ -19,7 +19,6 @@ int frame_actual = 0;
 int inicio_del_puente; // auxiliares para la construccion del puente
 Coordenada *puente_actual = (Coordenada *)calloc(1, sizeof(Coordenada));
 auto dur = std::chrono::system_clock::now().time_since_epoch();
-
 
 char32_t **crear_puente_separado(char32_t **mapa) {
   puente_actual->simbolo = puente;
@@ -95,6 +94,7 @@ void imprimir_mapa(char32_t **mapa) {
     }
     printf("\n");
   }
+  printf("\n");
 }
 
 bool es_agua(char32_t punto_en_el_mapa) {
@@ -104,10 +104,6 @@ bool es_agua(char32_t punto_en_el_mapa) {
 void finalizar(bool feliz) {
   cout << (feliz ? FINAL_FELIZ : FINAL_TRISTE) << endl;
   jugador->mov_anterior = 1;
-}
-
-bool se_reunieron() {
-  return (jugador->j == (j_inicial_rosa + 1) || jugador->j == j_inicial_rosa) && jugador->i == i_inicial_rosa;
 }
 
 void cambiar_olas(char32_t **mapa) {
@@ -130,18 +126,12 @@ void set_jugador_al_inicio() {
 void dibujar_juego(char32_t **mapa) {
   system("clear");
   frame_actual++;
-  if (frame_actual % 3 == 0 || frame_actual % 3 == 1) {
+  if (frame_actual % 3 == 0 || frame_actual % 3 == 1)
     cambiar_olas(mapa);
-  }
-  if (se_reunieron())
-    finalizar(true);
-  else {
-    cout << LEYENDA << endl;
-    if (es_agua(mapa[jugador->i][jugador->j])) {
-      set_jugador_al_inicio();
-    }
-    imprimir_mapa(mapa);
-  }
+  cout << LEYENDA << endl;
+  if (es_agua(mapa[jugador->i][jugador->j])) 
+    set_jugador_al_inicio();
+  imprimir_mapa(mapa);
 }
 
 auto reloj_pantalla = time_point<system_clock>(
@@ -155,14 +145,15 @@ void wait_pantalla() {
 
 void update(char32_t **mapa) {
   char input;
-  while (jugador->mov_anterior == 0) {
+  while (jugador->mov_anterior == 0) { //simple bandera prendida al finalizar
     wait_pantalla();
     dibujar_juego(mapa);
     jugador->i = datos[0];
     jugador->j = datos[1];
     if (datos[0] == -1)
       finalizar(false);
-    cout << (jugador->mov_anterior == 0 ? INSTRUCCIONES : "");
+    if (datos[1] == -1)
+      finalizar(true); 
   }
 }
 
