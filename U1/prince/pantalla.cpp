@@ -20,6 +20,10 @@ int inicio_del_puente; // auxiliares para la construccion del puente
 Coordenada *puente_actual = (Coordenada *)calloc(1, sizeof(Coordenada));
 auto dur = std::chrono::system_clock::now().time_since_epoch();
 
+void limpiar() {
+  system("clear");
+}
+
 char32_t **crear_puente_separado(char32_t **mapa) {
   puente_actual->simbolo = puente;
   int random;
@@ -102,7 +106,13 @@ bool es_agua(char32_t punto_en_el_mapa) {
 }
 
 void finalizar(bool feliz) {
-  cout << (feliz ? FINAL_FELIZ : FINAL_TRISTE) << endl;
+  if (feliz) {
+    limpiar();
+    cout << FINAL_FELIZ << endl;
+  } else {
+    jugador->simbolo = ' ';
+    cout << FINAL_TRISTE << endl;
+  }
   jugador->mov_anterior = 1;
 }
 
@@ -124,7 +134,7 @@ void set_jugador_al_inicio() {
 }
 
 void dibujar_juego(char32_t **mapa) {
-  system("clear");
+  limpiar();
   frame_actual++;
   if (frame_actual % 3 == 0 || frame_actual % 3 == 1)
     cambiar_olas(mapa);
@@ -147,13 +157,15 @@ void update(char32_t **mapa) {
   char input;
   while (jugador->mov_anterior == 0) { //simple bandera prendida al finalizar
     wait_pantalla();
-    dibujar_juego(mapa);
-    jugador->i = datos[0];
-    jugador->j = datos[1];
     if (datos[0] == -1)
       finalizar(false);
-    if (datos[1] == -1)
-      finalizar(true); 
+    else if (datos[1] == -1)
+      finalizar(true);
+    else {
+      jugador->i = datos[0];
+      jugador->j = datos[1];
+      dibujar_juego(mapa);
+    }
   }
 }
 
