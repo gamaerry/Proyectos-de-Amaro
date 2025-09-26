@@ -135,6 +135,8 @@ bool se_reunieron() {
 void read_controles() {
   if (filesystem::exists("death")) {
     set_posicion_inicial();
+    fragmento.clear();
+    restantes = 0;
     remove("death");
   } else if (!esta_detenido()) {
     caminar_un_paso();
