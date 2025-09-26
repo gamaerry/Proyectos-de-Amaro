@@ -8,7 +8,7 @@
 #include <sys/stat.h>
 #include <thread>
 #include <time.h>
-
+#include <fstream>
 #include <unistd.h>
 
 using namespace std::chrono;
@@ -110,7 +110,6 @@ void finalizar(bool feliz) {
     limpiar();
     cout << FINAL_FELIZ << endl;
   } else {
-    jugador->simbolo = ' ';
     cout << FINAL_TRISTE << endl;
   }
   jugador->mov_anterior = 1;
@@ -129,8 +128,13 @@ int *datos;
 
 void set_jugador_al_inicio() {
   jugador->simbolo = prince;
-  jugador->i = datos[0];
-  jugador->j = datos[1];
+  jugador->i = i_inicial_jugador;
+  jugador->j = j_inicial_jugador;
+}
+
+void avisar_ahogamiento() {
+    std::ofstream signal_file("death");
+    signal_file.close();
 }
 
 void dibujar_juego(char32_t **mapa) {
@@ -139,8 +143,10 @@ void dibujar_juego(char32_t **mapa) {
   if (frame_actual % 3 == 0 || frame_actual % 3 == 1)
     cambiar_olas(mapa);
   cout << LEYENDA << endl;
-  if (es_agua(mapa[jugador->i][jugador->j])) 
+  if (es_agua(mapa[jugador->i][jugador->j])){ 
+    avisar_ahogamiento();
     set_jugador_al_inicio();
+  }
   imprimir_mapa(mapa);
 }
 
@@ -162,9 +168,9 @@ void update(char32_t **mapa) {
     else if (datos[1] == -1)
       finalizar(true);
     else {
+      dibujar_juego(mapa);
       jugador->i = datos[0];
       jugador->j = datos[1];
-      dibujar_juego(mapa);
     }
   }
 }

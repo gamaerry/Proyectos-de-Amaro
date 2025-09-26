@@ -81,7 +81,6 @@ void set_posicion_inicial() {
   posicion[0] = i_inicial_jugador;
   posicion[1] = j_inicial_jugador;
   memcpy(datos, posicion, 2 * sizeof(int));
-  cout << INSTRUCCIONES << endl;
 }
 
 bool esta_detenido() {
@@ -134,9 +133,9 @@ bool se_reunieron() {
 }
 
 void read_controles() {
-  if (filesystem::exists("death.txt")) {
+  if (filesystem::exists("death")) {
     set_posicion_inicial();
-    remove("death.txt");
+    remove("death");
   } else if (!esta_detenido()) {
     caminar_un_paso();
   } else {
@@ -159,6 +158,7 @@ int *init_datos() {
 
 int main() {
   datos = init_datos();
+  cout << INSTRUCCIONES << endl;
   set_posicion_inicial();
   // cin.get(); //pausa
   while (!juego_terminado()) {
@@ -167,7 +167,6 @@ int main() {
     wait_control();
   }
   // Limpiar recursos
-  remove("finished.txt");
   munmap(datos, tamano_del_shm);
   close(mi_fd);
   shm_unlink(nombre_del_shm.data());
