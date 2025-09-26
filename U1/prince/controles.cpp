@@ -169,6 +169,7 @@ int main() {
     wait_control();
   }
   // Limpiar recursos
+  remove("death");
   munmap(datos, tamano_del_shm);
   close(mi_fd);
   shm_unlink(nombre_del_shm.data());
