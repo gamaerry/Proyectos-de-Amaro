@@ -140,7 +140,7 @@ void avisar_ahogamiento() {
 void dibujar_juego(char32_t **mapa) {
   limpiar();
   frame_actual++;
-  if (frame_actual % 3 == 0 || frame_actual % 3 == 1)
+  if (frame_actual % 5 == 0 || frame_actual % 5 == 1)
     cambiar_olas(mapa);
   cout << LEYENDA << endl;
   if (es_agua(mapa[jugador->i][jugador->j])){ 
