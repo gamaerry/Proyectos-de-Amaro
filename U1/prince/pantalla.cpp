@@ -18,6 +18,8 @@ Coordenada *jugador = (Coordenada *)calloc(1, sizeof(Coordenada));
 int frame_actual = 0;
 int inicio_del_puente; // auxiliares para la construccion del puente
 Coordenada *puente_actual = (Coordenada *)calloc(1, sizeof(Coordenada));
+auto dur = std::chrono::system_clock::now().time_since_epoch();
+
 
 char32_t **crear_puente_separado(char32_t **mapa) {
   puente_actual->simbolo = puente;
@@ -105,7 +107,7 @@ void finalizar(bool feliz) {
 }
 
 bool se_reunieron() {
-  return (jugador->j == ANCHO_TOTAL - 1 || jugador->j == ANCHO_TOTAL - 2) && jugador->i == LARGO_TOTAL / 2;
+  return (jugador->j == (j_inicial_rosa + 1) || jugador->j == j_inicial_rosa) && jugador->i == i_inicial_rosa;
 }
 
 void cambiar_olas(char32_t **mapa) {

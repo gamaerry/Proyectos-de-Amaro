@@ -1,7 +1,7 @@
 #ifndef CONSTANTES_H
 #define CONSTANTES_H
 
-#include <chrono>
+#include <regex>
 #include <string>
 using namespace std;
 
@@ -25,7 +25,10 @@ const int i_inicial_rosa = i_inicial_jugador;
 const int j_inicial_rosa = ANCHO_TOTAL - 2;
 const string nombre_del_shm = "/Jugador";
 const size_t tamano_del_shm = 1024;
-const auto dur = std::chrono::system_clock::now().time_since_epoch();
+const regex patron_movimiento("^[0-9wasdWASD]+$");
+const regex patron_salir("^[qQ]$");
+const string direcciones_validas = "wasdWASD";
+
 
 // Estructura simple
 struct Coordenada {
