@@ -1,14 +1,17 @@
 #include "constantes.h"
+#include <chrono>
 #include <cstdio>
 #include <cstdlib>
-#include <iostream>
-#include <time.h>
 #include <fcntl.h>
 #include <iostream>
 #include <sys/mman.h>
 #include <sys/stat.h>
-#include <unistd.h>
+#include <thread>
+#include <time.h>
 
+#include <unistd.h>
+
+using namespace std::chrono;
 using namespace std;
 
 Coordenada *jugador = (Coordenada *)calloc(1, sizeof(Coordenada));
@@ -75,18 +78,12 @@ char32_t **crear_plataformas() {
   return mapa;
 }
 
-void set_jugador_al_inicio() {
-  jugador->simbolo = prince;
-  jugador->i = LARGO_TOTAL / 2;
-  jugador->j = 1;
-}
-
 void imprimir_mapa(char32_t **mapa) {
   setlocale(LC_ALL, ""); // Habilita UTF-8 en la terminal
   for (int i = 0; i < LARGO_TOTAL; i++) {
     for (int j = 0; j < ANCHO_TOTAL; j++) {
       bool es_posicion_del_jugador = i == jugador->i && j == jugador->j;
-      bool es_posicion_de_la_rosa = i == LARGO_TOTAL / 2 && j == ANCHO_TOTAL - 2;
+      bool es_posicion_de_la_rosa = i == i_inicial_rosa && j == j_inicial_rosa;
       if (es_posicion_del_jugador)
         printf("%lc", (wint_t)jugador->simbolo);
       else if (es_posicion_de_la_rosa)
@@ -120,6 +117,14 @@ void cambiar_olas(char32_t **mapa) {
   }
 }
 
+int *datos;
+
+void set_jugador_al_inicio() {
+  jugador->simbolo = prince;
+  jugador->i = datos[0];
+  jugador->j = datos[1];
+}
+
 void dibujar_juego(char32_t **mapa) {
   system("clear");
   frame_actual++;
@@ -137,12 +142,19 @@ void dibujar_juego(char32_t **mapa) {
   }
 }
 
-int* datos;
+auto reloj_pantalla = time_point<system_clock>(
+    (duration_cast<milliseconds>(dur).count() / 1000 + 1) * 1000ms // en el segundo
+);
+
+void wait_pantalla() {
+  std::this_thread::sleep_until(reloj_pantalla);
+  reloj_pantalla += 1s;
+}
 
 void update(char32_t **mapa) {
   char input;
   while (jugador->mov_anterior == 0) {
-    usleep(1000000);
+    wait_pantalla();
     dibujar_juego(mapa);
     jugador->i = datos[0];
     jugador->j = datos[1];
@@ -154,18 +166,17 @@ void update(char32_t **mapa) {
 
 int mi_fd;
 
-int* leer_shm() {
+int *leer_shm() {
   mi_fd = shm_open(nombre_del_shm.data(), O_RDONLY, 0666);
   datos = (int *)mmap(0, tamano_del_shm, PROT_READ, MAP_SHARED, mi_fd, 0);
   return datos;
 }
 
-
 int main() {
   char32_t **mapa = crear_plataformas();
   mapa = crear_puente_separado(mapa);
-  set_jugador_al_inicio();
   datos = leer_shm();
+  set_jugador_al_inicio();
   update(mapa);
   // Limpiar recursos
   munmap(datos, tamano_del_shm);

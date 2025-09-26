@@ -1,6 +1,7 @@
 #ifndef CONSTANTES_H
 #define CONSTANTES_H
 
+#include <chrono>
 #include <string>
 using namespace std;
 
@@ -18,8 +19,13 @@ const int LARGO_TOTAL = 5;
 const int ANCHO_PLATAFORMAS = 3;
 const int ANCHO_PUENTE = 10;
 const int ANCHO_TOTAL = ANCHO_PLATAFORMAS * 2 + ANCHO_PUENTE;
+const int i_inicial_jugador = LARGO_TOTAL / 2;
+const int j_inicial_jugador = 1;
+const int i_inicial_rosa = i_inicial_jugador;
+const int j_inicial_rosa = ANCHO_TOTAL - 2;
 const string nombre_del_shm = "/Jugador";
 const size_t tamano_del_shm = 1024;
+const auto dur = std::chrono::system_clock::now().time_since_epoch();
 
 // Estructura simple
 struct Coordenada {
