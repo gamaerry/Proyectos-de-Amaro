@@ -88,15 +88,16 @@ public class App {
       System.out.println("(^_^) Tiro critico ++3 tazos");
       ganado = tazos.pop();
       System.out.print("("+ganado.tipo+") ");
+      puntajeActual += ganado.valor;
       ganado = tazos.pop();
       System.out.print("("+ganado.tipo+") ");
-      puntajeActual += 2;
-    } else {
+      puntajeActual += ganado.valor;
+    } else 
       System.out.println("('-') Tiro acertado ++1 tazo");
-      puntajeActual++;
-    }
+    puntajeActual++;
     ganado = tazos.pop();
     System.out.print("("+ganado.tipo+") ");
+    puntajeActual += ganado.valor;
     return ganado;
   }
 
