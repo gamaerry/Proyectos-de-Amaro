@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 struct Cola {
   struct Cola *anterior;
@@ -15,11 +16,17 @@ struct Cola *newCola(char *nombre) {
   return nueva;
 }
 
-void enqueue(struct Cola *nuevo) { // formar un nuevo en la cola
-  if (primero) {
-    struct Cola *ultimo = primero;
+struct Cola *get_last() {
+  struct Cola *ultimo = primero;
+  if (primero)
     while (ultimo->anterior)
       ultimo = ultimo->anterior;
+  return ultimo;
+}
+
+void enqueue(struct Cola *nuevo) { // formar un nuevo en la cola
+  if (primero) {
+    struct Cola *ultimo = get_last();
     ultimo->anterior = nuevo;
   } else
     primero = nuevo;
