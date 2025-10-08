@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 struct Cola {
   struct Cola *anterior;
@@ -17,18 +18,18 @@ struct Cola *newCola(char *nombre) {
   return nueva;
 }
 
-struct Cola *get_last(int to_delete) {
-  struct Cola *ultimo = primero;
-  struct Cola *penultimo;
-  if (primero) {
-    while (ultimo->anterior){
-      penultimo = ultimo;
-      ultimo = penultimo->anterior;
-    }
-    if (to_delete)
-      penultimo->anterior = NULL;
-  }
-  return ultimo;
+struct Cola *get_second_to_last() {
+  if (!primero || !primero->anterior)
+    return NULL;
+  struct Cola *actual = primero;
+  while (actual->anterior->anterior)
+    actual = actual->anterior;
+  return actual;
+}
+
+struct Cola *get_last() {
+  struct Cola *penultimo = get_second_to_last();
+  return penultimo ? penultimo->anterior : primero;
 }
 
 void enqueue(struct Cola *nuevo) { // formar un nuevo en la cola
@@ -36,12 +37,16 @@ void enqueue(struct Cola *nuevo) { // formar un nuevo en la cola
     if (al_inicio) {
       nuevo->anterior = primero;
       primero = nuevo;
-    } else {
-      struct Cola *ultimo = get_last(0);
-      ultimo->anterior = nuevo;
-    }
+    } else
+      get_last()->anterior = nuevo;
   } else
     primero = nuevo;
+}
+
+void desenlazar_ultimo() {
+  struct Cola *penultimo = get_second_to_last();
+  if (penultimo)
+    penultimo->anterior = NULL;
 }
 
 struct Cola *dequeue() { // sacar al primero de la cola
@@ -49,18 +54,17 @@ struct Cola *dequeue() { // sacar al primero de la cola
   if (al_inicio) {
     por_salir = primero;
     primero = primero ? primero->anterior : NULL;
-  } else
-    por_salir = get_last(1);
+  } else {
+    por_salir = get_last();
+    desenlazar_ultimo();
+  }
   return por_salir;
 }
 
 int clear() {
   if (primero) {
-    struct Cola *a_limpiar;
-    do {
-      a_limpiar = dequeue();
-      free(a_limpiar);
-    } while (primero);
+    while (primero)
+      free(dequeue());
     return 1;
   } else
     return 0;
@@ -126,6 +130,13 @@ int recibir_opcion_valida() {
   return opcion;
 }
 
+int eliminar(struct Cola *a_eliminar) {
+  int existe = a_eliminar != NULL;
+  free(a_eliminar);
+  a_eliminar = NULL;
+  return existe;
+}
+
 int main() {
   int opcion;
   do {
@@ -145,7 +156,8 @@ int main() {
         printf("¡Cola vacia!");
       break;
     case 3:
-      free(dequeue());
+      if (!eliminar(dequeue()))
+        printf("¡Cola vacia!");
       break;
     case 4:
       if (!clear())
