@@ -19,6 +19,31 @@ bool circular = false;
 
 // Metodos de la Lista enlazada
 
+Nodo *get_last() {
+  Nodo* ultimo = primero;
+  for (int i = 0; i < contador; i++)
+    ultimo = ultimo->siguiente;
+  return ultimo;
+}
+
+void disable_loop() {
+  if (contador > 0) {
+    Nodo* ultimo = get_last();
+    primero->anterior = nullptr;
+    ultimo->siguiente = nullptr;
+    circular = false;
+  }
+}
+
+void enable_loop() {
+  if (contador > 0) {
+    Nodo* ultimo = get_last();
+    primero->anterior = ultimo;
+    ultimo->siguiente = primero;
+    circular = true;
+  }
+}
+
 bool insert(bool before, int indice, Nodo *nuevo) {
   if (indice > contador)
     return false;
@@ -39,6 +64,7 @@ bool insert(bool before, int indice, Nodo *nuevo) {
     a_modificar->siguiente = nuevo;
     nuevo->anterior = a_modificar;
   }
+  contador++;
   return true;
 }
 
@@ -58,6 +84,7 @@ bool remove(int indice) {
     siguiente->anterior = anterior;
     actual->siguiente = nullptr;
   }
+  contador--;
   return true;
 }
 
@@ -198,11 +225,11 @@ void manage_option(int opcion, int indice) {
       cout << indice_fuera_del_rango();
   case 5:
     if (!reproducir())
-      cout << "¡Playlist vacia!";
+      cout << "¡Playlist vacía!";
     break;
   case 6:
     if (!clear())
-      cout << "¡Playlist vacia!";
+      cout << "¡Playlist vacía!";
     break;
   case 7:
     if (circular)
