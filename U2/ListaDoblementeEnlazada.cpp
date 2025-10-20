@@ -14,20 +14,42 @@ struct Nodo {
 };
 
 Nodo *primero = nullptr;
-Nodo *ultimo = nullptr;
 int contador = 0;
 bool circular = false;
 
 // Metodos de la Lista enlazada
 
+bool insert(bool before, int indice, Nodo *nuevo) {
+  if (indice > contador)
+    return false;
+  Nodo *a_modificar = primero;
+  for (int i = 0; i < indice; i++)
+    a_modificar = a_modificar->siguiente;
+  Nodo *anterior = a_modificar->anterior;
+  Nodo *siguiente = a_modificar->siguiente;
+  if (anterior && before) {
+    anterior->siguiente = nuevo;
+    nuevo->anterior = anterior;
+    a_modificar->anterior = nuevo;
+    nuevo->siguiente = a_modificar;
+  }
+  if (siguiente && !before) {
+    siguiente->anterior = nuevo;
+    nuevo->siguiente = siguiente;
+    a_modificar->siguiente = nuevo;
+    nuevo->anterior = a_modificar;
+  }
+  return true;
+}
+
 bool remove(int indice) {
   if (indice > contador || contador == 0)
     return false;
   Nodo *actual = primero;
-  for (int i = 0; i > indice; i++)
+  for (int i = 0; i < indice; i++)
     actual = actual->siguiente;
-  Nodo *anterior = primero->anterior;
-  Nodo *siguiente = primero->siguiente;
+  Nodo *anterior = actual->anterior;
+  Nodo *siguiente = actual->siguiente;
   if (anterior) {
     anterior->siguiente = siguiente;
     actual->anterior = nullptr;
@@ -153,19 +175,19 @@ void manage_option(int opcion, int indice) {
     if (indice < 0)
       break;
     for (; indice > 0; indice--)
-      insert(0, contador, get_nuevo_elemento());
+      insert(false, contador, get_nuevo_elemento());
   case 2:
     indice = get_int_valido("Ingrese el índice (iniciando del 0)");
     if (indice < 0)
       break;
-    if (!insert(1, indice, get_nuevo_elemento())) // before
+    if (!insert(true, indice, get_nuevo_elemento())) // before
       cout << indice_fuera_del_rango();
     break;
   case 3:
     indice = get_int_valido("Ingrese el índice (iniciando del 0)");
     if (indice < 0)
       break;
-    if (!insert(0, indice, get_nuevo_elemento())) // after
+    if (!insert(false, indice, get_nuevo_elemento())) // after
       cout << indice_fuera_del_rango();
     break;
   case 4:
