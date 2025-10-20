@@ -21,36 +21,27 @@ bool circular = false;
 // Metodos de la Lista enlazada
 
 Nodo *get_last() {
-  if (contador == 0)
-    return nullptr;
-  if (contador == 1)
-    return primero;
-
   Nodo *ultimo = primero;
-  for (int i = 0; i < contador - 1; i++) {
+  for (int i = 0; i < contador - 1; i++)
     ultimo = ultimo->siguiente;
-    // Protección contra bucle infinito
-    if (ultimo == primero)
-      break;
-  }
   return ultimo;
 }
 
-void enable_loop() {
-  if (contador > 0 && !circular) {
-    Nodo *ultimo = get_last();
-    primero->anterior = ultimo;
-    ultimo->siguiente = primero;
-    circular = true;
-  }
-}
-
 void disable_loop() {
-  if (contador > 0 && circular) {
+  if (contador > 0) {
     Nodo *ultimo = get_last();
     primero->anterior = nullptr;
     ultimo->siguiente = nullptr;
     circular = false;
+  }
+}
+
+void enable_loop() {
+  if (contador > 0) {
+    Nodo *ultimo = get_last();
+    primero->anterior = ultimo;
+    ultimo->siguiente = primero;
+    circular = true;
   }
 }
 
@@ -146,23 +137,26 @@ bool reproducir() {
       actual = actual->siguiente;
 
     // Obtener anterior y siguiente
-    Nodo *anterior_en_orden = nullptr;
-    Nodo *siguiente_en_orden = nullptr;
+    Nodo *anterior_en_orden = actual->anterior;
+    Nodo *siguiente_en_orden = actual->siguiente;
 
-    if (circular) {
-      // Si es circular, usar los punteros reales de la lista
-      anterior_en_orden = actual->anterior;
-      siguiente_en_orden = actual->siguiente;
-    } else {
-      // Si no es circular, calcular según el orden de reproducción
+    if (aleatorio) { // calcular según el orden aleatorio
       if (i > 0) {
         anterior_en_orden = primero;
         for (int j = 0; j < orden[i - 1]; j++)
+          anterior_en_orden = anterior_en_orden->siguiente;
+      } else if (circular) { // Si es aleatorio Y circular el anterior del primero es el último
+        anterior_en_orden = primero;
+        for (int j = 0; j < orden[contador - 1]; j++)
           anterior_en_orden = anterior_en_orden->siguiente;
       }
       if (i < contador - 1) {
         siguiente_en_orden = primero;
         for (int j = 0; j < orden[i + 1]; j++)
+          siguiente_en_orden = siguiente_en_orden->siguiente;
+      } else if (circular) { // Si es aleatorio Y circular el siguiente del último es el primero
+        siguiente_en_orden = primero;
+        for (int j = 0; j < orden[0]; j++)
           siguiente_en_orden = siguiente_en_orden->siguiente;
       }
     }
