@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sched.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ bool circular = false;
 // Metodos de la Lista enlazada
 
 Nodo *get_last() {
-  Nodo* ultimo = primero;
+  Nodo *ultimo = primero;
   for (int i = 0; i < contador; i++)
     ultimo = ultimo->siguiente;
   return ultimo;
@@ -28,7 +29,7 @@ Nodo *get_last() {
 
 void disable_loop() {
   if (contador > 0) {
-    Nodo* ultimo = get_last();
+    Nodo *ultimo = get_last();
     primero->anterior = nullptr;
     ultimo->siguiente = nullptr;
     circular = false;
@@ -37,7 +38,7 @@ void disable_loop() {
 
 void enable_loop() {
   if (contador > 0) {
-    Nodo* ultimo = get_last();
+    Nodo *ultimo = get_last();
     primero->anterior = ultimo;
     ultimo->siguiente = primero;
     circular = true;
@@ -94,22 +95,13 @@ bool clear() {
   Nodo *actual = primero;
   while (actual) {
     Nodo *siguiente = actual->siguiente;
+    actual->anterior = nullptr;
+    actual->siguiente = nullptr;
     delete actual;
     actual = siguiente;
   }
   primero = nullptr;
   contador = 0;
-  return true;
-}
-
-bool print() { // nunca usado
-  if (contador == 0)
-    return false;
-  Nodo *actual = primero;
-  while (actual) {
-    cout << actual->nombre << '\n';
-    actual = actual->siguiente;
-  }
   return true;
 }
 
@@ -121,9 +113,23 @@ bool aleatorio = false;
 bool reproducir() {
   if (contador == 0)
     return false;
-  Nodo *actual = primero;
+
+  vector<int> orden;
+  for (int i = 0; i < contador; i++)
+    orden.push_back(i);
+  if (aleatorio) {
+    // Mezclar el vector usando Fisher-Yates shuffle
+    for (int i = contador - 1; i > 0; i--) {
+      int j = rand() % (i + 1);
+      swap(orden[i], orden[j]);
+    }
+  }
+
   cout << "\n===== PLAYLIST: " << nombre << " =====\n";
   for (int i = 0; i < contador; i++) {
+    Nodo *actual = primero;
+    for (int j = 0; j < orden[i]; j++)
+      actual = actual->siguiente;
     cout << "┌──────────────────────────────────────────────\n";
     cout << "│ #" << i << "  " << actual->nombre << " (" << actual << ")\n";
     cout << "├──────────────────────────────────────────────\n";
@@ -140,7 +146,6 @@ bool reproducir() {
       cout << "(No hay siguiente)";
     cout << "\n";
     cout << "└──────────────────────────────────────────────\n\n\n";
-    actual = actual->siguiente;
   }
   cout << "Total de canciones: " << contador << "\n";
   cout << "🔁 " << (circular ? "(Activado)" : "(Desactivado)") << endl;
@@ -148,7 +153,6 @@ bool reproducir() {
   cout << "===============================================\n\n";
   return true;
 }
-
 void despedida() {
   if (clear())
     cout << "¡Playlist no vacia! Se ha vaciado automáticamente" << endl;
@@ -232,16 +236,13 @@ void manage_option(int opcion, int indice) {
       cout << "¡Playlist vacía!";
     break;
   case 7:
-    if (circular)
+    if (circular) // note que si la playlist está vacía, esto no efectua ningún cambio
       disable_loop();
     else
       enable_loop();
     break;
   case 8:
-    if (aleatorio)
-      disable_random();
-    else
-      enable_random();
+    aleatorio = !aleatorio;
     break;
   case 9:
     despedida();
