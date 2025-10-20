@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <sched.h>
 #include <string>
@@ -13,25 +14,81 @@ struct Nodo {
 };
 
 Nodo *primero = nullptr;
-Nodo *ultimo = nullptr;
 int contador = 0;
 bool circular = false;
 
 // Metodos de la Lista enlazada
 
+bool clear() {
+  if (!primero)
+    return false;
+  Nodo *actual = primero;
+  while (actual) {
+    Nodo *siguiente = actual->siguiente;
+    delete actual;
+    actual = siguiente;
+  }
+  primero = nullptr;
+  contador = 0;
+  return true;
+}
+
+bool print() { // nunca usado
+  if (contador == 0)
+    return false;
+  Nodo *actual = primero;
+  while (actual) {
+    cout << actual->nombre << '\n';
+    actual = actual->siguiente;
+  }
+  return true;
+}
+
 // Métodos del main:
 
 string nombre = "My new playlist";
+bool aleatorio = false;
+
+bool reproducir() {
+  if (contador == 0)
+    return false;
+  Nodo *actual = primero;
+  cout << "\n===== PLAYLIST: " << nombre << " =====\n";
+  for (int i = 0; i < contador; i++) {
+    cout << "┌──────────────────────────────────────────────\n";
+    cout << "│ #" << i << "  " << actual->nombre << " (" << actual << ")\n";
+    cout << "├──────────────────────────────────────────────\n";
+    cout << "│ ⏮ ";
+    if (actual->anterior)
+      cout << actual->anterior->nombre << " (" << actual->anterior << ")";
+    else
+      cout << "(No hay anterior)";
+    cout << "\n";
+    cout << "│ ⏭ ";
+    if (actual->siguiente)
+      cout << actual->siguiente->nombre << " (" << actual->siguiente << ")";
+    else
+      cout << "(No hay siguiente)";
+    cout << "\n";
+    cout << "└──────────────────────────────────────────────\n\n\n";
+    actual = actual->siguiente;
+  }
+  cout << "Total de canciones: " << contador << "\n";
+  cout << "🔁 " << (circular ? "(Activado)" : "(Desactivado)") << endl;
+  cout << "🔀 " << (aleatorio ? "(Activado)" : "(Desactivado)") << endl;
+  cout << "===============================================\n\n";
+  return true;
+}
 
 void despedida() {
   if (clear())
-    cout << "¡Lista no vacia! Se ha vaciado automáticamente" << endl;
+    cout << "¡Playlist no vacia! Se ha vaciado automáticamente" << endl;
   else
     cout << "¡Hasta pronto!" << endl;
 }
 
 string menu() {
-  string loop = circular ?  "Quitar" : "Poner";
+  string loop = circular ? "Quitar" : "Poner";
   return "\n" + nombre + "\n0. Cambiar nombre a la playlist\n 1. Llenar playlist\n 2. Ingresar a la playlist(before this track)\n 3. Ingresar a la playlist(after this track)\n 4. Eliminar de la playlist\n 5. Reproducir playlist\n 6. Limpiar playlist\n 7. " + loop + " playlist en bucle 8. Salir\n ";
 }
 
@@ -89,12 +146,12 @@ void manage_option(int opcion, int indice) {
     if (!remove(indice))
       cout << indice_fuera_del_rango();
   case 5:
-    if (!print())
-      cout << "¡Lista vacia!";
+    if (!reproducir())
+      cout << "¡Playlist vacia!";
     break;
   case 6:
     if (!clear())
-      cout << "¡Lista vacia!";
+      cout << "¡Playlist vacia!";
     break;
   case 7:
     if (circular)
