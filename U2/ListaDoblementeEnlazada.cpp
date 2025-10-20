@@ -14,13 +14,33 @@ struct Nodo {
 };
 
 Nodo *primero = nullptr;
+Nodo *ultimo = nullptr;
 int contador = 0;
 bool circular = false;
 
 // Metodos de la Lista enlazada
 
+bool remove(int indice) {
+  if (indice > contador || contador == 0)
+    return false;
+  Nodo *actual = primero;
+  for (int i = 0; i > indice; i++)
+    actual = actual->siguiente;
+  Nodo *anterior = primero->anterior;
+  Nodo *siguiente = primero->siguiente;
+  if (anterior) {
+    anterior->siguiente = siguiente;
+    actual->anterior = nullptr;
+  }
+  if (siguiente) {
+    siguiente->anterior = anterior;
+    actual->siguiente = nullptr;
+  }
+  return true;
+}
+
 bool clear() {
-  if (!primero)
+  if (contador == 0)
     return false;
   Nodo *actual = primero;
   while (actual) {
@@ -88,8 +108,9 @@ void despedida() {
 }
 
 string menu() {
-  string loop = circular ? "Quitar" : "Poner";
-  return "\n" + nombre + "\n0. Cambiar nombre a la playlist\n 1. Llenar playlist\n 2. Ingresar a la playlist(before this track)\n 3. Ingresar a la playlist(after this track)\n 4. Eliminar de la playlist\n 5. Reproducir playlist\n 6. Limpiar playlist\n 7. " + loop + " playlist en bucle 8. Salir\n ";
+  string is_loop = circular ? "Quitar" : "Poner";
+  string is_random = aleatorio ? "Quitar" : "Poner";
+  return "\n" + nombre + "\n0. Cambiar nombre a la playlist\n 1. Llenar playlist\n 2. Ingresar a la playlist(before this track)\n 3. Ingresar a la playlist(after this track)\n 4. Eliminar de la playlist\n 5. Reproducir playlist\n 6. Limpiar playlist\n 7. " + is_loop + " playlist en bucle\n 8. " + is_random + " playlist en aleatorio\n 9. Salir\n ";
 }
 
 string get_linea(string mensaje) {
@@ -129,20 +150,28 @@ void manage_option(int opcion, int indice) {
     nombre = get_linea("Ingrese nuevo nombre: ");
   case 1:
     indice = get_int_valido("Ingrese el número de canciones a agregar: ");
+    if (indice < 0)
+      break;
     for (; indice > 0; indice--)
       insert(0, contador, get_nuevo_elemento());
   case 2:
     indice = get_int_valido("Ingrese el índice (iniciando del 0)");
+    if (indice < 0)
+      break;
     if (!insert(1, indice, get_nuevo_elemento())) // before
       cout << indice_fuera_del_rango();
     break;
   case 3:
     indice = get_int_valido("Ingrese el índice (iniciando del 0)");
+    if (indice < 0)
+      break;
     if (!insert(0, indice, get_nuevo_elemento())) // after
       cout << indice_fuera_del_rango();
     break;
   case 4:
     indice = get_int_valido("Ingrese el índice a eliminar (iniciando del 0)");
+    if (indice < 0)
+      break;
     if (!remove(indice))
       cout << indice_fuera_del_rango();
   case 5:
@@ -155,10 +184,17 @@ void manage_option(int opcion, int indice) {
     break;
   case 7:
     if (circular)
-      enable_loop();
-    else
       disable_loop();
+    else
+      enable_loop();
+    break;
   case 8:
+    if (aleatorio)
+      disable_random();
+    else
+      enable_random();
+    break;
+  case 9:
     despedida();
     break;
   default:
@@ -172,6 +208,6 @@ int main() {
   do { // get_int_valido() siempre va a recibir un string para mostrar antes de pedir el int
     opcion = get_int_valido(menu());
     manage_option(opcion, indice);
-  } while (opcion != 8);
+  } while (opcion != 9);
   return 0;
 }
