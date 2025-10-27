@@ -55,7 +55,7 @@ public class AppTazos {
   static void imprimirPilaActualDeTazos() throws URISyntaxException, IOException {
     String contenido = "¡Pila de tazos vacía, fin del juego!";
     if (!tazos.isEmpty()) {
-      URI uri = App.class.getResource("/tazo" + tazos.size() + ".txt").toURI();
+      URI uri = AppTazos.class.getResource("/tazo" + tazos.size() + ".txt").toURI();
       contenido = Files.readString(Path.of(uri));
     }
     System.out.println(contenido);

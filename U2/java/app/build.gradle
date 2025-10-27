@@ -25,14 +25,6 @@ dependencies {
     implementation 'net.java.dev.jna:jna:5.18.1'
 }
 
-tasks.withType(JavaExec) {
-    systemProperty 'jna.library.path', "${projectDir}/libs"
-}
-
-tasks.withType(Test) {
-    systemProperty 'jna.library.path', "${projectDir}/libs"
-}
-
 run {
     standardInput = System.in
 }
