@@ -21,6 +21,16 @@ dependencies {
 
     // This dependency is used by the application.
     implementation libs.guava
+
+    implementation 'net.java.dev.jna:jna:5.18.1'
+}
+
+tasks.withType(JavaExec) {
+    systemProperty 'jna.library.path', "${projectDir}/libs"
+}
+
+tasks.withType(Test) {
+    systemProperty 'jna.library.path', "${projectDir}/libs"
 }
 
 run {
@@ -36,5 +46,6 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'App'
+    // mainClass = 'AppTazos'
+    mainClass = 'AppEnlace'
 }

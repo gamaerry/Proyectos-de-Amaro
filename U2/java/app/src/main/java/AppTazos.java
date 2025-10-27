@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class App {
+public class AppTazos {
   static Stack<Tazo> tazos = new Stack<>();
   static int[] marcador = new int[2];
   static int puntajeActual = 0;
