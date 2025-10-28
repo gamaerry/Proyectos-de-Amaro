@@ -1,4 +1,4 @@
-#include "Pila.h"
+#include "LibreriaPila.h"
 #include <iostream>
 
 using namespace std;
@@ -32,14 +32,14 @@ int main() {
     }
     if (opcion == 1)
       push();
-    else if (opcion == 2 && get_last())
+    else if (opcion == 2 && !esta_vacio())
       show();
-    else if (opcion == 3 && get_last())
+    else if (opcion == 3 && !esta_vacio())
       pop();
-    else if (opcion == 4 && get_last())
+    else if (opcion == 4 && !esta_vacio())
       clear();
     else if (opcion == 5)
-      despedida(get_last());
+      despedida(!esta_vacio());
     else
       cout << "No se realizó ninguna operación" << endl;
   } while (opcion != 5);

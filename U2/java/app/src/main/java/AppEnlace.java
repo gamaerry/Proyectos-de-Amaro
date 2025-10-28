@@ -1,18 +1,16 @@
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-
-interface MiLibreria extends Library {
-  MiLibreria INSTANCE = Native.load("practica7", MiLibreria.class);
-
-  void saludo();
-
-  void saludoConNombre(String nombre);
-}
+import java.util.Scanner;
 
 public class AppEnlace {
   public static void main(String[] args) {
     System.out.println("Plataforma: " + System.getProperty("os.name") + " - " + System.getProperty("os.arch"));
-    MiLibreria.INSTANCE.saludo();
-    MiLibreria.INSTANCE.saludoConNombre(" Luis");
+    // testPractica7();
+    UsoDePilas.main();
   }
+
+  // métodos del hello world:
+  static void testPractica7() {
+    Practica7.INSTANCE.saludo();
+    Practica7.INSTANCE.saludoConNombre(" Luis");
+  }
+
 }
