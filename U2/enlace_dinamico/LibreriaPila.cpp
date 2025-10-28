@@ -1,13 +1,12 @@
 #include "LibreriaPila.h"
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 const int TAMANO_MAXIMO = 1024;
-const string MSJ_PEDIR_NOMBRE = "Ingrese el nombre del elemento: ";
 
 struct Pila {
   char nombre[TAMANO_MAXIMO];
@@ -20,15 +19,13 @@ int empty() {
   return !ultimo_elemento;
 }
 
-void push() {
+void push(const char *nombre) {
   Pila *nuevo_elemento = (Pila *)malloc(sizeof(Pila));
-  cout << MSJ_PEDIR_NOMBRE;
-  cin.ignore();
-  cin.getline(nuevo_elemento->nombre, TAMANO_MAXIMO);
+  strncpy(nuevo_elemento->nombre, nombre, TAMANO_MAXIMO - 1);
+  nuevo_elemento->nombre[TAMANO_MAXIMO - 1] = '\0';
   nuevo_elemento->elemento_trasero = ultimo_elemento;
   ultimo_elemento = nuevo_elemento;
-  if (!empty())
-    cout << "¡Nuevo " << ultimo_elemento->nombre << " elemento introducido!" << endl;
+  cout << "¡Nuevo " << ultimo_elemento->nombre << " elemento introducido!" << endl;
 }
 
 void pop() {

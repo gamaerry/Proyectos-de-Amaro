@@ -6,7 +6,7 @@ public interface LibreriaPila extends Library {
 
   int empty();
 
-  void push();
+  void push(String nombre);
 
   void pop();
 

@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 int empty();
-void push();
+void push(const char* nombre);
 void pop();
 void clear();
 void show();

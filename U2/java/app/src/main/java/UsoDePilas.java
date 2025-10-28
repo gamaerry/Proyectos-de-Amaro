@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 public class UsoDePilas {
+
   static LibreriaPila lib = LibreriaPila.INSTANCE;
+
   public static void main() {
     Scanner escaner = new Scanner(System.in);
     int opcion;
@@ -9,13 +11,15 @@ public class UsoDePilas {
       mostrarMenu();
       if (!escaner.hasNextInt()) {
         System.out.print("¡No ingresó dígito válido! ");
-        escaner.next();
         opcion = 0;
-      } else
+      } else {
         opcion = escaner.nextInt();
-      if (opcion == 1)
-        lib.push();
-      else if (opcion == 2 && lib.empty() == 0)
+        escaner.nextLine();
+      }
+      if (opcion == 1) {
+        System.out.println("Ingrese el nombre del elemento: ");
+        lib.push(escaner.nextLine());
+      } else if (opcion == 2 && lib.empty() == 0)
         lib.show();
       else if (opcion == 3 && lib.empty() == 0)
         lib.pop();

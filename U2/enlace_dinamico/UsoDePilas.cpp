@@ -1,5 +1,6 @@
 #include "LibreriaPila.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ void mostrar_menu() {
 
 int main() {
   int opcion;
+  string nombre;
   do {
     mostrar_menu();
     cin >> opcion;
@@ -30,16 +32,19 @@ int main() {
       cin.clear();
       cin.ignore();
     }
-    if (opcion == 1)
-      push();
-    else if (opcion == 2 && !esta_vacio())
+    if (opcion == 1) {
+      cout << "Ingrese el nombre del elemento: ";
+      cin.ignore();
+      getline(cin, nombre);
+      push(nombre.c_str());
+    } else if (opcion == 2 && !empty())
       show();
-    else if (opcion == 3 && !esta_vacio())
+    else if (opcion == 3 && !empty())
       pop();
-    else if (opcion == 4 && !esta_vacio())
+    else if (opcion == 4 && !empty())
       clear();
     else if (opcion == 5)
-      despedida(!esta_vacio());
+      despedida(!empty());
     else
       cout << "No se realizó ninguna operación" << endl;
   } while (opcion != 5);
