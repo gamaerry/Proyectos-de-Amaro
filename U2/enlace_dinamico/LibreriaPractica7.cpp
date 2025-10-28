@@ -1,4 +1,4 @@
-#include "practica7.h"
+#include "LibreriaPractica7.h"
 #include <iostream>
 
 extern "C" EXPORT void saludo() {
@@ -6,5 +6,5 @@ extern "C" EXPORT void saludo() {
 }
 
 extern "C" EXPORT void saludoConNombre(const char* nombre) {
-  std::cout << "Hola mundo desde C++" << nombre << std::endl;
+  std::cout << "Hola mundo desde C++ " << nombre << std::endl;
 }

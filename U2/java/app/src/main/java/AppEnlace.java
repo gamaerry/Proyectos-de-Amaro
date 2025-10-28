@@ -7,10 +7,9 @@ public class AppEnlace {
     UsoDePilas.main();
   }
 
-  // métodos del hello world:
+  // métodos de la practica 7:
   static void testPractica7() {
-    Practica7.INSTANCE.saludo();
-    Practica7.INSTANCE.saludoConNombre(" Luis");
+    LibreriaPractica7.INSTANCE.saludo();
+    LibreriaPractica7.INSTANCE.saludoConNombre(" Luis");
   }
-
 }

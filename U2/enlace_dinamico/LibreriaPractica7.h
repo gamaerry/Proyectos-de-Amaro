@@ -1,5 +1,5 @@
-#ifndef PRACTICA7_H
-#define PRACTICA7_H
+#ifndef LIBRERIAPRACTICA7_H
+#define LIBRERIAPRACTICA7_H
 
 #ifdef _WIN32 // sistemas windows: g++ -shared -o practica7.dll practica7.cpp -static-libgcc -static-libstdc++
 #define EXPORT __declspec(dllexport)
