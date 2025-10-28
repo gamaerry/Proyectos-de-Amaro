@@ -1,10 +1,12 @@
 #include "Pila.h"
 #include <iostream>
 
-void despedida(Pila *ultimo_elemento) {
-  if (ultimo_elemento) {
+using namespace std;
+
+void despedida(bool hay_elementos) {
+  if (hay_elementos) {
     cout << "¡Pila no vacia! Se ha vaciado automáticamente" << endl;
-    ultimo_elemento = clear(ultimo_elemento);
+    clear();
   }
   cout << "¡Hasta pronto!" << endl;
 }
@@ -19,26 +21,25 @@ void mostrar_menu() {
 }
 
 int main() {
-  Pila *ultimo_elemento = nullptr;
   int opcion;
   do {
     mostrar_menu();
     cin >> opcion;
-    if(!cin) {
-      cout << "¡No ingresó dígito válido! ";  
+    if (!cin) {
+      cout << "¡No ingresó dígito válido! ";
       cin.clear();
       cin.ignore();
     }
     if (opcion == 1)
-      ultimo_elemento = push(ultimo_elemento);
-    else if (opcion == 2 && ultimo_elemento)
-      show(ultimo_elemento);
-    else if (opcion == 3 && ultimo_elemento)
-      ultimo_elemento = pop(ultimo_elemento);
-    else if (opcion == 4 && ultimo_elemento)
-      ultimo_elemento = clear(ultimo_elemento);
+      push();
+    else if (opcion == 2 && get_last())
+      show();
+    else if (opcion == 3 && get_last())
+      pop();
+    else if (opcion == 4 && get_last())
+      clear();
     else if (opcion == 5)
-      despedida(ultimo_elemento);
+      despedida(get_last());
     else
       cout << "No se realizó ninguna operación" << endl;
   } while (opcion != 5);
