@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d13cbtliqce84"]
+
+[ext_resource type="Texture2D" uid="uid://bisj37yc82gt5" path="res://assets/marco.png" id="1_ulxyu"]
+
+[node name="MarcoDeFichas" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ulxyu")
