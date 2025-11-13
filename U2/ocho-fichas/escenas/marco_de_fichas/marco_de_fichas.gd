@@ -13,7 +13,6 @@ func movimiento_posible(ficha: Ficha) -> int: # 0, 1, 2, 3 o -1
 	var indice_nulo: int = fichas_en_orden_actual.find(null)
 	var menos_dimension: int = -dimension # godot no permite expresiones en la estructura match
 	var movimiento: int = -1
-	print(fichas_en_orden_actual)
 	match indice - indice_nulo:
 		-1: movimiento = 0
 		1: movimiento = 2

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7smg3iud77bg"]
+[gd_scene load_steps=5 format=3 uid="uid://c7smg3iud77bg"]
 
 [ext_resource type="Script" uid="uid://dwtoq8knep4gv" path="res://escenas/nivel/nivel.gd" id="1_dekmp"]
 [ext_resource type="PackedScene" uid="uid://dyngocj1fgbqx" path="res://escenas/marco_de_8_fichas/marco_de_8_fichas.tscn" id="1_qw10f"]
 [ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/fondo.png" id="2_yw1ho"]
+[ext_resource type="Texture2D" uid="uid://cbpxpeqoottvq" path="res://assets/marco_relleno.png" id="4_buacj"]
 
 [node name="Nivel" type="Node2D"]
 script = ExtResource("1_dekmp")
@@ -14,3 +15,4 @@ texture = ExtResource("2_yw1ho")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="MarcoDe8Fichas" parent="." instance=ExtResource("1_qw10f")]
+texture = ExtResource("4_buacj")
