@@ -1,6 +1,6 @@
 class_name MarcoDeFichas extends Node2D
 
-var dimension: int = 3 #2, 3, 4 o 5
+@export var dimension: int = 3 #2, 3, 4 o 5
 var fichas_en_orden_actual: Array[Ficha] #orden actual, 
 
 func _ready() -> void:
