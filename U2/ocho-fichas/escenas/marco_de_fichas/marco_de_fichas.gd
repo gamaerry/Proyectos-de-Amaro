@@ -14,8 +14,14 @@ func movimiento_posible(ficha: Ficha) -> int: # 0, 1, 2, 3 o -1
 	var menos_dimension: int = -dimension # godot no permite expresiones en la estructura match
 	var movimiento: int = -1
 	match indice - indice_nulo:
-		-1: movimiento = 0
-		1: movimiento = 2
+		-1: if (indice + 1) % dimension == 0:
+			return movimiento
+		else:
+			movimiento = 0
+		1: if indice % dimension == 0:
+			return movimiento
+		else:
+			movimiento = 2
 		dimension: movimiento = 3
 		menos_dimension: movimiento = 1
 		_: return movimiento
