@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6qdurli3rkde"]
+[gd_scene load_steps=5 format=3 uid="uid://c6qdurli3rkde"]
 
 [ext_resource type="Texture2D" uid="uid://cyogsokr83hn4" path="res://assets/1.png" id="1_7bqfy"]
 [ext_resource type="Script" uid="uid://eqv5sbjt5532" path="res://escenas/ficha/ficha.gd" id="2_bymqh"]
+[ext_resource type="AudioStream" uid="uid://csq8f7xidrmj4" path="res://assets/fallar_2.wav" id="3_5ant5"]
+[ext_resource type="AudioStream" uid="uid://w207mvpshoh6" path="res://assets/movimiento_3.wav" id="3_bymqh"]
 
-[node name="Ficha" type="TextureButton"]
+[node name="Ficha" type="TextureButton" node_paths=PackedStringArray("audio_movimiento", "audio_fallar")]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,3 +20,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("1_7bqfy")
 script = ExtResource("2_bymqh")
+audio_movimiento = NodePath("AudioMovimiento")
+audio_fallar = NodePath("AudioFallar")
+
+[node name="AudioFallar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5ant5")
+
+[node name="AudioMovimiento" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bymqh")

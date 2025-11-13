@@ -1,6 +1,8 @@
 class_name Ficha extends TextureButton
 
 @export var numero: int
+@export var audio_movimiento: AudioStreamPlayer2D
+@export var audio_fallar: AudioStreamPlayer2D
 var contenedor: MarcoDeFichas
 var tween: Tween  # tween reutilizable
 var en_movimiento: bool = false
@@ -19,6 +21,10 @@ func _on_pressed() -> void:
 		return
 	var movimiento: int = contenedor.movimiento_posible(self)
 	_init_tween()
+	if movimiento >= 0:
+		audio_movimiento.play()
+	else:
+		audio_fallar.play()
 	match movimiento:
 		0: _mover_derecha()
 		1: _mover_abajo()
