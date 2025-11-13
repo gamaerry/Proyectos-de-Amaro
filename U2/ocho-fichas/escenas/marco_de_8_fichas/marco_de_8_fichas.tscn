@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyngocj1fgbqx"]
+
+[ext_resource type="Script" uid="uid://1sexvrjnj42b" path="res://escenas/marco_de_fichas/marco_de_fichas.gd" id="1_tlvst"]
+[ext_resource type="PackedScene" uid="uid://c6qdurli3rkde" path="res://escenas/ficha/ficha.tscn" id="2_l88c7"]
+
+[node name="MarcoDe8Fichas" type="Node2D"]
+script = ExtResource("1_tlvst")
+metadata/_custom_type_script = "uid://1sexvrjnj42b"
+
+[node name="Ficha" parent="." instance=ExtResource("2_l88c7")]
+numero = 1
+
+[node name="Ficha2" parent="." instance=ExtResource("2_l88c7")]
+numero = 2
+
+[node name="Ficha3" parent="." instance=ExtResource("2_l88c7")]
+numero = 3
+
+[node name="Ficha4" parent="." instance=ExtResource("2_l88c7")]
+numero = 4
+
+[node name="Ficha5" parent="." instance=ExtResource("2_l88c7")]
+numero = 5
+
+[node name="Ficha6" parent="." instance=ExtResource("2_l88c7")]
+numero = 6
+
+[node name="Ficha7" parent="." instance=ExtResource("2_l88c7")]
+numero = 7
+
+[node name="Ficha8" parent="." instance=ExtResource("2_l88c7")]
+numero = 8
