@@ -12,6 +12,7 @@ struct Nodo {
 };
 
 int nivel_actual = 0;
+int numero_de_nodos = 0;
 
 // Métodos del arbol
 
@@ -37,15 +38,28 @@ void printNodo(Nodo *raiz) {
   }
 }
 
+int objeto_encontrado = -1;
+
+void busqueda_binaria(Nodo* raiz, int a_buscar) {
+  if(raiz && nivel_actual < numero_de_nodos){
+    nivel_actual++;
+    if (raiz->valor == a_buscar) {
+      objeto_encontrado = nivel_actual;
+    } else {
+      busqueda_binaria(raiz->menor, a_buscar);
+      busqueda_binaria(raiz->mayor, a_buscar);
+    }
+  }
+}
+
 // Métodos del main
 
 int get_aleatorio() {
   return rand() % 100;
 }
 
-int main() {
-  srand(time(NULL));
-  int numero_de_nodos, valor_aleatorio = get_aleatorio();
+Nodo* llenar_arbol() {
+  int valor_aleatorio = get_aleatorio();
   cout << "Ingrese el número de nodos: ";
   cin >> numero_de_nodos;
   cout << "Números generados: ";
@@ -61,7 +75,32 @@ int main() {
       actual = actual->mayor;
     }
   }
+  return raiz;
+}
+
+void buscar_numero(Nodo* raiz) {
+  int a_buscar;
+  cout << "Ingrese número a buscar: ";
+  cin >> a_buscar;
+  busqueda_binaria(raiz, a_buscar);
+  if (objeto_encontrado < 0)
+    cout << "¡Objeto no encontrado!";
+  else
+    cout << "¡Objeto encontrado en el nivel " << (objeto_encontrado - 1) << "!";
+}
+
+void imprimir_arbol(Nodo* raiz) {
   cout << endl;
+  nivel_actual = 0;
   printNodo(raiz);
+  nivel_actual = 0;
+}
+
+int main() {
+  Nodo* raiz;
+  srand(time(NULL));
+  raiz = llenar_arbol();
+  buscar_numero(raiz);
+  imprimir_arbol(raiz);
   return 0;
 }
