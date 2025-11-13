@@ -2,6 +2,9 @@ class_name Ficha extends TextureButton
 
 var numero: int = 9 # ficha por defecto (imposible)
 var contenedor: MarcoDeFichas
+var tween: Tween  # tween reutilizable
+var en_movimiento: bool = false
+const TAMANO_FICHA: int = 32
 
 func _ready() -> void:
 	contenedor = get_parent() as MarcoDeFichas
@@ -10,11 +13,43 @@ func _ready() -> void:
 func _textura() -> String:
 	return "res://assets/" + str(numero) + ".png"
 
-
 func set_numero_ficha(n: int) -> void:
 	numero = n
 	texture_normal = load(_textura())
 
 func _on_pressed() -> void:
+	if en_movimiento:
+		return
 	var movimiento: int = contenedor.movimiento_posible(self)
-	
+	_init_tween()
+	match movimiento:
+		0: _mover_derecha()
+		1: _mover_abajo()
+		2: _mover_izquierda()
+		3: _mover_arriba()
+		_: _fallar_movimiento()
+
+func _init_tween() -> void:
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	en_movimiento = true
+	tween.finished.connect(func(): en_movimiento = false)
+
+func _mover_derecha():
+	tween.tween_property(self, "position:x", position.x + TAMANO_FICHA, 0.2)
+
+func _mover_abajo():
+	tween.tween_property(self, "position:y", position.y + TAMANO_FICHA, 0.2)
+
+func _mover_izquierda():
+	tween.tween_property(self, "position:x", position.x - TAMANO_FICHA, 0.2)
+
+func _mover_arriba():
+	tween.tween_property(self, "position:y", position.y - TAMANO_FICHA, 0.2)
+
+func _fallar_movimiento(): # Efecto de "rebote"
+	tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.1)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.1)
