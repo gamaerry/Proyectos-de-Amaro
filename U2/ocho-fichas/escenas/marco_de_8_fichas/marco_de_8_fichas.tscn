@@ -1,32 +1,74 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyngocj1fgbqx"]
+[gd_scene load_steps=4 format=3 uid="uid://dyngocj1fgbqx"]
 
-[ext_resource type="Script" uid="uid://1sexvrjnj42b" path="res://escenas/marco_de_fichas/marco_de_fichas.gd" id="1_tlvst"]
+[ext_resource type="Script" uid="uid://xkxyv430f82j" path="res://escenas/marco_de_8_fichas/marco_de_8_fichas.gd" id="2_e2lrl"]
 [ext_resource type="PackedScene" uid="uid://c6qdurli3rkde" path="res://escenas/ficha/ficha.tscn" id="2_l88c7"]
+[ext_resource type="Texture2D" uid="uid://bisj37yc82gt5" path="res://assets/marco.png" id="3_l88c7"]
 
-[node name="MarcoDe8Fichas" type="Node2D"]
-script = ExtResource("1_tlvst")
-metadata/_custom_type_script = "uid://1sexvrjnj42b"
+[node name="MarcoDe8Fichas" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("3_l88c7")
+script = ExtResource("2_e2lrl")
 
-[node name="Ficha" parent="." instance=ExtResource("2_l88c7")]
+[node name="Ficha1" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -99.0
+offset_top = -99.0
+offset_right = -67.0
+offset_bottom = -67.0
 numero = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha2" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -67.0
+offset_top = -99.0
+offset_right = -35.0
+offset_bottom = -67.0
 numero = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha3" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -35.0
+offset_top = -99.0
+offset_right = -3.0
+offset_bottom = -67.0
 numero = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha4" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -99.0
+offset_top = -67.0
+offset_right = -67.0
+offset_bottom = -35.0
 numero = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha5" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -67.0
+offset_top = -67.0
+offset_right = -35.0
+offset_bottom = -35.0
 numero = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha6" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -35.0
+offset_top = -67.0
+offset_right = -3.0
+offset_bottom = -35.0
 numero = 6
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha7" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -99.0
+offset_top = -35.0
+offset_right = -67.0
+offset_bottom = -3.0
 numero = 7
+metadata/_edit_use_anchors_ = true
 
 [node name="Ficha8" parent="." instance=ExtResource("2_l88c7")]
+offset_left = -67.0
+offset_top = -35.0
+offset_right = -35.0
+offset_bottom = -3.0
 numero = 8
+metadata/_edit_use_anchors_ = true
