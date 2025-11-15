@@ -1,11 +1,16 @@
 class_name MarcoDeFichas extends Sprite2D
 
 @export var dimension: int = 3 #2, 3, 4 o 5
-var fichas_en_orden_actual: Array[Ficha] #orden actual, 
+@export var numero_de_fichas: int = dimension*dimension - 1
+var orden_de_fichas: Array[int] = Global.get_arreglo_resoluble(numero_de_fichas)
+var fichas_en_orden_actual: Array[Node] # Deberian ser de tipo Ficha, pero no es necesario
 
 func _ready() -> void:
-	fichas_en_orden_actual.assign(get_children())
-	#fichas_en_orden_actual.shuffle()
+	fichas_en_orden_actual = get_children()
+	for i in numero_de_fichas:
+		var ficha: Ficha = fichas_en_orden_actual[i]
+		ficha.numero = orden_de_fichas[i]
+		ficha.set_textura()
 	fichas_en_orden_actual.append(null)
 
 func movimiento_posible(ficha: Ficha) -> int: # 0, 1, 2, 3 o -1

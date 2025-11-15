@@ -1,6 +1,6 @@
 class_name Ficha extends TextureButton
 
-@export var numero: int
+@export var numero: int = 0
 @export var audio_movimiento: AudioStreamPlayer2D
 @export var audio_fallar: AudioStreamPlayer2D
 var contenedor: MarcoDeFichas
@@ -11,10 +11,10 @@ const TAMANO_FICHA: int = 32
 func _ready() -> void:
 	contenedor = get_parent() as MarcoDeFichas
 	pressed.connect(_on_pressed)
-	texture_normal = load(_textura())
+	#texture_normal = load(_textura())
 
-func _textura() -> String:
-	return "res://assets/" + str(numero) + ".png"
+func set_textura() -> void:
+	texture_normal = load("res://assets/" + str(numero) + ".png")
 
 func _on_pressed() -> void:
 	if en_movimiento:
