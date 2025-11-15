@@ -13,13 +13,14 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	#texture_normal = load(_textura())
 
-func set_textura() -> void:
-	texture_normal = load("res://assets/" + str(numero) + ".png")
+func set_numero(n: int) -> void:
+	numero = n
+	texture_normal = load("res://assets/" + str(n) + ".png")
 
 func _on_pressed() -> void:
 	if en_movimiento:
 		return
-	var movimiento: int = contenedor.movimiento_posible(self)
+	var movimiento: int = contenedor.movimiento_posible(numero)
 	_init_tween()
 	if movimiento >= 0:
 		audio_movimiento.play()
