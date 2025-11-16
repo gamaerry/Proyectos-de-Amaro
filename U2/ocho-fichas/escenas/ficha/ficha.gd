@@ -9,7 +9,7 @@ var en_movimiento: bool = false
 const TAMANO_FICHA: int = 32
 
 func _ready() -> void:
-	contenedor = get_parent() as MarcoDeFichas
+	contenedor = get_parent()
 	pressed.connect(_on_pressed)
 	#texture_normal = load(_textura())
 
