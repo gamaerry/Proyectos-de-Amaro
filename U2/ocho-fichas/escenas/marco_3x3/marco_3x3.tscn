@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjyhalrylctyg"]
+
+[ext_resource type="PackedScene" uid="uid://d13cbtliqce84" path="res://escenas/marco_de_fichas/marco_de_fichas.tscn" id="1_3r0tw"]
+[ext_resource type="Texture2D" uid="uid://cbpxpeqoottvq" path="res://assets/marco_relleno.png" id="2_13xbt"]
+[ext_resource type="PackedScene" uid="uid://c6qdurli3rkde" path="res://escenas/ficha/ficha.tscn" id="2_tqqhw"]
+[ext_resource type="Texture2D" uid="uid://bpc0fddcwnvjy" path="res://assets/0.png" id="3_g5iwm"]
+
+[node name="Marco3x3" instance=ExtResource("1_3r0tw")]
+texture_filter = 1
+texture = ExtResource("2_13xbt")
+
+[node name="Ficha1" parent="." index="0" instance=ExtResource("2_tqqhw")]
+offset_left = -99.0
+offset_top = -99.0
+offset_right = -67.0
+offset_bottom = -67.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha2" parent="." index="1" instance=ExtResource("2_tqqhw")]
+offset_left = -67.0
+offset_top = -99.0
+offset_right = -35.0
+offset_bottom = -67.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha3" parent="." index="2" instance=ExtResource("2_tqqhw")]
+offset_left = -35.0
+offset_top = -99.0
+offset_right = -3.0
+offset_bottom = -67.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha4" parent="." index="3" instance=ExtResource("2_tqqhw")]
+offset_left = -99.0
+offset_top = -67.0
+offset_right = -67.0
+offset_bottom = -35.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha5" parent="." index="4" instance=ExtResource("2_tqqhw")]
+offset_left = -67.0
+offset_top = -67.0
+offset_right = -35.0
+offset_bottom = -35.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha6" parent="." index="5" instance=ExtResource("2_tqqhw")]
+offset_left = -35.0
+offset_top = -67.0
+offset_right = -3.0
+offset_bottom = -35.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha7" parent="." index="6" instance=ExtResource("2_tqqhw")]
+offset_left = -99.0
+offset_top = -35.0
+offset_right = -67.0
+offset_bottom = -3.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha8" parent="." index="7" instance=ExtResource("2_tqqhw")]
+offset_left = -67.0
+offset_top = -35.0
+offset_right = -35.0
+offset_bottom = -3.0
+texture_normal = ExtResource("3_g5iwm")
+metadata/_edit_use_anchors_ = true

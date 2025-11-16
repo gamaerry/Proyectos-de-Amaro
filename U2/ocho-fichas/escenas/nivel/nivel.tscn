@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7smg3iud77bg"]
+[gd_scene load_steps=4 format=3 uid="uid://c7smg3iud77bg"]
 
 [ext_resource type="Script" uid="uid://dwtoq8knep4gv" path="res://escenas/nivel/nivel.gd" id="1_dekmp"]
-[ext_resource type="PackedScene" uid="uid://dyngocj1fgbqx" path="res://escenas/marco_de_8_fichas/marco_de_8_fichas.tscn" id="1_qw10f"]
 [ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/fondo.png" id="2_yw1ho"]
-[ext_resource type="Texture2D" uid="uid://cbpxpeqoottvq" path="res://assets/marco_relleno.png" id="4_buacj"]
+[ext_resource type="Texture2D" uid="uid://dl13jxnv47bif" path="res://assets/noche/fondo_noche.png" id="3_yw1ho"]
 
-[node name="Nivel" type="Node2D"]
+[node name="Nivel" type="Node2D" node_paths=PackedStringArray("fondo_dia", "fondo_noche")]
 script = ExtResource("1_dekmp")
+fondo_dia = NodePath("FondoDia")
+fondo_noche = NodePath("FondoNoche")
 
-[node name="Fondo" type="Sprite2D" parent="."]
+[node name="FondoDia" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_yw1ho")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="MarcoDe8Fichas" parent="." instance=ExtResource("1_qw10f")]
-texture = ExtResource("4_buacj")
+[node name="FondoNoche" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_yw1ho")

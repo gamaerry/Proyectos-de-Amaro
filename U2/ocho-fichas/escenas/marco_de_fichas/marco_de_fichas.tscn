@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://1sexvrjnj42b" path="res://escenas/marco_de_fichas/marco_de_fichas.gd" id="1_ptcsn"]
 
-[node name="MarcoDeFichas" type="Node2D"]
+[node name="MarcoDeFichas" type="Sprite2D"]
 script = ExtResource("1_ptcsn")
