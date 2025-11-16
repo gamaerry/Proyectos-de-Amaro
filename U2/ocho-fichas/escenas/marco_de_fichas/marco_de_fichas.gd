@@ -7,7 +7,7 @@ var orden_de_fichas: Array[int] = Global.get_arreglo_resoluble(numero_de_fichas)
 signal posible_orden_terminado(orden)
 
 func _ready() -> void:
-	posible_orden_terminado.connect(get_parent().on_ultimo_vacio)
+	posible_orden_terminado.connect(get_parent().on_posible_orden_terminado)
 	for i in numero_de_fichas:
 		get_child(i).set_numero(orden_de_fichas[i])
 	orden_de_fichas.append(0)

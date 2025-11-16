@@ -12,7 +12,7 @@ const ESPIRAL_DECRECIENTE_ANTIHORARIO_3: Array[int] = [8,1,2,7,0,3,6,5,4]
 #const ESPIRAL_DECRECIENTE_HORARIO_3: Array[int] = [8,7,6,1,0,5,2,3,4]
 #const ESPIRAL_CRECIENTE_HORARIO_3: Array[int] = [1,2,3,8,0,4,7,6,5]
 
-func on_ultimo_vacio(orden: Array[int]) -> void:
+func on_posible_orden_terminado(orden: Array[int]) -> void:
 	match orden:
 		LINEAL_HORIZONTAL_3: printerr("LINEAL_HORIZONTAL_3!")
 		LINEAL_HORIZONTAL_INV_3: printerr("LINEAL_HORIZONTAL_INV_3!")
