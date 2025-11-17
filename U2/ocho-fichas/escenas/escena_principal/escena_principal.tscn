@@ -1,10 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://fwuydtyw5y5"]
+[gd_scene load_steps=9 format=3 uid="uid://fwuydtyw5y5"]
 
 [ext_resource type="Script" uid="uid://duaj15r6cq78g" path="res://escenas/escena_principal/escena_principal.gd" id="1_pdctq"]
 [ext_resource type="PackedScene" uid="uid://bijfajkuxnky4" path="res://escenas/nivel3x3/nivel3x3.tscn" id="2_snxy5"]
+[ext_resource type="PackedScene" uid="uid://ckucew4vdjh2f" path="res://escenas/contenedor_de_consejos/contenedor_de_consejos.tscn" id="3_sbgap"]
+[ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/fondo.png" id="3_y7kll"]
+[ext_resource type="Texture2D" uid="uid://dl13jxnv47bif" path="res://assets/noche/fondo_noche.png" id="4_px6n3"]
+[ext_resource type="Theme" uid="uid://mpp7lp5rdwdw" path="res://escenas/menu_principal/tema_botones.tres" id="4_rrast"]
+[ext_resource type="Script" uid="uid://c1ep03wcw7hq1" path="res://escenas/escena_principal/boton_inicio.gd" id="7_e307b"]
+[ext_resource type="Script" uid="uid://cqbqj1ktocs6h" path="res://escenas/escena_principal/boton_salir.gd" id="7_px6n3"]
 
 [node name="EscenaPrincipal" type="Node2D"]
 script = ExtResource("1_pdctq")
 niveles = Array[PackedScene]([ExtResource("2_snxy5")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="FondoDia" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_y7kll")
+
+[node name="FondoNoche" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("4_px6n3")
+
+[node name="Menu" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = -53.5
+offset_right = 79.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logros" type="Button" parent="Menu"]
+layout_mode = 2
+text = "  🎖  "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Inicio" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rrast")
+text = "Inicio"
+script = ExtResource("7_e307b")
+
+[node name="Cargar" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rrast")
+text = "Cargar"
+
+[node name="Salir" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rrast")
+text = "Salir"
+script = ExtResource("7_px6n3")
+
+[node name="dia" type="Button" parent="Menu"]
+layout_mode = 2
+text = "  ⏾ "
+
+[node name="ContenedorDeConsejos" parent="." instance=ExtResource("3_sbgap")]

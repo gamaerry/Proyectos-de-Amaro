@@ -2,8 +2,7 @@ class_name Nivel3x3 extends Nivel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	fondo_dia.visible = dia
-	fondo_noche.visible = !dia
+	pass
 	
 func on_posible_orden_terminado(orden: Array[int]) -> void:
 	match orden:

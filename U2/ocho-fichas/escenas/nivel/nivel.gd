@@ -1,9 +1,5 @@
 class_name Nivel extends Node2D
 
-@export var fondo_dia: Sprite2D
-@export var fondo_noche: Sprite2D
-var dia: bool = true
-
 #DIA3x3:
 const LINEAL_HORIZONTAL_3: Array[int] = [1,2,3,4,5,6,7,8,0]
 const LINEAL_HORIZONTAL_INV_3: Array[int] = [8,7,6,5,4,3,2,1,0]

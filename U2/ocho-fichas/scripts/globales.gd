@@ -1,8 +1,5 @@
 class_name Global extends Object
 
-const consejos: Array[String] = ["En la primera casilla siempre irá la ficha más alta o la ficha más baja, ninguna otra será digna", "Como es arriba es abajo",
-	"Come frutas y verduras", "Piensa a la inversa, pero dentro de la caja", "Si el Diablo existe, Dios existe", "Vive el presente", "Practica la gratitud"]
-
 static func get_numeros_espirales(n: int) -> Vector2i:
 	return Vector2i(2*n-1, (n-1)**2) # 5 y 4 en el caso de dimension 3
 
