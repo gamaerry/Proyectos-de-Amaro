@@ -7,3 +7,4 @@ U2/java/app/bin/
 # Godot 4+ specific ignores
 U2/ocho-fichas/.godot/
 U2/ocho-fichas/android/
+U2/ocho-fichas/builds
