@@ -66,6 +66,7 @@ func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) ->
 		tween.parallel().tween_property(color2, "modulate:a", 0.0, 1.5)
 		Global.gano_logro = 0
 		await tween.finished
+		consejos_activados = true
 		mostrar_consejo_random() # al ganar logro se detiene la recursividad
 
 func activar_mensaje_logros():
@@ -73,7 +74,6 @@ func activar_mensaje_logros():
 	consejos_activados = false
 	label2.modulate.a = 1
 	color2.modulate.a = 1
-	
 
 func desactivar_mensaje_logros():
 	self.visible = false
