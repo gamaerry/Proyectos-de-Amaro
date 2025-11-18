@@ -48,6 +48,8 @@ func _actualizar_logros_obtenidos() -> void:
 			logros.get_child(i).add_theme_stylebox_override("hover", load("res://escenas/menu_principal/tema_botones_obtenidos_hover.tres"))
 			logros.get_child(i).add_theme_stylebox_override("pressed", load("res://escenas/menu_principal/tema_botones_obtenidos_pressed.tres"))
 			logros.get_child(i).add_theme_stylebox_override("disabled", load("res://escenas/menu_principal/tema_botones_obtenidos_disable.tres"))
+		else:
+			logros.get_child(i).pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
 
 func _mostrar_ocultar_logros() -> void:
 	if !logros_en_movimiento:
