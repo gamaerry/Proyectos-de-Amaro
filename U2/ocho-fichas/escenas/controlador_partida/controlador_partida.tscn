@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvlu32p8yf40e"]
+
+[ext_resource type="Script" uid="uid://dxerb2a26eo5n" path="res://escenas/controlador_partida/controlador_partida.gd" id="1_rbj2b"]
+
+[node name="ControladorPartida" type="Node"]
+script = ExtResource("1_rbj2b")
