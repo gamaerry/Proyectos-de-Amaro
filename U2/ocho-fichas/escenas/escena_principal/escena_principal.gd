@@ -41,7 +41,6 @@ func _cargar() -> void:
 	_nivel_instanciado.fue_cargado = true
 
 func _actualizar_logros_obtenidos() -> void:
-	
 	for i in Global.NUMERO_DE_LOGROS:
 		if Global.logros_obtenidos_3[i]:
 			logros.get_child(i).pressed.connect(contenedor_texto.mostrar_logro.bind(false, i))
@@ -92,6 +91,8 @@ func _crear_nivel(index: int):
 	add_child.call_deferred(_nivel_instanciado)
 	menu.visible = false
 	boton_regresar.visible = true
+	if logros_en_pantalla:
+		_mostrar_logros()
 	
 func _eliminar_nivel():
 	_nivel_instanciado.queue_free()
