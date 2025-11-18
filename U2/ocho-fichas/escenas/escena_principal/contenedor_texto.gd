@@ -51,7 +51,7 @@ func mostrar_consejo_random() -> void:
 		return
 	elif bolsa.is_empty():
 		_rellenar_bolsa()
-	await _espera(14)
+	await _espera(15)
 	await aparecer_consejo()
 	mostrar_consejo_random() # Recursividad infinita
 
@@ -63,7 +63,7 @@ func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) ->
 	color2.modulate.a = 1
 	label2.text = LOGROS[logro]
 	if temporal:
-		await _espera(7)
+		await _espera(5)
 		tween = create_tween()
 		tween.tween_property(label2, "modulate:a", 0.0, 1.5)
 		tween.parallel().tween_property(color2, "modulate:a", 0.0, 1.5)
@@ -78,7 +78,7 @@ func aparecer_consejo() -> void:
 	tween = create_tween()
 	tween.tween_property(label, "modulate:a", 1.0, 1.0)
 	tween.parallel().tween_property(color, "modulate:a", 1.0, 1.0)
-	await _espera(7)
+	await _espera(5)
 	tween = create_tween()
 	tween.tween_property(label, "modulate:a", 0.0, 1.5)
 	tween.parallel().tween_property(color, "modulate:a", 0.0, 1.5)

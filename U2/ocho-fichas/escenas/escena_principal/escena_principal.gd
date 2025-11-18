@@ -53,12 +53,9 @@ func _mostrar_logros() -> void:
 		if !logros_en_pantalla:
 			_mover_logros(logros.position.x + RECORRIDO_NECESARIO)
 			logros_en_pantalla = true
-			contenedor_texto.consejos_activados = false
 		else:
 			_mover_logros(logros.position.x - RECORRIDO_NECESARIO)
 			logros_en_pantalla = false
-			contenedor_texto.consejos_activados = true
-			contenedor_texto.mostrar_consejo_random()
 
 func _mover_logros(nueva_posicion: float)->void:
 		tween = create_tween()
@@ -66,7 +63,7 @@ func _mover_logros(nueva_posicion: float)->void:
 		tween.set_trans(Tween.TRANS_CUBIC)
 		logros_en_movimiento = true
 		tween.finished.connect(func(): logros_en_movimiento = false)
-		tween.tween_property(logros, "position:x", nueva_posicion , 1)
+		tween.tween_property(logros, "position:x", nueva_posicion , 0.5)
 
 func cambiar_modo_dia():
 	Global.dia = !Global.dia
