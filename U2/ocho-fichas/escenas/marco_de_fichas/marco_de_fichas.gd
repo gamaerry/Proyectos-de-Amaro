@@ -23,7 +23,6 @@ func _ready() -> void:
 			get_child(i).set_numero(orden_de_fichas[i])
 		orden_de_fichas.append(0)
 	orden_inicial_de_fichas = orden_de_fichas.duplicate()
-	printerr(orden_de_fichas)
 
 func ordenar_posiciones() -> void:
 	for i in numero_de_fichas:

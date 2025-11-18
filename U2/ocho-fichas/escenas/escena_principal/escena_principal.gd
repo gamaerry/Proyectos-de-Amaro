@@ -26,7 +26,6 @@ func _ready() -> void:
 	_actualizar_logros_obtenidos()
 	cambiar_modo_dia()
 	boton_regresar.visible = false
-	controlador_partida.cargar_partida()
 	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
 	boton_dia.pressed.connect(cambiar_modo_dia)
 	gano_logro.connect(contenedor_texto.mostrar_logro)
@@ -37,6 +36,7 @@ func _ready() -> void:
 	
 func _cargar() -> void:
 	_crear_nivel(index_actual)
+	controlador_partida.cargar_partida()
 	_nivel_instanciado.fue_cargado = true
 
 func _actualizar_logros_obtenidos() -> void:
