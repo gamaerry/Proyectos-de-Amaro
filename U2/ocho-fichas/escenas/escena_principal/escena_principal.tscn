@@ -21,6 +21,7 @@ texture_filter = 1
 texture = ExtResource("3_y7kll")
 
 [node name="FondoNoche" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("4_px6n3")
 
@@ -30,10 +31,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -79.5
-offset_top = -53.5
-offset_right = 79.5
-offset_bottom = 53.5
+offset_left = -66.75
+offset_top = -62.5
+offset_right = 66.75
+offset_bottom = 62.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -150,42 +151,50 @@ metadata/_edit_use_anchors_ = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -285.0
-offset_top = -68.0
-offset_right = -193.0
-offset_bottom = 68.0
+offset_left = -265.0
+offset_top = -84.0
+offset_right = -190.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
 [node name="OHC" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "OHC"
 
 [node name="OHD" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "OHD"
 
 [node name="OVC" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "OVC"
 
 [node name="OVD" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "OVD"
 
 [node name="EHC" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "EHC"
 
 [node name="EHD" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "EHD"
 
 [node name="EVC" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "EAC"
 
 [node name="EVD" type="Button" parent="GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_rrast")
 text = "EAD"
