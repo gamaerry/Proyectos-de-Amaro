@@ -13,3 +13,7 @@ const ESPIRAL_CRECIENTE_HORARIO_3: Array[int] = [1,2,3,8,0,4,7,6,5]
 
 func on_posible_orden_terminado(orden: Array[int]) -> void:
 	pass
+
+func _set_logro(logro: int) -> void:
+	Global.gano_logro = logro
+	get_parent().gano_logro.emit()

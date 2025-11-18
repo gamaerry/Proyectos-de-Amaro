@@ -1,6 +1,7 @@
 class_name Global extends Object
 
 static var dia: bool = true
+static var gano_logro: int = 0
 
 static func get_numeros_espirales(n: int) -> Vector2i:
 	return Vector2i(2*n-1, (n-1)**2) # 5 y 4 en el caso de dimension 3

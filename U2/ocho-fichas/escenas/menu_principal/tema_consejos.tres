@@ -3,5 +3,7 @@
 [ext_resource type="FontFile" uid="uid://bq1rlq5jevg1" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="1_ddmhj"]
 
 [resource]
-Label/font_sizes/font_size = 8
+Label/constants/line_spacing = -3
+Label/constants/outline_size = 0
+Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_ddmhj")

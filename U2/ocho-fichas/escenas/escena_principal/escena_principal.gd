@@ -7,7 +7,8 @@ extends Node2D
 @onready var menu: HBoxContainer = $Menu
 @onready var fondo_dia: Sprite2D = $FondoDia
 @onready var fondo_noche: Sprite2D = $FondoNoche
-
+@onready var contenedor_texto: CanvasLayer = $ContenedorTexto
+signal gano_logro
 var _dimension_actual: int = 3
 var _index_actual: int = _dimension_actual - 3
 var _nivel_instanciado: Node2D
@@ -18,6 +19,7 @@ func _ready() -> void:
 	fondo_noche.visible = !Global.dia
 	boton_inicio.pressed.connect(_crear_nivel.bind(_index_actual))
 	boton_dia.pressed.connect(_cambiar_modo_dia)
+	gano_logro.connect(contenedor_texto.mostrar_logro)
 	_dimension_actual = 3
 	
 func _cambiar_modo_dia():
