@@ -8,6 +8,7 @@ const CONSEJOS: Array[String] = [
 	"Piensa fuera de la caja. . . pero dentro del tablero. . .",
 	"Si el Diablo existe, Dios existe.",
 	"Vive el presente.",
+	"Es imposible conseguir los logros de día en modo noche.",
 	"Cada que sales tu partida se guarda automáticamente, pero solo puedes guardar una.",
 	"Sí, tambien tus logros se guardan al salir.",
 	"Practica la gratitud.",
