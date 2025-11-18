@@ -52,15 +52,12 @@ func mostrar_consejo_random() -> void:
 	elif bolsa.is_empty():
 		_rellenar_bolsa()
 	await _espera(15)
-	await aparecer_consejo()
-	mostrar_consejo_random() # Recursividad infinita
+	if consejos_activados:
+		await aparecer_consejo()
+		mostrar_consejo_random() # Recursividad infinita
 
 func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) -> void:
-	self.visible = true
-	label.modulate.a = 0
-	color.modulate.a = 0
-	label2.modulate.a = 1
-	color2.modulate.a = 1
+	activar_mensaje_logros()
 	label2.text = LOGROS[logro]
 	if temporal:
 		await _espera(5)
@@ -69,8 +66,20 @@ func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) ->
 		tween.parallel().tween_property(color2, "modulate:a", 0.0, 1.5)
 		Global.gano_logro = 0
 		await tween.finished
-		self.visible = false
 		mostrar_consejo_random() # al ganar logro se detiene la recursividad
+
+func activar_mensaje_logros():
+	self.visible = true
+	consejos_activados = false
+	label2.modulate.a = 1
+	color2.modulate.a = 1
+	
+
+func desactivar_mensaje_logros():
+	self.visible = false
+	consejos_activados = true
+	label2.modulate.a = 0
+	color2.modulate.a = 0
 
 func aparecer_consejo() -> void:
 	self.visible = true

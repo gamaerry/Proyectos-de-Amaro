@@ -55,6 +55,7 @@ func _mostrar_logros() -> void:
 			logros_en_pantalla = true
 		else:
 			_mover_logros(logros.position.x - RECORRIDO_NECESARIO)
+			contenedor_texto.desactivar_mensaje_logros()
 			logros_en_pantalla = false
 
 func _mover_logros(nueva_posicion: float)->void:
