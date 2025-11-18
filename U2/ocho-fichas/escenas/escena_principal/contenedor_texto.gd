@@ -27,7 +27,6 @@ const LOGROS: Array[String] = [
 ]
 
 var tween: Tween  # tween reutilizable
-var consejos_activados: bool = true
 var bolsa: Array[String] = []  # Shuffle bag
 @export var consejos: bool = true
 @onready var label: Label = $ColorRect/Consejos
@@ -36,7 +35,6 @@ var bolsa: Array[String] = []  # Shuffle bag
 @onready var color2: ColorRect = $ColorRect2
 
 func _ready() -> void:
-	self.visible = false
 	mostrar_consejo_random()
 
 func _rellenar_bolsa() -> void:
@@ -47,14 +45,11 @@ func _espera(segundos: int) -> void:
 	await get_tree().create_timer(segundos).timeout
 
 func mostrar_consejo_random() -> void:
-	if !consejos_activados:
-		return
-	elif bolsa.is_empty():
+	if bolsa.is_empty():
 		_rellenar_bolsa()
 	await _espera(15)
-	if consejos_activados:
-		await aparecer_consejo()
-		mostrar_consejo_random() # Recursividad infinita
+	await aparecer_consejo()
+	mostrar_consejo_random() # Recursividad infinita
 
 func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) -> void:
 	activar_mensaje_logros()
@@ -66,23 +61,17 @@ func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) ->
 		tween.parallel().tween_property(color2, "modulate:a", 0.0, 1.5)
 		Global.gano_logro = 0
 		await tween.finished
-		consejos_activados = true
 		mostrar_consejo_random() # al ganar logro se detiene la recursividad
 
 func activar_mensaje_logros():
-	self.visible = true
-	consejos_activados = false
 	label2.modulate.a = 1
 	color2.modulate.a = 1
 
 func desactivar_mensaje_logros():
-	self.visible = false
-	consejos_activados = true
 	label2.modulate.a = 0
 	color2.modulate.a = 0
 
 func aparecer_consejo() -> void:
-	self.visible = true
 	label.text = "Consejo: " + bolsa.pop_front()
 	tween = create_tween()
 	tween.tween_property(label, "modulate:a", 1.0, 1.0)
@@ -92,4 +81,3 @@ func aparecer_consejo() -> void:
 	tween.tween_property(label, "modulate:a", 0.0, 1.5)
 	tween.parallel().tween_property(color, "modulate:a", 0.0, 1.5)
 	await tween.finished
-	self.visible = false

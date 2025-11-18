@@ -31,7 +31,7 @@ func _ready() -> void:
 	boton_dia.pressed.connect(cambiar_modo_dia)
 	gano_logro.connect(contenedor_texto.mostrar_logro)
 	boton_cargar.pressed.connect(_cargar)
-	boton_logros.pressed.connect(_mostrar_logros)
+	boton_logros.pressed.connect(_mostrar_ocultar_logros)
 	boton_regresar.pressed.connect(regresar_al_menu)
 	_dimension_actual = 3
 	
@@ -49,7 +49,7 @@ func _actualizar_logros_obtenidos() -> void:
 			logros.get_child(i).add_theme_stylebox_override("pressed", load("res://escenas/menu_principal/tema_botones_obtenidos_pressed.tres"))
 			logros.get_child(i).add_theme_stylebox_override("disabled", load("res://escenas/menu_principal/tema_botones_obtenidos_disable.tres"))
 
-func _mostrar_logros() -> void:
+func _mostrar_ocultar_logros() -> void:
 	if !logros_en_movimiento:
 		if !logros_en_pantalla:
 			_mover_logros(logros.position.x + RECORRIDO_NECESARIO)
@@ -73,6 +73,9 @@ func cambiar_modo_dia():
 	fondo_noche.visible = !Global.dia
 	boton_dia.text = ICONOS[int(!Global.dia)]
 	ordenar_logros()
+	if logros_en_pantalla:
+		_mostrar_ocultar_logros()
+	
 
 func ordenar_logros() -> void:
 	for i in Global.NUMERO_DE_LOGROS:
@@ -92,7 +95,7 @@ func _crear_nivel(index: int):
 	menu.visible = false
 	boton_regresar.visible = true
 	if logros_en_pantalla:
-		_mostrar_logros()
+		_mostrar_ocultar_logros()
 	
 func _eliminar_nivel():
 	_nivel_instanciado.queue_free()
