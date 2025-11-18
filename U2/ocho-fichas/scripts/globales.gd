@@ -5,8 +5,8 @@ static var gano_logro: int = 0
 static var dia_guardado: bool
 const NUMERO_DE_LOGROS: int = 8
 const ORDEN_LOGROS_3: Array[bool] = [true,true,false,false,false,false,true,true]
-#static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false]
-static var logros_obtenidos_3: Array[bool] = [true,true,false,false,false,false,true,true]
+static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false]
+#static var logros_obtenidos_3: Array[bool] = [true,true,false,false,false,false,true,true]
 static var tablero_3: Array[int]
 static func get_numeros_espirales(n: int) -> Vector2i:
 	return Vector2i(2*n-1, (n-1)**2) # 5 y 4 en el caso de dimension 3

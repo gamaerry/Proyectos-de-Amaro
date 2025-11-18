@@ -23,6 +23,7 @@ var logros_en_movimiento: bool = false
 var logros_en_pantalla: bool = false
 
 func _ready() -> void:
+	controlador_partida.cargar_partida()
 	_actualizar_logros_obtenidos()
 	cambiar_modo_dia()
 	boton_regresar.visible = false
@@ -40,6 +41,7 @@ func _cargar() -> void:
 	_nivel_instanciado.fue_cargado = true
 
 func _actualizar_logros_obtenidos() -> void:
+	
 	for i in Global.NUMERO_DE_LOGROS:
 		if Global.logros_obtenidos_3[i]:
 			logros.get_child(i).pressed.connect(contenedor_texto.mostrar_logro.bind(false, i))
