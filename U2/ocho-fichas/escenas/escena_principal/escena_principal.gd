@@ -77,6 +77,7 @@ func ordenar_logros() -> void:
 		logros.get_child(i).disabled = Global.ORDEN_LOGROS_3[i] != Global.dia
 
 func regresar_al_menu():
+	_actualizar_logros_obtenidos()
 	controlador_partida.guardar_partida()
 	_nivel_instanciado.queue_free()
 	_nivel_instanciado = null

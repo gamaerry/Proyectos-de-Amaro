@@ -21,3 +21,4 @@ func _set_logro(logro: int) -> void:
 	get_parent().gano_logro.emit() #escena principal siempre es parent
 	match get_parent().index_actual:
 		0: Global.logros_obtenidos_3[logro - 1] = true
+	
