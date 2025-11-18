@@ -15,7 +15,10 @@ func _ready() -> void:
 
 func set_numero(n: int) -> void:
 	numero = n
-	texture_normal = load("res://assets/" + str(n) + ".png")
+	var ruta: String = "res://assets/noche" + str(n) + "_noche.png"
+	if !Global.dia:
+		ruta = "res://assets/" + str(n) + ".png"
+	texture_normal = load(ruta)
 
 func _on_pressed() -> void:
 	if en_movimiento:
