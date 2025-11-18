@@ -189,12 +189,26 @@ layout_mode = 2
 theme = ExtResource("4_rrast")
 text = "EHD"
 
-[node name="EVC" type="Button" parent="GridContainer"]
+[node name="EAC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("4_rrast")
 text = "EAC"
 
-[node name="EVD" type="Button" parent="GridContainer"]
+[node name="EAD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("4_rrast")
 text = "EAD"
+
+[node name="RegresarAlMenu" type="Button" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -85.0
+offset_right = 157.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_rrast")
+theme_override_font_sizes/font_size = 20
+text = "Regresar al menú"

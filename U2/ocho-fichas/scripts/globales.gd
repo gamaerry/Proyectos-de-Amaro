@@ -1,8 +1,11 @@
 class_name Global extends Object
 
-static var dia: bool = true
+static var dia: bool = false 
 static var gano_logro: int = 0
-
+const NUMERO_DE_LOGROS: int = 8
+const ORDEN_LOGROS_3: Array[bool] = [true,true,false,false,false,false,true,true]
+static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false] 
+#static var logros_obtenidos_3: Array[bool] = [true,true,true,true,true,true,true,true] 
 static func get_numeros_espirales(n: int) -> Vector2i:
 	return Vector2i(2*n-1, (n-1)**2) # 5 y 4 en el caso de dimension 3
 
