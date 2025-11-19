@@ -18,13 +18,17 @@ const CONSEJOS: Array[String] = [
 
 const LOGROS: Array[String] = [
 	"Logro conseguido OHC: Orden Horizontal Creciente",
-	"Logro conseguido OHD: Orden Horizontal Decreciente",
-	"Logro conseguido OVC: Orden Vertival Creciente",
-	"Logro conseguido OVD: Orden Vertical Decreciente",
 	"Logro conseguido EHC: Espiral en sentido Horario Creciente",
+	"Logro conseguido SHC: Serpenteado Horizontal Creciente",
+	"Logro conseguido OHD: Orden Horizontal Decreciente",
 	"Logro conseguido EHD: Espiral en sentido Horario Decreciente",
+	"Logro conseguido SHD: Serpenteado Horizontal Decreciente",
+	"Logro conseguido OVC: Orden Vertical Creciente",
 	"Logro conseguido EAC: Espiral en sentido Antihorario Creciente",
+	"Logro conseguido SVC: Serpenteado Vertical Creciente",
+	"Logro conseguido OVD: Orden Vertical Decreciente",
 	"Logro conseguido EAD: Espiral en sentido Antihorario Decreciente",
+	"Logro conseguido SVD: Serpenteado Vertical Decreciente",
 ]
 
 var tween: Tween  # tween reutilizable

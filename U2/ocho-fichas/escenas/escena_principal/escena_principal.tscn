@@ -141,53 +141,73 @@ metadata/_edit_use_anchors_ = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -248.0
+offset_left = -270.0
 offset_top = -62.0
-offset_right = -191.0
-offset_bottom = 63.0
+offset_right = -190.0
+offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 2
+columns = 3
 
 [node name="OHC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "OHC"
 
-[node name="OHD" type="Button" parent="GridContainer"]
-layout_mode = 2
-theme = ExtResource("10_sv3hn")
-text = "OHD"
-
-[node name="OVC" type="Button" parent="GridContainer"]
-layout_mode = 2
-theme = ExtResource("10_sv3hn")
-text = "OVC"
-
-[node name="OVD" type="Button" parent="GridContainer"]
-layout_mode = 2
-theme = ExtResource("10_sv3hn")
-text = "OVD"
-
 [node name="EHC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EHC"
+
+[node name="SHC" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "SHC"
+
+[node name="OHD" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "OHD"
 
 [node name="EHD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EHD"
 
+[node name="SHD" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "SHD"
+
+[node name="OVC" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "OVC"
+
 [node name="EAC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EAC"
 
+[node name="SVC" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "SVC"
+
+[node name="OVD" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "OVD"
+
 [node name="EAD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EAD"
+
+[node name="SVD" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme = ExtResource("10_sv3hn")
+text = "SVD"
 
 [node name="RegresarAlMenu" type="Button" parent="."]
 anchors_preset = 15

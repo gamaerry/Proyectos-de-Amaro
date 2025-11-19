@@ -2,7 +2,5 @@
 
 [ext_resource type="Script" uid="uid://dwtoq8knep4gv" path="res://escenas/nivel/nivel.gd" id="1_dekmp"]
 
-[node name="Nivel" type="Node2D" node_paths=PackedStringArray("fondo_dia", "fondo_noche")]
+[node name="Nivel" type="Node2D"]
 script = ExtResource("1_dekmp")
-fondo_dia = NodePath("")
-fondo_noche = NodePath("")

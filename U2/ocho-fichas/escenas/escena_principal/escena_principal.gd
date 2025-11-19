@@ -18,7 +18,7 @@ var _dimension_actual: int = 3
 var index_actual: int = _dimension_actual - 3
 var _nivel_instanciado: Node2D
 const ICONOS: Array[String] = ["  ⏾  ","  ☀︎  "]
-const RECORRIDO_NECESARIO: int = 110
+const RECORRIDO_NECESARIO: int = 115
 var logros_en_movimiento: bool = false
 var logros_en_pantalla: bool = false
 
