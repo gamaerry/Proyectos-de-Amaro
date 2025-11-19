@@ -30,6 +30,7 @@ func ordenar_posiciones() -> void:
 		if orden_de_fichas[i] == 0:
 			get_child(i).position = Vector2i(16,16)
 			get_child(i).set_numero(orden_de_fichas[numero_de_fichas])
+	printerr(orden_de_fichas)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("abajo"):
@@ -42,8 +43,14 @@ func _input(event: InputEvent) -> void:
 		_izquierda()
 
 func _presionar_si_es_posible(indice_a_mover: int):
+	printerr(orden_inicial_de_fichas)
 	if indice_a_mover >= 0 and indice_a_mover <= numero_de_fichas:
-		get_child(orden_inicial_de_fichas.find(orden_de_fichas[indice_a_mover]))._on_pressed()
+		printerr(orden_de_fichas[indice_a_mover])
+		var indice_encontrado: int = orden_inicial_de_fichas.find(orden_de_fichas[indice_a_mover])
+		if get_parent().fue_cargado && indice_encontrado == numero_de_fichas:
+			indice_encontrado = orden_inicial_de_fichas.find(0)
+		printerr(indice_encontrado)
+		get_child(indice_encontrado)._on_pressed()
 
 func _abajo() -> void:
 	_presionar_si_es_posible(orden_de_fichas.find(0) - dimension)
