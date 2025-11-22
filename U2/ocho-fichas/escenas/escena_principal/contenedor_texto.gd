@@ -34,6 +34,7 @@ const LOGROS: Array[String] = [
 var tween: Tween  # tween reutilizable
 var bolsa: Array[String] = []  # Shuffle bag
 @export var consejos: bool = true
+@export var audio_logro: AudioStreamPlayer2D
 @onready var label: Label = $ColorRect/Consejos
 @onready var color: ColorRect = $ColorRect
 @onready var label2: Label = $ColorRect2/Logros
@@ -60,6 +61,7 @@ func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) ->
 	activar_mensaje_logros(false)
 	label2.text = LOGROS[logro]
 	if temporal:
+		audio_logro.play()
 		await _espera(5)
 		tween = create_tween()
 		tween.tween_property(label2, "modulate:a", 0.0, 1.5)
