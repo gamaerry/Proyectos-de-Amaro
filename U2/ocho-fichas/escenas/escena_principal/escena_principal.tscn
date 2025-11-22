@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://fwuydtyw5y5"]
+[gd_scene load_steps=15 format=3 uid="uid://fwuydtyw5y5"]
 
 [ext_resource type="Script" uid="uid://duaj15r6cq78g" path="res://escenas/escena_principal/escena_principal.gd" id="1_pdctq"]
 [ext_resource type="PackedScene" uid="uid://bijfajkuxnky4" path="res://escenas/nivel3x3/nivel3x3.tscn" id="2_snxy5"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bvlu32p8yf40e" path="res://escenas/controlador_partida/controlador_partida.tscn" id="10_pt7cf"]
 [ext_resource type="Theme" uid="uid://dbqq473ipc3tm" path="res://escenas/menu_principal/tema_botones_logros.tres" id="10_sv3hn"]
 [ext_resource type="Resource" uid="uid://dpt6irg5v7uly" path="res://recursos/datos_partida.tres" id="11_sv3hn"]
+[ext_resource type="Script" uid="uid://crgw3r2ilcq1v" path="res://escenas/BotonLogro/boton_logro.gd" id="12_fq8hg"]
 
 [node name="EscenaPrincipal" type="Node2D"]
 script = ExtResource("1_pdctq")
@@ -158,61 +159,85 @@ columns = 3
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "OHC"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="EHC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EHC"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="SHC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "SHC"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="OHD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "OHD"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="EHD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EHD"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="SHD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "SHD"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="OVC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "OVC"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="EAC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EAC"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="SVC" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "SVC"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="OVD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "OVD"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="EAD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "EAD"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="SVD" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme = ExtResource("10_sv3hn")
 text = "SVD"
+script = ExtResource("12_fq8hg")
+metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
 [node name="RegresarAlMenu" type="Button" parent="."]
 anchors_preset = 15

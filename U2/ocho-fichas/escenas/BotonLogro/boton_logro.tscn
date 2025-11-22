@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbkwbs7clgi01"]
+
+[ext_resource type="Script" uid="uid://crgw3r2ilcq1v" path="res://escenas/BotonLogro/boton_logro.gd" id="1_7x37n"]
+
+[node name="BotonLogro" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_7x37n")

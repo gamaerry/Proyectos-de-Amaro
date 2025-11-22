@@ -24,7 +24,6 @@ var logros_en_pantalla: bool = false
 
 func _ready() -> void:
 	controlador_partida.cargar_partida()
-	_actualizar_logros_obtenidos()
 	cambiar_modo_dia()
 	boton_regresar.visible = false
 	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
@@ -42,14 +41,16 @@ func _cargar() -> void:
 
 func _actualizar_logros_obtenidos() -> void:
 	for i in Global.NUMERO_DE_LOGROS:
+		var logro: Node = logros.get_child(i)
+		for c in logro.pressed.get_connections():
+			logro.pressed.disconnect(c.callable)
 		if Global.logros_obtenidos_3[i]:
-			logros.get_child(i).pressed.connect(contenedor_texto.mostrar_logro.bind(false, i))
-			logros.get_child(i).add_theme_stylebox_override("normal", load("res://escenas/menu_principal/tema_botones_obtenidos_normal.tres"))
-			logros.get_child(i).add_theme_stylebox_override("hover", load("res://escenas/menu_principal/tema_botones_obtenidos_hover.tres"))
-			logros.get_child(i).add_theme_stylebox_override("pressed", load("res://escenas/menu_principal/tema_botones_obtenidos_pressed.tres"))
-			logros.get_child(i).add_theme_stylebox_override("disabled", load("res://escenas/menu_principal/tema_botones_obtenidos_disable.tres"))
+			logro.pressed.connect(contenedor_texto.mostrar_logro.bind(false, i))
+			logro.set_tema_desbloqueado()
+		elif logro.imposible:
+			logro.pressed.connect(contenedor_texto.desactivar_mensaje_logros)
 		else:
-			logros.get_child(i).pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
+			logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
 
 func _mostrar_ocultar_logros() -> void:
 	if !logros_en_movimiento:
@@ -62,12 +63,12 @@ func _mostrar_ocultar_logros() -> void:
 			logros_en_pantalla = false
 
 func _mover_logros(nueva_posicion: float)->void:
-		tween = create_tween()
-		tween.set_ease(Tween.EASE_OUT)
-		tween.set_trans(Tween.TRANS_CUBIC)
-		logros_en_movimiento = true
-		tween.finished.connect(func(): logros_en_movimiento = false)
-		tween.tween_property(logros, "position:x", nueva_posicion , 0.5)
+	tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	logros_en_movimiento = true
+	tween.finished.connect(func(): logros_en_movimiento = false, CONNECT_ONE_SHOT)
+	tween.tween_property(logros, "position:x", nueva_posicion , 0.5)
 
 func cambiar_modo_dia():
 	Global.dia = !Global.dia
@@ -75,13 +76,13 @@ func cambiar_modo_dia():
 	fondo_noche.visible = !Global.dia
 	boton_dia.text = ICONOS[int(!Global.dia)]
 	ordenar_logros()
+	_actualizar_logros_obtenidos()
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
-	
 
 func ordenar_logros() -> void:
 	for i in Global.NUMERO_DE_LOGROS:
-		logros.get_child(i).disabled = Global.ORDEN_LOGROS_3[i] != Global.dia
+		logros.get_child(i).set_imposible(Global.ORDEN_LOGROS_3[i] != Global.dia)
 
 func regresar_al_menu():
 	_actualizar_logros_obtenidos()
