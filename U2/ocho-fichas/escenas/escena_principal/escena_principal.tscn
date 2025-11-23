@@ -1,28 +1,31 @@
-[gd_scene load_steps=24 format=3 uid="uid://fwuydtyw5y5"]
+[gd_scene load_steps=27 format=3 uid="uid://fwuydtyw5y5"]
 
 [ext_resource type="Script" uid="uid://duaj15r6cq78g" path="res://escenas/escena_principal/escena_principal.gd" id="1_pdctq"]
 [ext_resource type="PackedScene" uid="uid://bijfajkuxnky4" path="res://escenas/nivel3x3/nivel3x3.tscn" id="2_snxy5"]
-[ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/fondo.png" id="3_y7kll"]
-[ext_resource type="Texture2D" uid="uid://dl13jxnv47bif" path="res://assets/noche/fondo_noche.png" id="4_px6n3"]
+[ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/imagenes/fondo.png" id="3_y7kll"]
+[ext_resource type="Texture2D" uid="uid://dl13jxnv47bif" path="res://assets/imagenes/noche/fondo_noche.png" id="4_px6n3"]
 [ext_resource type="Theme" uid="uid://mpp7lp5rdwdw" path="res://escenas/menu_principal/tema_botones.tres" id="4_rrast"]
-[ext_resource type="Texture2D" uid="uid://q4fq0q5o8pv2" path="res://assets/boton_logros_normal.png" id="5_otcpn"]
-[ext_resource type="Texture2D" uid="uid://dfdj5kwimadiv" path="res://assets/boton_logros_pressed.png" id="6_ctuc8"]
+[ext_resource type="Texture2D" uid="uid://q4fq0q5o8pv2" path="res://assets/imagenes/boton_logros_normal.png" id="5_otcpn"]
+[ext_resource type="Texture2D" uid="uid://dfdj5kwimadiv" path="res://assets/imagenes/boton_logros_pressed.png" id="6_ctuc8"]
 [ext_resource type="Script" uid="uid://c1ep03wcw7hq1" path="res://escenas/escena_principal/boton_inicio.gd" id="7_e307b"]
 [ext_resource type="Script" uid="uid://cqbqj1ktocs6h" path="res://escenas/escena_principal/boton_salir.gd" id="7_px6n3"]
-[ext_resource type="Texture2D" uid="uid://cca2jojyl2te6" path="res://assets/boton_logros_hover.png" id="7_wwuot"]
+[ext_resource type="Texture2D" uid="uid://cca2jojyl2te6" path="res://assets/imagenes/boton_logros_hover.png" id="7_wwuot"]
 [ext_resource type="Script" uid="uid://jd5a4ux1upqt" path="res://escenas/escena_principal/contenedor_texto.gd" id="8_asb8d"]
 [ext_resource type="Theme" uid="uid://s8hn1f0k01sq" path="res://escenas/menu_principal/tema_consejos.tres" id="9_ictn0"]
 [ext_resource type="AudioStream" uid="uid://bekpwpvrl4jnw" path="res://assets/logro_1.wav" id="10_htiw2"]
 [ext_resource type="PackedScene" uid="uid://bvlu32p8yf40e" path="res://escenas/controlador_partida/controlador_partida.tscn" id="10_pt7cf"]
 [ext_resource type="Theme" uid="uid://dbqq473ipc3tm" path="res://escenas/menu_principal/tema_botones_logros.tres" id="10_sv3hn"]
-[ext_resource type="Texture2D" uid="uid://b0qqitw8l7ylu" path="res://assets/boton_noche_normal.png" id="11_q5o1b"]
+[ext_resource type="Texture2D" uid="uid://b0qqitw8l7ylu" path="res://assets/imagenes/boton_noche_normal.png" id="11_q5o1b"]
 [ext_resource type="Resource" uid="uid://dpt6irg5v7uly" path="res://recursos/datos_partida.tres" id="11_sv3hn"]
 [ext_resource type="Script" uid="uid://crgw3r2ilcq1v" path="res://escenas/BotonLogro/boton_logro.gd" id="12_fq8hg"]
-[ext_resource type="Texture2D" uid="uid://dpdvf8y6o8isv" path="res://assets/boton_noche_pressed.png" id="12_fvqy1"]
-[ext_resource type="Texture2D" uid="uid://bo0060r7ba1wt" path="res://assets/boton_noche_hover.png" id="13_26dec"]
-[ext_resource type="Texture2D" uid="uid://bhuc2lqw1yyj5" path="res://assets/boton_cuadrado_normal.png" id="13_fra2k"]
-[ext_resource type="Texture2D" uid="uid://bn51jsp2b2tlv" path="res://assets/boton_cuadrado_pressed.png" id="14_rsvwu"]
-[ext_resource type="Texture2D" uid="uid://i2vs304y0h3v" path="res://assets/boton_cuadrado_hover.png" id="15_p2mpa"]
+[ext_resource type="Texture2D" uid="uid://dpdvf8y6o8isv" path="res://assets/imagenes/boton_noche_pressed.png" id="12_fvqy1"]
+[ext_resource type="Texture2D" uid="uid://bo0060r7ba1wt" path="res://assets/imagenes/boton_noche_hover.png" id="13_26dec"]
+[ext_resource type="Texture2D" uid="uid://bhuc2lqw1yyj5" path="res://assets/imagenes/boton_cuadrado_normal.png" id="13_fra2k"]
+[ext_resource type="Texture2D" uid="uid://bcyb0ueg0qhdd" path="res://assets/imagenes/en_normal.png" id="14_m1n0g"]
+[ext_resource type="Texture2D" uid="uid://bn51jsp2b2tlv" path="res://assets/imagenes/boton_cuadrado_pressed.png" id="14_rsvwu"]
+[ext_resource type="Texture2D" uid="uid://br545jfjkcfms" path="res://assets/imagenes/en_pressed.png" id="15_126hc"]
+[ext_resource type="Texture2D" uid="uid://i2vs304y0h3v" path="res://assets/imagenes/boton_cuadrado_hover.png" id="15_p2mpa"]
+[ext_resource type="Texture2D" uid="uid://dq7yll5ymgwkb" path="res://assets/imagenes/en_hover.png" id="16_axhd6"]
 
 [node name="EscenaPrincipal" type="Node2D"]
 script = ExtResource("1_pdctq")
@@ -97,6 +100,13 @@ layout_mode = 2
 texture_normal = ExtResource("5_otcpn")
 texture_pressed = ExtResource("6_ctuc8")
 texture_hover = ExtResource("7_wwuot")
+
+[node name="Idioma" type="TextureButton" parent="OpcionesDeMenu"]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("14_m1n0g")
+texture_pressed = ExtResource("15_126hc")
+texture_hover = ExtResource("16_axhd6")
 
 [node name="ContenedorTexto" type="CanvasLayer" parent="." node_paths=PackedStringArray("audio_logro")]
 script = ExtResource("8_asb8d")

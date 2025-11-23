@@ -5,6 +5,7 @@ extends Node2D
 @onready var boton_cargar: Button = $MenuPrincipal/Cargar
 @onready var boton_dia: TextureButton = $OpcionesDeMenu/Dia
 @onready var boton_logros: TextureButton = $OpcionesDeMenu/Logros
+@onready var boton_idioma: TextureButton = $OpcionesDeMenu/Idioma
 @onready var boton_regresar: TextureButton = $RegresarAlMenu
 @onready var logros: GridContainer = $Logros
 @onready var menu: VBoxContainer = $MenuPrincipal
@@ -82,13 +83,13 @@ func cambiar_modo_dia():
 		
 func cambiar_aspecto_boton_dia() -> void:
 	if !Global.dia:
-		boton_dia.texture_normal = load("res://assets/boton_dia_normal.png")
-		boton_dia.texture_hover = load("res://assets/boton_dia_hover.png")
-		boton_dia.texture_pressed = load("res://assets/boton_dia_pressed.png")
+		boton_dia.texture_normal = load("res://assets/imagenes/boton_dia_normal.png")
+		boton_dia.texture_hover = load("res://assets/imagenes/boton_dia_hover.png")
+		boton_dia.texture_pressed = load("res://assets/imagenes/boton_dia_pressed.png")
 	else:
-		boton_dia.texture_normal = load("res://assets/boton_noche_normal.png")
-		boton_dia.texture_hover = load("res://assets/boton_noche_hover.png")
-		boton_dia.texture_pressed = load("res://assets/boton_noche_pressed.png")
+		boton_dia.texture_normal = load("res://assets/imagenes/boton_noche_normal.png")
+		boton_dia.texture_hover = load("res://assets/imagenes/boton_noche_hover.png")
+		boton_dia.texture_pressed = load("res://assets/imagenes/boton_noche_pressed.png")
 
 
 func ordenar_logros() -> void:
