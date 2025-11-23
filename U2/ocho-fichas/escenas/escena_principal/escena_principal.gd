@@ -1,13 +1,14 @@
 extends Node2D
 
 @export var niveles: Array[PackedScene]
-@onready var boton_inicio: Button = $Menu/VBoxContainer/Inicio
-@onready var boton_cargar: Button = $Menu/VBoxContainer/Cargar
-@onready var boton_dia: TextureButton = $Menu/dia
-@onready var boton_logros: TextureButton = $Menu/Logros
+@onready var boton_inicio: Button = $MenuPrincipal/Inicio
+@onready var boton_cargar: Button = $MenuPrincipal/Cargar
+@onready var boton_dia: TextureButton = $OpcionesDeMenu/Dia
+@onready var boton_logros: TextureButton = $OpcionesDeMenu/Logros
 @onready var boton_regresar: TextureButton = $RegresarAlMenu
-@onready var logros: GridContainer = $GridContainer
-@onready var menu: HBoxContainer = $Menu
+@onready var logros: GridContainer = $Logros
+@onready var menu: VBoxContainer = $MenuPrincipal
+@onready var opciones: VBoxContainer = $OpcionesDeMenu
 @onready var fondo_dia: Sprite2D = $FondoDia
 @onready var fondo_noche: Sprite2D = $FondoNoche
 @onready var contenedor_texto: ContenedorTexto = $ContenedorTexto
@@ -100,12 +101,14 @@ func regresar_al_menu():
 	_nivel_instanciado.queue_free()
 	_nivel_instanciado = null
 	menu.visible = true
+	opciones.visible = true
 	boton_regresar.visible = false
 
 func _crear_nivel(index: int):
 	_nivel_instanciado = niveles[index].instantiate()
 	add_child.call_deferred(_nivel_instanciado)
 	menu.visible = false
+	opciones.visible = false
 	boton_regresar.visible = true
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
