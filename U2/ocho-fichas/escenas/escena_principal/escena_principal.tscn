@@ -126,6 +126,7 @@ texture_hover = ExtResource("16_axhd6")
 
 [node name="ContenedorTexto" type="CanvasLayer" parent="." node_paths=PackedStringArray("audio_logro")]
 script = ExtResource("8_asb8d")
+consejos = null
 audio_logro = NodePath("AudioStreamPlayer2D")
 
 [node name="ColorRect" type="ColorRect" parent="ContenedorTexto"]

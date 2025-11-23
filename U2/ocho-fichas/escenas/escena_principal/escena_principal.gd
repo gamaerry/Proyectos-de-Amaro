@@ -29,6 +29,7 @@ func _ready() -> void:
 	boton_regresar.visible = false
 	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
 	boton_dia.pressed.connect(cambiar_modo_dia)
+	boton_idioma.pressed.connect(_cambiar_idioma)
 	gano_logro.connect(contenedor_texto.mostrar_logro)
 	boton_cargar.pressed.connect(_cargar)
 	boton_logros.pressed.connect(_mostrar_ocultar_logros)
@@ -39,6 +40,29 @@ func _cargar() -> void:
 	_crear_nivel(index_actual)
 	controlador_partida.cargar_partida()
 	_nivel_instanciado.fue_cargado = true
+
+func _cambiar_idioma() -> void:
+	Global.idioma = (Global.idioma + 1) % Global.TOTAL_IDIOMAS
+	_cambiar_aspecto_boton_idioma()
+	if logros_en_pantalla:
+		_mostrar_ocultar_logros()
+		await tween.finished # se puede porque se tiene siempre referencia al tween 
+	_cambiar_etiqueta_de_cada_logro()
+	
+func _cambiar_etiqueta_de_cada_logro() -> void:
+	for i in Global.NUMERO_DE_LOGROS:
+		logros.get_child(i).text = Global.get_acronimo(contenedor_texto.LOGROS[i][Global.idioma])
+
+func _cambiar_aspecto_boton_idioma() -> void:
+	if Global.idioma == 0:
+		boton_idioma.texture_normal = load("res://assets/imagenes/botones/en_normal.png")
+		boton_idioma.texture_hover = load("res://assets/imagenes/botones/en_hover.png")
+		boton_idioma.texture_pressed = load("res://assets/imagenes/botones/en_pressed.png")
+	else:
+		boton_idioma.texture_normal = load("res://assets/imagenes/botones/es_normal.png")
+		boton_idioma.texture_hover = load("res://assets/imagenes/botones/es_hover.png")
+		boton_idioma.texture_pressed = load("res://assets/imagenes/botones/es_pressed.png")
+
 
 func _actualizar_logros_obtenidos() -> void:
 	for i in Global.NUMERO_DE_LOGROS:
@@ -83,13 +107,13 @@ func cambiar_modo_dia():
 		
 func cambiar_aspecto_boton_dia() -> void:
 	if !Global.dia:
-		boton_dia.texture_normal = load("res://assets/imagenes/boton_dia_normal.png")
-		boton_dia.texture_hover = load("res://assets/imagenes/boton_dia_hover.png")
-		boton_dia.texture_pressed = load("res://assets/imagenes/boton_dia_pressed.png")
+		boton_dia.texture_normal = load("res://assets/imagenes/botones/boton_dia_normal.png")
+		boton_dia.texture_hover = load("res://assets/imagenes/botones/boton_dia_hover.png")
+		boton_dia.texture_pressed = load("res://assets/imagenes/botones/boton_dia_pressed.png")
 	else:
-		boton_dia.texture_normal = load("res://assets/imagenes/boton_noche_normal.png")
-		boton_dia.texture_hover = load("res://assets/imagenes/boton_noche_hover.png")
-		boton_dia.texture_pressed = load("res://assets/imagenes/boton_noche_pressed.png")
+		boton_dia.texture_normal = load("res://assets/imagenes/botones/boton_noche_normal.png")
+		boton_dia.texture_hover = load("res://assets/imagenes/botones/boton_noche_hover.png")
+		boton_dia.texture_pressed = load("res://assets/imagenes/botones/boton_noche_pressed.png")
 
 
 func ordenar_logros() -> void:
