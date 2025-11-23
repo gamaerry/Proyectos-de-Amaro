@@ -3,6 +3,7 @@ extends Node2D
 @export var niveles: Array[PackedScene]
 @onready var boton_inicio: TextureButton = $MenuPrincipal/Inicio
 @onready var boton_cargar: TextureButton = $MenuPrincipal/Cargar
+@onready var boton_salir: TextureButton = $MenuPrincipal/Salir
 @onready var boton_dia: TextureButton = $OpcionesDeMenu/Dia
 @onready var boton_logros: TextureButton = $OpcionesDeMenu/Logros
 @onready var boton_idioma: TextureButton = $OpcionesDeMenu/Idioma
@@ -43,7 +44,7 @@ func _cargar() -> void:
 
 func _cambiar_idioma() -> void:
 	Global.idioma = (Global.idioma + 1) % Global.TOTAL_IDIOMAS
-	_cambiar_aspecto_boton_idioma()
+	_cambiar_aspecto_menu()
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
 		await tween.finished # se puede porque se tiene siempre referencia al tween 
@@ -53,15 +54,34 @@ func _cambiar_etiqueta_de_cada_logro() -> void:
 	for i in Global.NUMERO_DE_LOGROS:
 		logros.get_child(i).text = Global.get_acronimo(contenedor_texto.LOGROS[i][Global.idioma])
 
-func _cambiar_aspecto_boton_idioma() -> void:
+
+func _cambiar_aspecto_menu() -> void:
 	if Global.idioma == 0:
 		boton_idioma.texture_normal = load("res://assets/imagenes/botones/en_normal.png")
 		boton_idioma.texture_hover = load("res://assets/imagenes/botones/en_hover.png")
 		boton_idioma.texture_pressed = load("res://assets/imagenes/botones/en_pressed.png")
+		boton_inicio.texture_normal = load("res://assets/imagenes/botones/es/inicio_normal.png")
+		boton_inicio.texture_pressed = load("res://assets/imagenes/botones/es/inicio_pressed.png")
+		boton_inicio.texture_hover = load("res://assets/imagenes/botones/es/inicio_hover.png")
+		boton_cargar.texture_normal = load("res://assets/imagenes/botones/es/cargar_normal.png")
+		boton_cargar.texture_pressed = load("res://assets/imagenes/botones/es/cargar_pressed.png")
+		boton_cargar.texture_hover = load("res://assets/imagenes/botones/es/cargar_hover.png")
+		boton_salir.texture_normal = load("res://assets/imagenes/botones/es/salir_normal.png")
+		boton_salir.texture_pressed = load("res://assets/imagenes/botones/es/salir_pressed.png")
+		boton_salir.texture_hover = load("res://assets/imagenes/botones/es/salir_hover.png")
 	else:
 		boton_idioma.texture_normal = load("res://assets/imagenes/botones/es_normal.png")
 		boton_idioma.texture_hover = load("res://assets/imagenes/botones/es_hover.png")
 		boton_idioma.texture_pressed = load("res://assets/imagenes/botones/es_pressed.png")
+		boton_inicio.texture_normal = load("res://assets/imagenes/botones/en/start_normal.png")
+		boton_inicio.texture_pressed = load("res://assets/imagenes/botones/en/start_pressed.png")
+		boton_inicio.texture_hover = load("res://assets/imagenes/botones/en/start_hover.png")
+		boton_cargar.texture_normal = load("res://assets/imagenes/botones/en/load_normal.png")
+		boton_cargar.texture_pressed = load("res://assets/imagenes/botones/en/load_pressed.png")
+		boton_cargar.texture_hover = load("res://assets/imagenes/botones/en/load_hover.png")
+		boton_salir.texture_normal = load("res://assets/imagenes/botones/en/exit_normal.png")
+		boton_salir.texture_pressed = load("res://assets/imagenes/botones/en/exit_pressed.png")
+		boton_salir.texture_hover = load("res://assets/imagenes/botones/en/exit_hover.png")
 
 
 func _actualizar_logros_obtenidos() -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qrl4u5hf045x"
-path="res://.godot/imported/salir_pressed.png-54a0810dc6986bdb5c57d24fa5140c29.ctex"
+uid="uid://vqcxcpusj04w"
+path="res://.godot/imported/start_pressed.png-3b78ec5471390238c38b0c2cb67c2dc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imagenes/botones/salir_pressed.png"
-dest_files=["res://.godot/imported/salir_pressed.png-54a0810dc6986bdb5c57d24fa5140c29.ctex"]
+source_file="res://assets/imagenes/botones/en/start_pressed.png"
+dest_files=["res://.godot/imported/start_pressed.png-3b78ec5471390238c38b0c2cb67c2dc4.ctex"]
 
 [params]
 

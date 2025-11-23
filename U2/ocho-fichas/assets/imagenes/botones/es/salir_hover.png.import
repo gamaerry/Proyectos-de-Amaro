@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcaupisn2thgi"
-path="res://.godot/imported/inicio_hover.png-492e857876e515151e1374e48e8f95f7.ctex"
+uid="uid://c2dofrjep4ebb"
+path="res://.godot/imported/salir_hover.png-393cef2dde4229c7248af0cce9fb06e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imagenes/botones/inicio_hover.png"
-dest_files=["res://.godot/imported/inicio_hover.png-492e857876e515151e1374e48e8f95f7.ctex"]
+source_file="res://assets/imagenes/botones/es/salir_hover.png"
+dest_files=["res://.godot/imported/salir_hover.png-393cef2dde4229c7248af0cce9fb06e2.ctex"]
 
 [params]
 
