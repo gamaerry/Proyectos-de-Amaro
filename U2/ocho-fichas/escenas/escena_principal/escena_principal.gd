@@ -18,7 +18,7 @@ var _dimension_actual: int = 3
 var index_actual: int = _dimension_actual - 3
 var _nivel_instanciado: Node2D
 const ICONOS: Array[String] = ["  ⏾  ","  ☀︎  "]
-const RECORRIDO_NECESARIO: int = 115
+const RECORRIDO_NECESARIO: int = 133
 var logros_en_movimiento: bool = false
 var logros_en_pantalla: bool = false
 
@@ -68,7 +68,7 @@ func _mover_logros(nueva_posicion: float)->void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	logros_en_movimiento = true
 	tween.finished.connect(func(): logros_en_movimiento = false, CONNECT_ONE_SHOT)
-	tween.tween_property(logros, "position:x", nueva_posicion , 0.5)
+	tween.tween_property(logros, "position:x", nueva_posicion , 0.4)
 
 func cambiar_modo_dia():
 	Global.dia = !Global.dia
