@@ -1,8 +1,8 @@
 extends Node2D
 
 @export var niveles: Array[PackedScene]
-@onready var boton_inicio: Button = $MenuPrincipal/Inicio
-@onready var boton_cargar: Button = $MenuPrincipal/Cargar
+@onready var boton_inicio: TextureButton = $MenuPrincipal/Inicio
+@onready var boton_cargar: TextureButton = $MenuPrincipal/Cargar
 @onready var boton_dia: TextureButton = $OpcionesDeMenu/Dia
 @onready var boton_logros: TextureButton = $OpcionesDeMenu/Logros
 @onready var boton_idioma: TextureButton = $OpcionesDeMenu/Idioma

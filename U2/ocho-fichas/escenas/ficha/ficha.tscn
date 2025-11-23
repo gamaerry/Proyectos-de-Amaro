@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6qdurli3rkde"]
 
-[ext_resource type="Texture2D" uid="uid://cyogsokr83hn4" path="res://assets/imagenes/1.png" id="1_7bqfy"]
+[ext_resource type="Texture2D" uid="uid://cyogsokr83hn4" path="res://assets/imagenes/dia/1.png" id="1_7bqfy"]
 [ext_resource type="Script" uid="uid://eqv5sbjt5532" path="res://escenas/ficha/ficha.gd" id="2_bymqh"]
 [ext_resource type="AudioStream" uid="uid://csq8f7xidrmj4" path="res://assets/fallar_2.wav" id="3_5ant5"]
 [ext_resource type="AudioStream" uid="uid://w207mvpshoh6" path="res://assets/movimiento_3.wav" id="3_bymqh"]

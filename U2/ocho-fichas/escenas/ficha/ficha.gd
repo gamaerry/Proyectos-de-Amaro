@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func set_numero(n: int) -> void:
 	numero = n
-	var ruta: String = "res://assets/imagenes/" + str(n) + ".png"
+	var ruta: String = "res://assets/imagenes/dia/" + str(n) + ".png"
 	if !Global.dia:
 		ruta = "res://assets/imagenes/noche/" + str(n) + "_noche.png"
 	texture_normal = load(ruta)

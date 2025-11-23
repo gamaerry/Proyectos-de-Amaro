@@ -1,31 +1,39 @@
-[gd_scene load_steps=27 format=3 uid="uid://fwuydtyw5y5"]
+[gd_scene load_steps=35 format=3 uid="uid://fwuydtyw5y5"]
 
 [ext_resource type="Script" uid="uid://duaj15r6cq78g" path="res://escenas/escena_principal/escena_principal.gd" id="1_pdctq"]
 [ext_resource type="PackedScene" uid="uid://bijfajkuxnky4" path="res://escenas/nivel3x3/nivel3x3.tscn" id="2_snxy5"]
-[ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/imagenes/fondo.png" id="3_y7kll"]
+[ext_resource type="Texture2D" uid="uid://de81lo50ni10q" path="res://assets/imagenes/dia/fondo.png" id="3_y7kll"]
 [ext_resource type="Texture2D" uid="uid://dl13jxnv47bif" path="res://assets/imagenes/noche/fondo_noche.png" id="4_px6n3"]
 [ext_resource type="Theme" uid="uid://mpp7lp5rdwdw" path="res://escenas/menu_principal/tema_botones.tres" id="4_rrast"]
-[ext_resource type="Texture2D" uid="uid://q4fq0q5o8pv2" path="res://assets/imagenes/boton_logros_normal.png" id="5_otcpn"]
-[ext_resource type="Texture2D" uid="uid://dfdj5kwimadiv" path="res://assets/imagenes/boton_logros_pressed.png" id="6_ctuc8"]
-[ext_resource type="Script" uid="uid://c1ep03wcw7hq1" path="res://escenas/escena_principal/boton_inicio.gd" id="7_e307b"]
+[ext_resource type="Texture2D" uid="uid://q4fq0q5o8pv2" path="res://assets/imagenes/botones/boton_logros_normal.png" id="5_otcpn"]
+[ext_resource type="Texture2D" uid="uid://wy4ea7ehqrah" path="res://assets/imagenes/botones/inicio_normal.png" id="6_axhd6"]
+[ext_resource type="Texture2D" uid="uid://dfdj5kwimadiv" path="res://assets/imagenes/botones/boton_logros_pressed.png" id="6_ctuc8"]
+[ext_resource type="Texture2D" uid="uid://c0u5ydoxr7ikh" path="res://assets/imagenes/botones/inicio_pressed.png" id="7_kpj0l"]
 [ext_resource type="Script" uid="uid://cqbqj1ktocs6h" path="res://escenas/escena_principal/boton_salir.gd" id="7_px6n3"]
-[ext_resource type="Texture2D" uid="uid://cca2jojyl2te6" path="res://assets/imagenes/boton_logros_hover.png" id="7_wwuot"]
+[ext_resource type="Texture2D" uid="uid://cca2jojyl2te6" path="res://assets/imagenes/botones/boton_logros_hover.png" id="7_wwuot"]
 [ext_resource type="Script" uid="uid://jd5a4ux1upqt" path="res://escenas/escena_principal/contenedor_texto.gd" id="8_asb8d"]
+[ext_resource type="Texture2D" uid="uid://bcaupisn2thgi" path="res://assets/imagenes/botones/inicio_hover.png" id="8_q3xw2"]
 [ext_resource type="Theme" uid="uid://s8hn1f0k01sq" path="res://escenas/menu_principal/tema_consejos.tres" id="9_ictn0"]
+[ext_resource type="Texture2D" uid="uid://bwhdukgqni0wl" path="res://assets/imagenes/botones/cargar_normal.png" id="9_p60ft"]
+[ext_resource type="Texture2D" uid="uid://ctludkacykch" path="res://assets/imagenes/botones/cargar_pressed.png" id="10_1ijcn"]
 [ext_resource type="AudioStream" uid="uid://bekpwpvrl4jnw" path="res://assets/logro_1.wav" id="10_htiw2"]
 [ext_resource type="PackedScene" uid="uid://bvlu32p8yf40e" path="res://escenas/controlador_partida/controlador_partida.tscn" id="10_pt7cf"]
 [ext_resource type="Theme" uid="uid://dbqq473ipc3tm" path="res://escenas/menu_principal/tema_botones_logros.tres" id="10_sv3hn"]
-[ext_resource type="Texture2D" uid="uid://b0qqitw8l7ylu" path="res://assets/imagenes/boton_noche_normal.png" id="11_q5o1b"]
+[ext_resource type="Texture2D" uid="uid://dylmfjnqi4rlv" path="res://assets/imagenes/botones/cargar_hover.png" id="11_jn0hn"]
+[ext_resource type="Texture2D" uid="uid://b0qqitw8l7ylu" path="res://assets/imagenes/botones/boton_noche_normal.png" id="11_q5o1b"]
 [ext_resource type="Resource" uid="uid://dpt6irg5v7uly" path="res://recursos/datos_partida.tres" id="11_sv3hn"]
+[ext_resource type="Texture2D" uid="uid://cvwyqxjnc7oa4" path="res://assets/imagenes/botones/salir_normal.png" id="12_4gqqi"]
 [ext_resource type="Script" uid="uid://crgw3r2ilcq1v" path="res://escenas/BotonLogro/boton_logro.gd" id="12_fq8hg"]
-[ext_resource type="Texture2D" uid="uid://dpdvf8y6o8isv" path="res://assets/imagenes/boton_noche_pressed.png" id="12_fvqy1"]
-[ext_resource type="Texture2D" uid="uid://bo0060r7ba1wt" path="res://assets/imagenes/boton_noche_hover.png" id="13_26dec"]
-[ext_resource type="Texture2D" uid="uid://bhuc2lqw1yyj5" path="res://assets/imagenes/boton_cuadrado_normal.png" id="13_fra2k"]
-[ext_resource type="Texture2D" uid="uid://bcyb0ueg0qhdd" path="res://assets/imagenes/en_normal.png" id="14_m1n0g"]
-[ext_resource type="Texture2D" uid="uid://bn51jsp2b2tlv" path="res://assets/imagenes/boton_cuadrado_pressed.png" id="14_rsvwu"]
-[ext_resource type="Texture2D" uid="uid://br545jfjkcfms" path="res://assets/imagenes/en_pressed.png" id="15_126hc"]
-[ext_resource type="Texture2D" uid="uid://i2vs304y0h3v" path="res://assets/imagenes/boton_cuadrado_hover.png" id="15_p2mpa"]
-[ext_resource type="Texture2D" uid="uid://dq7yll5ymgwkb" path="res://assets/imagenes/en_hover.png" id="16_axhd6"]
+[ext_resource type="Texture2D" uid="uid://dpdvf8y6o8isv" path="res://assets/imagenes/botones/boton_noche_pressed.png" id="12_fvqy1"]
+[ext_resource type="Texture2D" uid="uid://bo0060r7ba1wt" path="res://assets/imagenes/botones/boton_noche_hover.png" id="13_26dec"]
+[ext_resource type="Texture2D" uid="uid://bhuc2lqw1yyj5" path="res://assets/imagenes/botones/boton_cuadrado_normal.png" id="13_fra2k"]
+[ext_resource type="Texture2D" uid="uid://qrl4u5hf045x" path="res://assets/imagenes/botones/salir_pressed.png" id="13_nutjc"]
+[ext_resource type="Texture2D" uid="uid://c2dofrjep4ebb" path="res://assets/imagenes/botones/salir_hover.png" id="14_lp32y"]
+[ext_resource type="Texture2D" uid="uid://bcyb0ueg0qhdd" path="res://assets/imagenes/botones/en_normal.png" id="14_m1n0g"]
+[ext_resource type="Texture2D" uid="uid://bn51jsp2b2tlv" path="res://assets/imagenes/botones/boton_cuadrado_pressed.png" id="14_rsvwu"]
+[ext_resource type="Texture2D" uid="uid://br545jfjkcfms" path="res://assets/imagenes/botones/en_pressed.png" id="15_126hc"]
+[ext_resource type="Texture2D" uid="uid://i2vs304y0h3v" path="res://assets/imagenes/botones/boton_cuadrado_hover.png" id="15_p2mpa"]
+[ext_resource type="Texture2D" uid="uid://dq7yll5ymgwkb" path="res://assets/imagenes/botones/en_hover.png" id="16_axhd6"]
 
 [node name="EscenaPrincipal" type="Node2D"]
 script = ExtResource("1_pdctq")
@@ -57,21 +65,29 @@ offset_bottom = 62.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Inicio" type="Button" parent="MenuPrincipal"]
+[node name="Inicio" type="TextureButton" parent="MenuPrincipal"]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("4_rrast")
-text = "Inicio"
-script = ExtResource("7_e307b")
+texture_normal = ExtResource("6_axhd6")
+texture_pressed = ExtResource("7_kpj0l")
+texture_hover = ExtResource("8_q3xw2")
 
-[node name="Cargar" type="Button" parent="MenuPrincipal"]
+[node name="Cargar" type="TextureButton" parent="MenuPrincipal"]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("4_rrast")
-text = "Cargar"
+texture_normal = ExtResource("9_p60ft")
+texture_pressed = ExtResource("10_1ijcn")
+texture_hover = ExtResource("11_jn0hn")
 
-[node name="Salir" type="Button" parent="MenuPrincipal"]
+[node name="Salir" type="TextureButton" parent="MenuPrincipal"]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("4_rrast")
-text = "Salir"
+texture_normal = ExtResource("12_4gqqi")
+texture_pressed = ExtResource("13_nutjc")
+texture_hover = ExtResource("14_lp32y")
 script = ExtResource("7_px6n3")
 
 [node name="OpcionesDeMenu" type="VBoxContainer" parent="."]
