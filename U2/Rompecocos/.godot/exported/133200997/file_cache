@@ -1,0 +1,16 @@
+res://escenas/controlador_partida/controlador_partida.tscn::71a43c21e14905b66e6a3e3537a81887::1763930890::res://.godot/exported/133200997/export-9b52b8593e7dfa5a8b9c85a2eb3e4384-controlador_partida.scn
+res://escenas/escena_principal/escena_principal.tscn::36ae86dfb9604e2954fd7a515ea50699::1763929767::res://.godot/exported/133200997/export-2e4da8baeadc5bc8d8fa9f50fba70213-escena_principal.scn
+res://escenas/ficha/ficha.tscn::39af123103d52014403210625508ecf2::1763913946::res://.godot/exported/133200997/export-a162d8b8767cac8bdc9adbf7165fc25b-ficha.scn
+res://escenas/marco_3x3/marco_3x3.tscn::c2e6d2a70aeb218e190a83c5f491041b::1763913946::res://.godot/exported/133200997/export-81ee7bea43eb33b930da93f929f3312f-marco_3x3.scn
+res://escenas/marco_de_fichas/marco_de_fichas.tscn::f689e24e3a73e1f06aefc9c1b6e92906::1763930260::res://.godot/exported/133200997/export-86b4e33875889cb387f19e327d532cf2-marco_de_fichas.scn
+res://escenas/menu_principal/tema_botones.tres::5bfeb0b34884b2003479449cb8dd8082::1763431204::res://.godot/exported/133200997/export-41f0926634869adfc72a7669349993f4-tema_botones.res
+res://escenas/menu_principal/tema_botones_obtenidos_disable.tres::a577c9e4a1fe51bff53a081c809b9720::1763443608::res://.godot/exported/133200997/export-3e3b2ee9574b81efa5a1379157738937-tema_botones_obtenidos_disable.res
+res://escenas/menu_principal/tema_botones_obtenidos_hover.tres::e1dae3e80c430356b191856797fda518::1763443717::res://.godot/exported/133200997/export-d6d3fdd144fc49442c44a8f8135fbee5-tema_botones_obtenidos_hover.res
+res://escenas/menu_principal/tema_botones_obtenidos_normal.tres::00c652a6c5e0c8018eb2f8016837b5b6::1763443717::res://.godot/exported/133200997/export-d4114447676c723162ce505bee846ae6-tema_botones_obtenidos_normal.res
+res://escenas/menu_principal/tema_botones_obtenidos_pressed.tres::e62e417185bb582808d561877342ccc9::1763443717::res://.godot/exported/133200997/export-b83ebc98ea7ece57d1f62c252e5b34c4-tema_botones_obtenidos_pressed.res
+res://escenas/menu_principal/tema_consejos.tres::f26ee6ebf00ab46726a5b13f6348d85e::1763431374::res://.godot/exported/133200997/export-83f3953e1b6ca448f96d3de954546d72-tema_consejos.res
+res://escenas/nivel/nivel.tscn::cdc4c0cc7b4dc67d82dc01f4ad19877e::1763919356::res://.godot/exported/133200997/export-10281650f849d06092bf769d5e72350c-nivel.scn
+res://escenas/nivel3x3/nivel3x3.tscn::c04e9e4dd4dc6295aa1f6d076ff9192c::1763325826::res://.godot/exported/133200997/export-ea1e5bc2b7136b489bb379e1314cb852-nivel3x3.scn
+res://recursos/datos_partida.tres::bdbf090d7b862e7e409a5c092d8508fe::1763446502::res://.godot/exported/133200997/export-fa9e1cc5df6faf40b1dc98635dfa6130-datos_partida.res
+res://escenas/menu_principal/tema_botones_logros.tres::10b09a3fe4444548ed469114e2fffe89::1763531645::res://.godot/exported/133200997/export-dc24b81ffd0a8000ac356336bf0ab152-tema_botones_logros.res
+res://escenas/BotonLogro/boton_logro.tscn::bc901732fa253039383dbbb9d01e9937::1763928347::res://.godot/exported/133200997/export-3debecc9cad890091d2966521243af81-boton_logro.scn

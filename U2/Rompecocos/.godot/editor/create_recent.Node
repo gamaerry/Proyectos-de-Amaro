@@ -1,0 +1,14 @@
+TextureButton
+VBoxContainer
+BotonLogro
+Button
+AudioStreamPlayer2D
+Node
+GridContainer
+CanvasLayer
+Label
+ColorRect
+HBoxContainer
+Container
+Label      - Matches the "text" keyword.
+Sprite2D
