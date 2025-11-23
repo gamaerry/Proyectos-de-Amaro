@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://fwuydtyw5y5"]
+[gd_scene load_steps=18 format=3 uid="uid://fwuydtyw5y5"]
 
 [ext_resource type="Script" uid="uid://duaj15r6cq78g" path="res://escenas/escena_principal/escena_principal.gd" id="1_pdctq"]
 [ext_resource type="PackedScene" uid="uid://bijfajkuxnky4" path="res://escenas/nivel3x3/nivel3x3.tscn" id="2_snxy5"]
@@ -14,6 +14,9 @@
 [ext_resource type="Theme" uid="uid://dbqq473ipc3tm" path="res://escenas/menu_principal/tema_botones_logros.tres" id="10_sv3hn"]
 [ext_resource type="Resource" uid="uid://dpt6irg5v7uly" path="res://recursos/datos_partida.tres" id="11_sv3hn"]
 [ext_resource type="Script" uid="uid://crgw3r2ilcq1v" path="res://escenas/BotonLogro/boton_logro.gd" id="12_fq8hg"]
+[ext_resource type="Texture2D" uid="uid://bhuc2lqw1yyj5" path="res://assets/boton_cuadrado_normal.png" id="13_fra2k"]
+[ext_resource type="Texture2D" uid="uid://bn51jsp2b2tlv" path="res://assets/boton_cuadrado_pressed.png" id="14_rsvwu"]
+[ext_resource type="Texture2D" uid="uid://i2vs304y0h3v" path="res://assets/boton_cuadrado_hover.png" id="15_p2mpa"]
 
 [node name="EscenaPrincipal" type="Node2D"]
 script = ExtResource("1_pdctq")
@@ -240,7 +243,8 @@ text = "SVD"
 script = ExtResource("12_fq8hg")
 metadata/_custom_type_script = "uid://crgw3r2ilcq1v"
 
-[node name="RegresarAlMenu" type="Button" parent="."]
+[node name="RegresarAlMenu" type="TextureButton" parent="."]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -251,8 +255,9 @@ offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("10_sv3hn")
-theme_override_font_sizes/font_size = 15
-text = "🏠"
+texture_normal = ExtResource("13_fra2k")
+texture_pressed = ExtResource("14_rsvwu")
+texture_hover = ExtResource("15_p2mpa")
 
 [node name="ControladorPartida" parent="." instance=ExtResource("10_pt7cf")]
 datos_partida = ExtResource("11_sv3hn")
