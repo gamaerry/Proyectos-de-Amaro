@@ -14,7 +14,9 @@ func _ready() -> void:
 	posible_orden_terminado.connect(get_parent().on_posible_orden_terminado)
 	if !Global.tablero_3.is_empty() && get_parent().fue_cargado:
 		orden_de_fichas = Global.tablero_3
-		if Global.dia != Global.dia_guardado:
+		printerr(Global.dia)
+		printerr(Global.dia_tablero)
+		if Global.dia != Global.dia_tablero:
 			get_parent().get_parent().cambiar_modo_dia()
 		ordenar_posiciones()
 	else:

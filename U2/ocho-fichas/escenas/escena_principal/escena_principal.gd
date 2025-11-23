@@ -26,13 +26,15 @@ var logros_en_pantalla: bool = false
 
 func _ready() -> void:
 	controlador_partida.cargar_partida()
-	cambiar_modo_dia()
+	_aplicar_idioma()
+	_aplicar_modo_dia()
 	boton_regresar.visible = false
 	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
 	boton_dia.pressed.connect(cambiar_modo_dia)
 	boton_idioma.pressed.connect(_cambiar_idioma)
 	gano_logro.connect(contenedor_texto.mostrar_logro)
 	boton_cargar.pressed.connect(_cargar)
+	boton_salir.pressed.connect(_salir)
 	boton_logros.pressed.connect(_mostrar_ocultar_logros)
 	boton_regresar.pressed.connect(regresar_al_menu)
 	_dimension_actual = 3
@@ -41,9 +43,16 @@ func _cargar() -> void:
 	_crear_nivel(index_actual)
 	controlador_partida.cargar_partida()
 	_nivel_instanciado.fue_cargado = true
+	
+func _salir() -> void:
+	controlador_partida.guardar_partida()
+	get_tree().quit()
 
 func _cambiar_idioma() -> void:
 	Global.idioma = (Global.idioma + 1) % Global.TOTAL_IDIOMAS
+	_aplicar_idioma()
+
+func _aplicar_idioma() -> void: 
 	_cambiar_aspecto_menu()
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
@@ -117,6 +126,10 @@ func _mover_logros(nueva_posicion: float)->void:
 
 func cambiar_modo_dia():
 	Global.dia = !Global.dia
+	_aplicar_modo_dia()
+
+func _aplicar_modo_dia():
+	printerr(Global.dia)
 	fondo_dia.visible = Global.dia
 	fondo_noche.visible = !Global.dia
 	cambiar_aspecto_boton_dia()
@@ -124,7 +137,7 @@ func cambiar_modo_dia():
 	_actualizar_logros_obtenidos()
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
-		
+
 func cambiar_aspecto_boton_dia() -> void:
 	if !Global.dia:
 		boton_dia.texture_normal = load("res://assets/imagenes/botones/boton_dia_normal.png")

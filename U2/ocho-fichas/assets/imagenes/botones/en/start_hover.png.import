@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsykqeuxnlfpx"
-path="res://.godot/imported/start_hoverl.png-0588256a06af387fb2620e04e058c85c.ctex"
+uid="uid://ca4gp4x6vc5b1"
+path="res://.godot/imported/start_hover.png-9226d9bdd87d6e0a710def5c1a11832d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imagenes/botones/en/start_hoverl.png"
-dest_files=["res://.godot/imported/start_hoverl.png-0588256a06af387fb2620e04e058c85c.ctex"]
+source_file="res://assets/imagenes/botones/en/start_hover.png"
+dest_files=["res://.godot/imported/start_hover.png-9226d9bdd87d6e0a710def5c1a11832d.ctex"]
 
 [params]
 

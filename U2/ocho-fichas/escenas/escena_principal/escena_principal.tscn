@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://fwuydtyw5y5"]
+[gd_scene load_steps=34 format=3 uid="uid://fwuydtyw5y5"]
 
 [ext_resource type="Script" uid="uid://duaj15r6cq78g" path="res://escenas/escena_principal/escena_principal.gd" id="1_pdctq"]
 [ext_resource type="PackedScene" uid="uid://bijfajkuxnky4" path="res://escenas/nivel3x3/nivel3x3.tscn" id="2_snxy5"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://wy4ea7ehqrah" path="res://assets/imagenes/botones/es/inicio_normal.png" id="6_axhd6"]
 [ext_resource type="Texture2D" uid="uid://dfdj5kwimadiv" path="res://assets/imagenes/botones/boton_logros_pressed.png" id="6_ctuc8"]
 [ext_resource type="Texture2D" uid="uid://c0u5ydoxr7ikh" path="res://assets/imagenes/botones/es/inicio_pressed.png" id="7_kpj0l"]
-[ext_resource type="Script" uid="uid://cqbqj1ktocs6h" path="res://escenas/escena_principal/boton_salir.gd" id="7_px6n3"]
 [ext_resource type="Texture2D" uid="uid://cca2jojyl2te6" path="res://assets/imagenes/botones/boton_logros_hover.png" id="7_wwuot"]
 [ext_resource type="Script" uid="uid://jd5a4ux1upqt" path="res://escenas/escena_principal/contenedor_texto.gd" id="8_asb8d"]
 [ext_resource type="Texture2D" uid="uid://bcaupisn2thgi" path="res://assets/imagenes/botones/es/inicio_hover.png" id="8_q3xw2"]
@@ -88,7 +87,6 @@ theme = ExtResource("4_rrast")
 texture_normal = ExtResource("12_4gqqi")
 texture_pressed = ExtResource("13_nutjc")
 texture_hover = ExtResource("14_lp32y")
-script = ExtResource("7_px6n3")
 
 [node name="OpcionesDeMenu" type="VBoxContainer" parent="."]
 anchors_preset = 8

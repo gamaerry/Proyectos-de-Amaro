@@ -1,6 +1,7 @@
 class_name Global extends Object
 
-static var dia: bool = false
+static var dia: bool = true # dia por defecto
+static var dia_tablero: bool = true # puede estar en modo dia pero la partida guardada ser de noche
 const TOTAL_IDIOMAS: int = 2
 static var idioma: int = 0 # español por defecto
 static var gano_logro: int = 0
