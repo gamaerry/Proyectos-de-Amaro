@@ -3,7 +3,7 @@ extends Node2D
 @export var niveles: Array[PackedScene]
 @onready var boton_inicio: Button = $Menu/VBoxContainer/Inicio
 @onready var boton_cargar: Button = $Menu/VBoxContainer/Cargar
-@onready var boton_dia: Button = $Menu/dia
+@onready var boton_dia: TextureButton = $Menu/dia
 @onready var boton_logros: TextureButton = $Menu/Logros
 @onready var boton_regresar: TextureButton = $RegresarAlMenu
 @onready var logros: GridContainer = $GridContainer
@@ -17,7 +17,6 @@ var tween: Tween  # tween reutilizable
 var _dimension_actual: int = 3
 var index_actual: int = _dimension_actual - 3
 var _nivel_instanciado: Node2D
-const ICONOS: Array[String] = ["  ⏾  ","  ☀︎  "]
 const RECORRIDO_NECESARIO: int = 133
 var logros_en_movimiento: bool = false
 var logros_en_pantalla: bool = false
@@ -74,11 +73,22 @@ func cambiar_modo_dia():
 	Global.dia = !Global.dia
 	fondo_dia.visible = Global.dia
 	fondo_noche.visible = !Global.dia
-	boton_dia.text = ICONOS[int(!Global.dia)]
+	cambiar_aspecto_boton_dia()
 	ordenar_logros()
 	_actualizar_logros_obtenidos()
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
+		
+func cambiar_aspecto_boton_dia() -> void:
+	if !Global.dia:
+		boton_dia.texture_normal = load("res://assets/boton_dia_normal.png")
+		boton_dia.texture_hover = load("res://assets/boton_dia_hover.png")
+		boton_dia.texture_pressed = load("res://assets/boton_dia_pressed.png")
+	else:
+		boton_dia.texture_normal = load("res://assets/boton_noche_normal.png")
+		boton_dia.texture_hover = load("res://assets/boton_noche_hover.png")
+		boton_dia.texture_pressed = load("res://assets/boton_noche_pressed.png")
+
 
 func ordenar_logros() -> void:
 	for i in Global.NUMERO_DE_LOGROS:
