@@ -10,15 +10,22 @@ config_version=5
 
 [application]
 
-config/name="Ocho fichas"
+config/name="Rompecocos"
+config/version="1.0.0"
 run/main_scene="uid://fwuydtyw5y5"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://bs1of5nrmah7h"
+config/icon="uid://cibpfrp2yes1r"
+config/windows_native_icon="uid://cibpfrp2yes1r"
+boot_splash/minimum_display_time=2000
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=180
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -54,3 +61,4 @@ izquierda={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+textures/default_filters/use_nearest_mipmap_filter=true

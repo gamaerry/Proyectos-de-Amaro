@@ -129,7 +129,6 @@ func cambiar_modo_dia():
 	_aplicar_modo_dia()
 
 func _aplicar_modo_dia():
-	printerr(Global.dia)
 	fondo_dia.visible = Global.dia
 	fondo_noche.visible = !Global.dia
 	cambiar_aspecto_boton_dia()
