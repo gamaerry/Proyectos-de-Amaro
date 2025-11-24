@@ -5,6 +5,6 @@ U2/out/
 U2/c/out/
 U2/java/app/bin/
 # Godot 4+ specific ignores
-U2/ocho-fichas/.godot/
-U2/ocho-fichas/android/
-U2/ocho-fichas/builds
+U2/Rompecocos/.godot/
+U2/Rompecocos/android/
+U2/Rompecocos/builds
