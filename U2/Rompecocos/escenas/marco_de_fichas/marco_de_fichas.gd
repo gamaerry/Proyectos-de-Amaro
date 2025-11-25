@@ -22,6 +22,7 @@ func _ready() -> void:
 		for i in numero_de_fichas:
 			get_child(i).set_numero(orden_de_fichas[i])
 		orden_de_fichas.append(0)
+		Global.tablero_3 = orden_de_fichas
 	orden_inicial_de_fichas = orden_de_fichas.duplicate()
 
 func ordenar_posiciones() -> void:
