@@ -13,8 +13,6 @@ const CONSEJOS: Array[Dictionary] = [{
 		1: "Tip: How many tiles should a 1x1 board have?"},{
 		0: "Consejo: Piensa fuera de la caja. . . pero dentro del tablero. . .",
 		1: "Tip: Think outside the box. . . but inside the board. . ."},{
-		0: "Consejo: Si el Diablo existe, Dios existe.",
-		1: "Tip: If the Devil exists, then God exists."},{
 		0: "Consejo: Vive el presente.",
 		1: "Tip: Live in the present."},{
 		0: "Consejo: Es imposible conseguir los logros de día en modo noche.",
