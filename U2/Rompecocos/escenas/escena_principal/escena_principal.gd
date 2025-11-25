@@ -20,7 +20,7 @@ var tween: Tween  # tween reutilizable
 var _dimension_actual: int = 3
 var index_actual: int = _dimension_actual - 3
 var _nivel_instanciado: Node2D
-const RECORRIDO_NECESARIO: int = 133
+const RECORRIDO_NECESARIO: int = 173
 var logros_en_movimiento: bool = false
 var logros_en_pantalla: bool = false
 
