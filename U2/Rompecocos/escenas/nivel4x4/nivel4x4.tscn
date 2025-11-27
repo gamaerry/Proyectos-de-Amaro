@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl73uij53l7nw"]
+
+[ext_resource type="PackedScene" uid="uid://c7smg3iud77bg" path="res://escenas/nivel/nivel.tscn" id="1_e1g26"]
+[ext_resource type="Script" uid="uid://birr2cn77lwhj" path="res://escenas/nivel4x4/nivel4x4.gd" id="2_1l2sp"]
+[ext_resource type="PackedScene" uid="uid://dt4cftvlleh57" path="res://escenas/marco_4x4/marco_4x4.tscn" id="3_hhkil"]
+
+[node name="Nivel4x4" instance=ExtResource("1_e1g26")]
+script = ExtResource("2_1l2sp")
+
+[node name="Marco4x4" parent="." index="0" instance=ExtResource("3_hhkil")]
+dimension = 0

@@ -2,7 +2,6 @@ class_name MarcoDeFichas extends Sprite2D
 
 @export var dimension: int #2, 3, 4 o 5
 var numero_de_fichas: int
-var fichas_para_espiral: Vector2i
 var orden_de_fichas: Array[int] 
 var orden_inicial_de_fichas: Array[int]
 var menos_dimension: int  # godot no permite expresiones en la estructura match
@@ -25,13 +24,11 @@ func _ready() -> void:
 			get_child(i).set_numero(orden_de_fichas[i])
 		orden_de_fichas.append(0)
 		Global.update_tablero(orden_de_fichas)
-		printerr(orden_de_fichas)
 	orden_inicial_de_fichas = orden_de_fichas.duplicate()
 
 func _init_variables() -> void:
 	dimension = Global.dimension_actual
 	numero_de_fichas = dimension*dimension - 1
-	fichas_para_espiral = Global.get_numeros_espirales(dimension)
 	menos_dimension = -dimension
 	match dimension:
 		3: tablero_actual = Global.tablero_3
@@ -100,5 +97,5 @@ func movimiento_posible(ficha: int) -> int: # 0, 1, 2, 3 o -1
 	return movimiento
 
 func _verificar_posible_orden_terminado(primero: int, ultimo: int) -> void:
-	if (primero == 1 || primero == numero_de_fichas) && (ultimo == 0 || ultimo == fichas_para_espiral.x || ultimo == fichas_para_espiral.y):
+	if (primero == 1 or primero == numero_de_fichas) and Global.get_posibles_ultimos().has(ultimo):
 		posible_orden_terminado.emit(orden_de_fichas)

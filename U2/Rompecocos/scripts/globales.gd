@@ -7,11 +7,13 @@ static var gano_logro: int = 0
 static var dia_guardado: bool
 const NUMERO_DE_LOGROS: int = 12
 const ORDEN_LOGROS_3: Array[bool] = [true,false,false,true,false,false,false,true,true,false,true,true]
+const ORDEN_LOGROS_4: Array[bool] = [true,true,false,false,false,true,true,true,false,false,false,true]
 static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
+static var logros_obtenidos_4: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
 #static var logros_obtenidos_3: Array[bool] = [true,true,true,true,true,true,true,true,true,true,true,true]
 static var tablero_3: Array[int]
 static var tablero_4: Array[int]
-static var dimension_actual: int = 3
+static var dimension_actual: int = 4
 
 static func update_tablero(nuevo: Array[int]):
 	match dimension_actual:
@@ -21,8 +23,11 @@ static func update_tablero(nuevo: Array[int]):
 static func get_acronimo(texto: String) -> String:
 	return texto.substr(texto.find(":") - 3, 3)
 
-static func get_numeros_espirales(n: int) -> Vector2i:
-	return Vector2i(2*n-1, (n-1)**2) # 5 y 4 en el caso de dimension 3
+static func get_posibles_ultimos() -> Dictionary[int, bool]: # posibles ultimas fichas en espiral, serpenteado y lineal
+	match dimension_actual: 
+		3: return {4: true, 5: true, 0: true}
+		4: return {7: true, 9: true, 3: true, 13: true, 0: true}
+		_: return {} # tecnicamente imposible
 
 # Devuelve cuántas inversiones tiene el arreglo
 static func _contar_inversiones(arreglo: Array[int]) -> int:

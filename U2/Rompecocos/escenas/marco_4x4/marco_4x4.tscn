@@ -125,9 +125,9 @@ texture_normal = ExtResource("4_30sab")
 metadata/_edit_use_anchors_ = true
 
 [node name="Ficha15" parent="." instance=ExtResource("3_han33")]
-offset_left = -68.0
+offset_left = -67.0
 offset_top = -35.0
-offset_right = -36.0
+offset_right = -35.0
 offset_bottom = -3.0
 texture_normal = ExtResource("4_30sab")
 metadata/_edit_use_anchors_ = true

@@ -17,7 +17,7 @@ extends Node2D
 @onready var controlador_partida: ControladorPartida = $ControladorPartida
 signal gano_logro
 var tween: Tween  # tween reutilizable
-var _dimension_actual: int = 3
+var _dimension_actual: int = 4
 var index_actual: int = _dimension_actual - 3
 var _nivel_instanciado: Node2D
 const RECORRIDO_NECESARIO: int = 173
@@ -37,7 +37,7 @@ func _ready() -> void:
 	boton_salir.pressed.connect(_salir)
 	boton_logros.pressed.connect(_mostrar_ocultar_logros)
 	boton_regresar.pressed.connect(regresar_al_menu)
-	_dimension_actual = 3
+	_dimension_actual = 4
 	
 func _cargar() -> void:
 	_crear_nivel(index_actual)
