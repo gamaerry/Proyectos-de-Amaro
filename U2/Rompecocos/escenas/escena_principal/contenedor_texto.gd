@@ -64,6 +64,14 @@ const LOGROS: Array[Dictionary] = [{
 		1: "Achievement unlocked DSV: Decreasing Serpentine Vertical"}
 ]
 
+func estado_actual_logros(contador: int, dimension: int) -> String:
+	var fraccion: String = str(contador) + "/" + str(Global.NUMERO_DE_LOGROS)
+	var dimension_str: String = str(dimension) + "x" + str(dimension)
+	if Global.idioma == 0:
+		return fraccion + " logros conseguidos del tablero de " + dimension_str
+	else:
+		return fraccion + " achievements obtained from the " + dimension_str + " board"
+
 var tween: Tween  # tween reutilizable
 var bolsa: Array[Dictionary] = []  # Shuffle bag
 @export var consejos: bool = true
@@ -90,9 +98,12 @@ func mostrar_consejo_random() -> void:
 	await aparecer_consejo()
 	mostrar_consejo_random() # Recursividad infinita
 
-func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1) -> void:
-	activar_mensaje_logros(false)
-	label2.text = LOGROS[logro][Global.idioma]
+func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1,  logro_gris: bool = false) -> void:
+	activar_mensaje_logros(logro_gris)
+	if logro < 0:
+		label2.text = estado_actual_logros(Global.obtener_numero_de_logros_conseguidos(), Global.dimension_actual)
+	else:
+		label2.text = LOGROS[logro][Global.idioma]
 	if temporal:
 		audio_logro.play()
 		await _espera(5)

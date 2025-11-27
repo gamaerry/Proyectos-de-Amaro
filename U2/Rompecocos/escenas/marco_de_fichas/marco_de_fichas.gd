@@ -8,6 +8,7 @@ var menos_dimension: int  # godot no permite expresiones en la estructura match
 var indice: int
 var indice_nulo: int
 var tablero_actual: Array[int]
+var dia_guardado: bool
 signal posible_orden_terminado(orden)
 
 func _ready() -> void:
@@ -15,7 +16,7 @@ func _ready() -> void:
 	posible_orden_terminado.connect(get_parent().on_posible_orden_terminado)
 	if not tablero_actual.is_empty() and get_parent().fue_cargado:
 		orden_de_fichas = tablero_actual
-		if Global.dia != Global.dia_guardado:
+		if Global.dia != dia_guardado:
 			get_parent().get_parent().cambiar_modo_dia()
 		ordenar_posiciones()
 	else:
@@ -31,8 +32,12 @@ func _init_variables() -> void:
 	numero_de_fichas = dimension*dimension - 1
 	menos_dimension = -dimension
 	match dimension:
-		3: tablero_actual = Global.tablero_3
-		4: tablero_actual = Global.tablero_4
+		3: 
+			tablero_actual = Global.tablero_3
+			dia_guardado = Global.dia_guardado_3
+		4: 
+			tablero_actual = Global.tablero_4
+			dia_guardado = Global.dia_guardado_4
 
 func ordenar_posiciones() -> void:
 	for i in numero_de_fichas:

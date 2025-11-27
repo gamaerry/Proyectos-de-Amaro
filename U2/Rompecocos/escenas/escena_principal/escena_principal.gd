@@ -25,7 +25,7 @@ var logros_en_pantalla: bool = false
 
 func _ready() -> void:
 	_init_variables()
-	controlador_partida.cargar_partida()
+	controlador_partida.cargar_partida(0)
 	_aplicar_idioma()
 	_aplicar_modo_dia()
 	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
@@ -39,11 +39,11 @@ func _ready() -> void:
 	
 func _init_variables() -> void:
 	boton_regresar.visible = false
-	index_actual = Global.dimension_actual - 3
+	index_actual = Global.dimension_actual - Global.DIMENSION_MINIMA
 
 func _cargar() -> void:
 	_crear_nivel(index_actual)
-	controlador_partida.cargar_partida()
+	controlador_partida.cargar_partida(Global.dimension_actual)
 	_nivel_instanciado.fue_cargado = true
 	
 func _salir() -> void:
@@ -96,11 +96,14 @@ func _cambiar_aspecto_menu() -> void:
 
 
 func _actualizar_logros_obtenidos() -> void:
+	var logros_obtenidos: Array[bool]
+	match Global.dimension_actual:
+		3: logros_obtenidos = Global.logros_obtenidos_3
+		4: logros_obtenidos = Global.logros_obtenidos_4
 	for i in Global.NUMERO_DE_LOGROS:
 		var logro: Node = logros.get_child(i)
-		for c in logro.pressed.get_connections():
-			logro.pressed.disconnect(c.callable)
-		if Global.logros_obtenidos_3[i]:
+		_desconectar_conexion(logro)
+		if logros_obtenidos[i]:
 			logro.pressed.connect(contenedor_texto.mostrar_logro.bind(false, i))
 			logro.set_tema_desbloqueado()
 		elif logro.imposible:
@@ -108,9 +111,41 @@ func _actualizar_logros_obtenidos() -> void:
 		else:
 			logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
 
+func _desconectar_conexion(nodo: Node) -> void:
+	for c in nodo.pressed.get_connections():
+		nodo.pressed.disconnect(c.callable)
+
+func _mostrar_logros_especificos() -> void:
+	for i in Global.NUMERO_DE_LOGROS:
+		var logro: Node = logros.get_child(i)
+		if i < Global.DIMENSIONES_DISPONIBLES:
+			logro.text = Global.get_acronimo(contenedor_texto.LOGROS[i][Global.idioma])
+		else:
+			logro.visible = true
+		
+func _seleccion_de_dimension_de_logros() -> void:
+	for i in Global.NUMERO_DE_LOGROS:
+		if i < Global.DIMENSIONES_DISPONIBLES:
+			_cambiar_a_selector_de_dimension(logros.get_child(i), i + Global.DIMENSION_MINIMA)
+		else:
+			logros.get_child(i).visible = false
+
+func _cambiar_a_selector_de_dimension(logro: Node, dimension: int):
+	if Global.estado_actual_dimensiones[dimension]:
+		logro.set_tema_desbloqueado()
+	logro.text = str(dimension) + "x" + str(dimension)
+	_desconectar_conexion(logro)
+	logro.pressed.connect(_mostrar_logros_especificos.bind(), CONNECT_ONE_SHOT)
+	if Global.dimension_desbloqueada(dimension):
+		logro.pressed.connect(contenedor_texto.mostrar_logro.bind(false, -1, Global.estado_actual_dimensiones[dimension]))
+		logro.set_tema_desbloqueado()
+	else:
+		logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
+
 func _mostrar_ocultar_logros() -> void:
 	if !logros_en_movimiento:
 		if !logros_en_pantalla:
+			_seleccion_de_dimension_de_logros()
 			_mover_logros(logros.position.x + RECORRIDO_NECESARIO)
 			logros_en_pantalla = true
 		else:
