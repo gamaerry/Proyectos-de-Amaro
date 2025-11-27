@@ -1,0 +1,133 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt4cftvlleh57"]
+
+[ext_resource type="Script" uid="uid://1sexvrjnj42b" path="res://escenas/marco_de_fichas/marco_de_fichas.gd" id="1_1x2y4"]
+[ext_resource type="Texture2D" uid="uid://ib61ukicssky" path="res://assets/imagenes/marco_relleno_4.png" id="1_lnok8"]
+[ext_resource type="PackedScene" uid="uid://c6qdurli3rkde" path="res://escenas/ficha/ficha.tscn" id="3_han33"]
+[ext_resource type="Texture2D" uid="uid://bpc0fddcwnvjy" path="res://assets/imagenes/dia/0.png" id="4_30sab"]
+
+[node name="Marco4x4" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_lnok8")
+script = ExtResource("1_1x2y4")
+dimension = 4
+metadata/_custom_type_script = "uid://1sexvrjnj42b"
+
+[node name="Ficha1" parent="." instance=ExtResource("3_han33")]
+offset_left = -131.0
+offset_top = -131.0
+offset_right = -99.0
+offset_bottom = -99.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha2" parent="." instance=ExtResource("3_han33")]
+offset_left = -99.0
+offset_top = -131.0
+offset_right = -67.0
+offset_bottom = -99.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha3" parent="." instance=ExtResource("3_han33")]
+offset_left = -67.0
+offset_top = -131.0
+offset_right = -35.0
+offset_bottom = -99.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha4" parent="." instance=ExtResource("3_han33")]
+offset_left = -35.0
+offset_top = -131.0
+offset_right = -3.0
+offset_bottom = -99.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha5" parent="." instance=ExtResource("3_han33")]
+offset_left = -131.0
+offset_top = -99.0
+offset_right = -99.0
+offset_bottom = -67.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha6" parent="." instance=ExtResource("3_han33")]
+offset_left = -99.0
+offset_top = -99.0
+offset_right = -67.0
+offset_bottom = -67.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha7" parent="." instance=ExtResource("3_han33")]
+offset_left = -67.0
+offset_top = -99.0
+offset_right = -35.0
+offset_bottom = -67.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha8" parent="." instance=ExtResource("3_han33")]
+offset_left = -35.0
+offset_top = -99.0
+offset_right = -3.0
+offset_bottom = -67.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha9" parent="." instance=ExtResource("3_han33")]
+offset_left = -131.0
+offset_top = -67.0
+offset_right = -99.0
+offset_bottom = -35.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha10" parent="." instance=ExtResource("3_han33")]
+offset_left = -99.0
+offset_top = -67.0
+offset_right = -67.0
+offset_bottom = -35.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha11" parent="." instance=ExtResource("3_han33")]
+offset_left = -67.0
+offset_top = -67.0
+offset_right = -35.0
+offset_bottom = -35.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha12" parent="." instance=ExtResource("3_han33")]
+offset_left = -35.0
+offset_top = -67.0
+offset_right = -3.0
+offset_bottom = -35.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha13" parent="." instance=ExtResource("3_han33")]
+offset_left = -131.0
+offset_top = -35.0
+offset_right = -99.0
+offset_bottom = -3.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha14" parent="." instance=ExtResource("3_han33")]
+offset_left = -99.0
+offset_top = -35.0
+offset_right = -67.0
+offset_bottom = -3.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ficha15" parent="." instance=ExtResource("3_han33")]
+offset_left = -68.0
+offset_top = -35.0
+offset_right = -36.0
+offset_bottom = -3.0
+texture_normal = ExtResource("4_30sab")
+metadata/_edit_use_anchors_ = true
