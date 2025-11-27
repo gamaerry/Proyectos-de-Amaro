@@ -10,6 +10,13 @@ const ORDEN_LOGROS_3: Array[bool] = [true,false,false,true,false,false,false,tru
 static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
 #static var logros_obtenidos_3: Array[bool] = [true,true,true,true,true,true,true,true,true,true,true,true]
 static var tablero_3: Array[int]
+static var tablero_4: Array[int]
+static var dimension_actual: int = 3
+
+static func update_tablero(nuevo: Array[int]):
+	match dimension_actual:
+		3: tablero_3 = nuevo
+		4: tablero_4 = nuevo
 
 static func get_acronimo(texto: String) -> String:
 	return texto.substr(texto.find(":") - 3, 3)

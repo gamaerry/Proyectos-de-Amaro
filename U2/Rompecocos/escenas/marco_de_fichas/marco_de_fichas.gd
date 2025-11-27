@@ -1,19 +1,21 @@
 class_name MarcoDeFichas extends Sprite2D
 
-@export var dimension: int = 3 #2, 3, 4 o 5
-var numero_de_fichas: int = dimension*dimension - 1
-var fichas_para_espiral: Vector2i = Global.get_numeros_espirales(dimension)
+@export var dimension: int #2, 3, 4 o 5
+var numero_de_fichas: int
+var fichas_para_espiral: Vector2i
 var orden_de_fichas: Array[int] 
 var orden_inicial_de_fichas: Array[int]
-var menos_dimension: int = -dimension # godot no permite expresiones en la estructura match
+var menos_dimension: int  # godot no permite expresiones en la estructura match
 var indice: int
 var indice_nulo: int
+var tablero_actual: Array[int]
 signal posible_orden_terminado(orden)
 
 func _ready() -> void:
+	_init_variables()
 	posible_orden_terminado.connect(get_parent().on_posible_orden_terminado)
-	if !Global.tablero_3.is_empty() && get_parent().fue_cargado:
-		orden_de_fichas = Global.tablero_3
+	if not tablero_actual.is_empty() and get_parent().fue_cargado:
+		orden_de_fichas = tablero_actual
 		if Global.dia != Global.dia_guardado:
 			get_parent().get_parent().cambiar_modo_dia()
 		ordenar_posiciones()
@@ -22,8 +24,18 @@ func _ready() -> void:
 		for i in numero_de_fichas:
 			get_child(i).set_numero(orden_de_fichas[i])
 		orden_de_fichas.append(0)
-		Global.tablero_3 = orden_de_fichas
+		Global.update_tablero(orden_de_fichas)
+		printerr(orden_de_fichas)
 	orden_inicial_de_fichas = orden_de_fichas.duplicate()
+
+func _init_variables() -> void:
+	dimension = Global.dimension_actual
+	numero_de_fichas = dimension*dimension - 1
+	fichas_para_espiral = Global.get_numeros_espirales(dimension)
+	menos_dimension = -dimension
+	match dimension:
+		3: tablero_actual = Global.tablero_3
+		4: tablero_actual = Global.tablero_4
 
 func ordenar_posiciones() -> void:
 	for i in numero_de_fichas:
@@ -83,7 +95,7 @@ func movimiento_posible(ficha: int) -> int: # 0, 1, 2, 3 o -1
 		_: return movimiento
 	orden_de_fichas[indice] = 0
 	orden_de_fichas[indice_nulo] = ficha
-	Global.tablero_3 = orden_de_fichas
+	Global.update_tablero(orden_de_fichas)
 	_verificar_posible_orden_terminado(orden_de_fichas[0], orden_de_fichas[numero_de_fichas])
 	return movimiento
 
