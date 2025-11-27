@@ -17,18 +17,17 @@ extends Node2D
 @onready var controlador_partida: ControladorPartida = $ControladorPartida
 signal gano_logro
 var tween: Tween  # tween reutilizable
-var _dimension_actual: int = 4
-var index_actual: int = _dimension_actual - 3
+var index_actual: int
 var _nivel_instanciado: Node2D
 const RECORRIDO_NECESARIO: int = 173
 var logros_en_movimiento: bool = false
 var logros_en_pantalla: bool = false
 
 func _ready() -> void:
+	_init_variables()
 	controlador_partida.cargar_partida()
 	_aplicar_idioma()
 	_aplicar_modo_dia()
-	boton_regresar.visible = false
 	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
 	boton_dia.pressed.connect(cambiar_modo_dia)
 	boton_idioma.pressed.connect(_cambiar_idioma)
@@ -37,8 +36,11 @@ func _ready() -> void:
 	boton_salir.pressed.connect(_salir)
 	boton_logros.pressed.connect(_mostrar_ocultar_logros)
 	boton_regresar.pressed.connect(regresar_al_menu)
-	_dimension_actual = 4
 	
+func _init_variables() -> void:
+	boton_regresar.visible = false
+	index_actual = Global.dimension_actual - 3
+
 func _cargar() -> void:
 	_crear_nivel(index_actual)
 	controlador_partida.cargar_partida()
@@ -175,4 +177,4 @@ func _eliminar_nivel():
 
 func _reiniciar_nivel():
 	_eliminar_nivel()
-	_crear_nivel(_dimension_actual - 3)
+	_crear_nivel(index_actual)
