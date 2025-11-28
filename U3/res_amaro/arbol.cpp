@@ -66,6 +66,7 @@ void busquedaPreorder(int n, Node *root) {
     // cout << "[" << root << "] Value: " << root->value << endl;
     contador1++;
     if (n == root->value) {
+      cout << "Numero de iteraciones preorder: " << contador1 << endl;
       return;
     }
     busquedaPreorder(n, root->left);
@@ -79,6 +80,7 @@ void busquedaInorder(int n, Node *root) {
     contador2++;
     busquedaInorder(n, root->left);
     if (n == root->value) {
+      cout << "Numero de iteraciones inorder: " << contador2 << endl;
       return;
     }
     busquedaInorder(n, root->right);
@@ -91,6 +93,7 @@ void busquedaPostorder(int n, Node *root) {
     busquedaPostorder(n, root->left);
     busquedaPostorder(n, root->right);
     if (n == root->value) {
+      cout << "Numero de iteraciones postorder: " << contador3 << endl;
       print(root);
       return;
     }
@@ -137,9 +140,6 @@ int main() {
   int busqueda;
   cin >> busqueda;
   busquedaPreorder(busqueda, mainRoot);
-  cout << "Numero de iteraciones preorder: " << contador1 << endl;
   busquedaInorder(busqueda, mainRoot);
-  cout << "Numero de iteraciones inorder: " << contador2 << endl;
   busquedaPostorder(busqueda, mainRoot);
-  cout << "Numero de iteraciones postorder: " << contador3 << endl;
 }
