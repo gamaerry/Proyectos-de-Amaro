@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1eu28sjnk2ob"]
+
+[ext_resource type="Script" uid="uid://bukb6umhnb87c" path="res://escenas/BotonDimension/boton_dimension.gd" id="1_fsui0"]
+
+[node name="BotonDimension" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_fsui0")

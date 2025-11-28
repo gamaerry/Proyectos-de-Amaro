@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhoappim812kd"
-path="res://.godot/imported/4x4_disabled.png-2249a37e5f36bb0d882aed68e94431b9.ctex"
+uid="uid://bql648qnfeuec"
+path="res://.godot/imported/4_normal.png-7bdade0096e6a2c45ef851e2fdd4879d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imagenes/botones/dimensiones/4x4_disabled.png"
-dest_files=["res://.godot/imported/4x4_disabled.png-2249a37e5f36bb0d882aed68e94431b9.ctex"]
+source_file="res://assets/imagenes/botones/dimensiones/4_normal.png"
+dest_files=["res://.godot/imported/4_normal.png-7bdade0096e6a2c45ef851e2fdd4879d.ctex"]
 
 [params]
 

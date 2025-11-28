@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bql648qnfeuec"
-path="res://.godot/imported/4x4_normal.png-1a60f0e3c29845a310ff7110bf4c7e9f.ctex"
+uid="uid://cimmj23c1m7hk"
+path="res://.godot/imported/3_hover.png-fbd6e5058179403396d1bb810048af4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imagenes/botones/dimensiones/4x4_normal.png"
-dest_files=["res://.godot/imported/4x4_normal.png-1a60f0e3c29845a310ff7110bf4c7e9f.ctex"]
+source_file="res://assets/imagenes/botones/dimensiones/3_hover.png"
+dest_files=["res://.godot/imported/3_hover.png-fbd6e5058179403396d1bb810048af4d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dohpqa74xyagd"
-path="res://.godot/imported/5x5_hover.png-72567c294eaa54fc0381ae57c7c79f62.ctex"
+uid="uid://bebaaxnww5ww4"
+path="res://.godot/imported/3_disabled.png-23e447443721412ed160d30ec84c3837.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imagenes/botones/dimensiones/5x5_hover.png"
-dest_files=["res://.godot/imported/5x5_hover.png-72567c294eaa54fc0381ae57c7c79f62.ctex"]
+source_file="res://assets/imagenes/botones/dimensiones/3_disabled.png"
+dest_files=["res://.godot/imported/3_disabled.png-23e447443721412ed160d30ec84c3837.ctex"]
 
 [params]
 

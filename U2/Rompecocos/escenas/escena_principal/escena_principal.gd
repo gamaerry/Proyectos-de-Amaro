@@ -8,6 +8,7 @@ extends Node2D
 @onready var boton_logros: TextureButton = $OpcionesDeMenu/Logros
 @onready var boton_idioma: TextureButton = $OpcionesDeMenu/Idioma
 @onready var boton_regresar: TextureButton = $RegresarAlMenu
+@onready var dimensiones: VBoxContainer = $"MenuDimensiones"
 @onready var logros: GridContainer = $Logros
 @onready var menu: VBoxContainer = $MenuPrincipal
 @onready var opciones: VBoxContainer = $OpcionesDeMenu
@@ -29,11 +30,11 @@ func _ready() -> void:
 	controlador_partida.cargar_partida(0)
 	_aplicar_idioma()
 	_aplicar_modo_dia()
-	boton_inicio.pressed.connect(_crear_nivel.bind(index_actual))
+	boton_inicio.pressed.connect(_mostrar_menu_dimensiones)
+	boton_cargar.pressed.connect(_mostrar_menu_dimensiones.bind(true))
 	boton_dia.pressed.connect(cambiar_modo_dia)
 	boton_idioma.pressed.connect(_cambiar_idioma)
 	gano_logro.connect(contenedor_texto.mostrar_logro)
-	boton_cargar.pressed.connect(_cargar)
 	boton_salir.pressed.connect(_salir)
 	boton_logros.pressed.connect(_mostrar_ocultar_logros)
 	boton_regresar.pressed.connect(regresar_al_menu)
@@ -41,11 +42,6 @@ func _ready() -> void:
 func _init_variables() -> void:
 	boton_regresar.visible = false
 	index_actual = Global.dimension_actual - Global.DIMENSION_MINIMA
-
-func _cargar() -> void:
-	_crear_nivel(index_actual)
-	controlador_partida.cargar_partida(Global.dimension_actual)
-	_nivel_instanciado.fue_cargado = true
 	
 func _salir() -> void:
 	controlador_partida.guardar_partida()
@@ -201,25 +197,38 @@ func ordenar_logros() -> void:
 		logros.get_child(i).set_imposible(Global.ORDEN_LOGROS_3[i] != Global.dia)
 
 func regresar_al_menu():
-	controlador_partida.guardar_partida()
-	_nivel_instanciado.queue_free()
+	if _nivel_instanciado:
+		controlador_partida.guardar_partida()
+		_nivel_instanciado.queue_free()
 	_nivel_instanciado = null
 	menu.visible = true
 	opciones.visible = true
 	boton_regresar.visible = false
+	dimensiones.visible = false
 
-func _crear_nivel(index: int):
-	_nivel_instanciado = niveles[index].instantiate()
-	add_child.call_deferred(_nivel_instanciado)
+func _mostrar_menu_dimensiones(cargado: bool = false):
 	menu.visible = false
 	opciones.visible = false
 	boton_regresar.visible = true
+	dimensiones.visible = true
+	var dimension: Node
+	for i in Global.DIMENSIONES_DISPONIBLES:
+		dimension = dimensiones.get_child(i)
+		if Global.dimension_desbloqueada[i+Global.DIMENSION_MINIMA]:
+			dimension.set_tema_desbloqueado()
+			dimension.pressed.connect(_crear_nivel.bind(i, cargado), CONNECT_ONE_SHOT)
+		else:
+			dimension.set_tema_bloqueado()
+			dimension.pressed.connect(contenedor_texto.mostrar_logro_bloqueado.bind(MENSAJE_DIMENSION_BLOQUEADA[Global.idioma]), CONNECT_ONE_SHOT)
+		dimension.visible = true
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
-	
-func _eliminar_nivel():
-	_nivel_instanciado.queue_free()
 
-func _reiniciar_nivel():
-	_eliminar_nivel()
-	_crear_nivel(index_actual)
+func _crear_nivel(index: int, cargado, bool):
+	dimensiones.visible = false
+	_nivel_instanciado = niveles[index].instantiate()
+	add_child.call_deferred(_nivel_instanciado)
+	if cargado:
+		controlador_partida.cargar_partida(Global.dimension_actual)
+		_nivel_instanciado.fue_cargado = true
+	
