@@ -162,8 +162,8 @@ func _mostrar_ocultar_logros() -> void:
 			logros_en_pantalla = false
 
 func _verificar_tableros_desbloqueados():
-	if Global.dimension_actual:
-		pass
+	Global.dimension_desbloqueada[4] = Global.dimension_completada[3]
+	Global.dimension_desbloqueada[5] = Global.dimension_completada[4]
 
 func _mover_logros(nueva_posicion: float)->void:
 	tween = create_tween()
