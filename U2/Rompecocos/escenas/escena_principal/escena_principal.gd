@@ -116,7 +116,8 @@ func _desconectar_listener(nodo: Node) -> void:
 	for c in nodo.pressed.get_connections():
 		nodo.pressed.disconnect(c.callable)
 
-func _mostrar_logros_especificos() -> void:
+func _mostrar_logros_especificos(dimension_escogida: int) -> void:
+	Global.dimension_actual = dimension_escogida
 	contenedor_texto.mostrar_logro(false, -1, !Global.dimension_completada[Global.dimension_actual])
 	_actualizar_logros_obtenidos()
 	for i in Global.NUMERO_DE_LOGROS:
@@ -145,12 +146,13 @@ func _cambiar_a_selector_de_dimension(logro: Node, dimension: int) -> void:
 		return
 	if Global.dimension_completada[dimension]:
 		logro.set_tema_desbloqueado()
-	logro.pressed.connect(_mostrar_logros_especificos.bind(), CONNECT_ONE_SHOT)
+	logro.pressed.connect(_mostrar_logros_especificos.bind(dimension), CONNECT_ONE_SHOT)
 		
 
 func _mostrar_ocultar_logros() -> void:
 	if !logros_en_movimiento:
 		if !logros_en_pantalla:
+			_verificar_tableros_desbloqueados()
 			_seleccion_de_dimension_de_logros()
 			_mover_logros(logros.position.x + RECORRIDO_NECESARIO)
 			logros_en_pantalla = true
@@ -158,6 +160,10 @@ func _mostrar_ocultar_logros() -> void:
 			_mover_logros(logros.position.x - RECORRIDO_NECESARIO)
 			contenedor_texto.desactivar_mensaje_logros()
 			logros_en_pantalla = false
+
+func _verificar_tableros_desbloqueados():
+	if Global.dimension_actual:
+		pass
 
 func _mover_logros(nueva_posicion: float)->void:
 	tween = create_tween()
