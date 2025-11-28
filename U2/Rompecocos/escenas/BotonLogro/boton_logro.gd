@@ -12,9 +12,9 @@ var font_disable := get_theme_font("disable", "Button")
 
 func set_imposible(_imposible: bool) -> void:
 	imposible = _imposible
-	_set_tema_bloqueado()
+	set_tema_bloqueado()
 		
-func _set_tema_bloqueado() -> void:
+func set_tema_bloqueado() -> void:
 	if imposible:
 		add_theme_stylebox_override("normal", estilos[3])
 		add_theme_stylebox_override("hover", estilos[3])

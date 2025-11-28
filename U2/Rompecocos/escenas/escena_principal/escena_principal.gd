@@ -15,6 +15,7 @@ extends Node2D
 @onready var fondo_noche: Sprite2D = $FondoNoche
 @onready var contenedor_texto: ContenedorTexto = $ContenedorTexto
 @onready var controlador_partida: ControladorPartida = $ControladorPartida
+const MENSAJE_DIMENSION_BLOQUEADA: Array[String] = ["Tablero bloqueado: Complete el anterior para desbloquear.", "Board locked: Complete the previous one to unlock."]
 signal gano_logro
 var tween: Tween  # tween reutilizable
 var index_actual: int
@@ -102,7 +103,7 @@ func _actualizar_logros_obtenidos() -> void:
 		4: logros_obtenidos = Global.logros_obtenidos_4
 	for i in Global.NUMERO_DE_LOGROS:
 		var logro: Node = logros.get_child(i)
-		_desconectar_conexion(logro)
+		_desconectar_listener(logro)
 		if logros_obtenidos[i]:
 			logro.pressed.connect(contenedor_texto.mostrar_logro.bind(false, i))
 			logro.set_tema_desbloqueado()
@@ -111,11 +112,13 @@ func _actualizar_logros_obtenidos() -> void:
 		else:
 			logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
 
-func _desconectar_conexion(nodo: Node) -> void:
+func _desconectar_listener(nodo: Node) -> void:
 	for c in nodo.pressed.get_connections():
 		nodo.pressed.disconnect(c.callable)
 
 func _mostrar_logros_especificos() -> void:
+	contenedor_texto.mostrar_logro(false, -1, !Global.dimension_completada[Global.dimension_actual])
+	_actualizar_logros_obtenidos()
 	for i in Global.NUMERO_DE_LOGROS:
 		var logro: Node = logros.get_child(i)
 		if i < Global.DIMENSIONES_DISPONIBLES:
@@ -130,17 +133,20 @@ func _seleccion_de_dimension_de_logros() -> void:
 		else:
 			logros.get_child(i).visible = false
 
-func _cambiar_a_selector_de_dimension(logro: Node, dimension: int):
-	if Global.estado_actual_dimensiones[dimension]:
-		logro.set_tema_desbloqueado()
+func _cambiar_a_selector_de_dimension(logro: Node, dimension: int) -> void:
+	logro.set_tema_bloqueado()
 	logro.text = str(dimension) + "x" + str(dimension)
-	_desconectar_conexion(logro)
-	logro.pressed.connect(_mostrar_logros_especificos.bind(), CONNECT_ONE_SHOT)
-	if Global.dimension_desbloqueada(dimension):
-		logro.pressed.connect(contenedor_texto.mostrar_logro.bind(false, -1, Global.estado_actual_dimensiones[dimension]))
+	_desconectar_listener(logro)
+	if !Global.dimension_desbloqueada[dimension]:
+		logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado.bind(MENSAJE_DIMENSION_BLOQUEADA[Global.idioma]), CONNECT_ONE_SHOT)
+		return
+	if dimension == 5 and Global.dimension_desbloqueada[dimension]:
+		logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado.bind(["¡Próximamente!", "Soon!"][Global.idioma]), CONNECT_ONE_SHOT)
+		return
+	if Global.dimension_completada[dimension]:
 		logro.set_tema_desbloqueado()
-	else:
-		logro.pressed.connect(contenedor_texto.mostrar_logro_bloqueado)
+	logro.pressed.connect(_mostrar_logros_especificos.bind(), CONNECT_ONE_SHOT)
+		
 
 func _mostrar_ocultar_logros() -> void:
 	if !logros_en_movimiento:
@@ -170,7 +176,6 @@ func _aplicar_modo_dia():
 	fondo_noche.visible = !Global.dia
 	cambiar_aspecto_boton_dia()
 	ordenar_logros()
-	_actualizar_logros_obtenidos()
 	if logros_en_pantalla:
 		_mostrar_ocultar_logros()
 
@@ -190,7 +195,6 @@ func ordenar_logros() -> void:
 		logros.get_child(i).set_imposible(Global.ORDEN_LOGROS_3[i] != Global.dia)
 
 func regresar_al_menu():
-	_actualizar_logros_obtenidos()
 	controlador_partida.guardar_partida()
 	_nivel_instanciado.queue_free()
 	_nivel_instanciado = null

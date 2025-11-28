@@ -8,14 +8,15 @@ static var idioma: int = 0 # español por defecto
 static var gano_logro: int = 0
 static var dia_guardado_3: bool
 static var dia_guardado_4: bool
-static var estado_actual_dimensiones: Dictionary[int, bool] = {3: false, 4: false, 5: false} # 3x3 completado, 4x4 completado, 5x5 completado
+static var dimension_desbloqueada: Dictionary[int, bool] = {3: true, 4: false, 5:false}
+static var dimension_completada: Dictionary[int, bool] = {3: true, 4: false, 5: false}
 const NUMERO_DE_LOGROS: int = 12
 const ORDEN_LOGROS_3: Array[bool] = [true,false,false,true,false,false,false,true,true,false,true,true]
 const ORDEN_LOGROS_4: Array[bool] = [true,true,false,false,false,true,true,true,false,false,false,true]
-static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
+#static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
 static var logros_obtenidos_4: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
 static var logros_obtenidos_5: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
-#static var logros_obtenidos_3: Array[bool] = [true,true,true,true,true,true,true,true,true,true,true,true]
+static var logros_obtenidos_3: Array[bool] = [true,true,true,true,true,true,true,true,true,true,true,true]
 static var tablero_3: Array[int]
 static var tablero_4: Array[int]
 static var dimension_actual: int = 3
@@ -24,12 +25,6 @@ static func update_tablero(nuevo: Array[int]):
 	match dimension_actual:
 		3: tablero_3 = nuevo
 		4: tablero_4 = nuevo
-
-static func dimension_desbloqueada(dimension: int) -> bool:
-	if dimension < 4: # 1, 2 y 3 siempre estaran desbloqueadas
-		return true
-	else:
-		return estado_actual_dimensiones[dimension-1]
 
 static func obtener_numero_de_logros_conseguidos() -> int:
 	var contador = 0
@@ -40,7 +35,7 @@ static func obtener_numero_de_logros_conseguidos() -> int:
 		_: obtenidos = logros_obtenidos_5
 	for i in NUMERO_DE_LOGROS:
 		if obtenidos[i]:
-			++contador
+			contador += 1
 	return contador
 
 static func get_acronimo(texto: String) -> String:

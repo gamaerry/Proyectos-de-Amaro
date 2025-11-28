@@ -113,9 +113,9 @@ func mostrar_logro(temporal: bool = true, logro: int = Global.gano_logro - 1,  l
 		Global.gano_logro = 0
 		await tween.finished
 
-func mostrar_logro_bloqueado():
+func mostrar_logro_bloqueado(mensaje: String = MENSAJE_LOGRO_SECRETO[Global.idioma]):
 	activar_mensaje_logros(true)
-	label2.text = MENSAJE_LOGRO_SECRETO[Global.idioma]
+	label2.text = mensaje
 
 func activar_mensaje_logros(bloqueado: bool):
 	label2.modulate.a = 1
