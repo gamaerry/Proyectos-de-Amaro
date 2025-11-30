@@ -37,7 +37,5 @@ func on_posible_orden_terminado(_orden: Array[int]) -> void:
 func _set_logro(logro: int) -> void:
 	Global.gano_logro = logro
 	get_parent().gano_logro.emit() #escena principal siempre es parent
-	match get_parent().index_actual:
-		0: Global.logros_obtenidos_3[logro - 1] = true
-		1: Global.logros_obtenidos_4[logro - 1] = true
+	Global.LOGROS_OBTENIDOS[Global.dimension_actual][logro - 1] = true
 	

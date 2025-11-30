@@ -9,17 +9,25 @@ static var gano_logro: int = 0
 static var dia_guardado_3: bool
 static var dia_guardado_4: bool
 static var dimension_desbloqueada: Dictionary[int, bool] = {3: true, 4: false, 5:false}
-static var dimension_completada: Dictionary[int, bool] = {3: true, 4: false, 5: false}
 const NUMERO_DE_LOGROS: int = 12
-const ORDEN_LOGROS_3: Array[bool] = [true,false,false,true,false,false,false,true,true,false,true,true]
-const ORDEN_LOGROS_4: Array[bool] = [true,true,false,false,false,true,true,true,false,false,false,true]
-#static var logros_obtenidos_3: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
-static var logros_obtenidos_4: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
-static var logros_obtenidos_5: Array[bool] = [false,false,false,false,false,false,false,false,false,false,false,false]
-static var logros_obtenidos_3: Array[bool] = [true,true,true,true,true,true,true,true,true,true,true,true]
+const ORDEN_LOGROS: Dictionary = {
+		3: [true,false,false,true,false,false,false,true,true,false,true,true], 
+		4: [true,true,false,false,false,true,true,true,false,false,false,true]}
+#static var LOGROS_OBTENIDOS: Dictionary = {
+#		3: [true,true,true,true,true,true,true,true,true,true,true,true], 
+#		4: [true,true,true,true,true,true,true,true,true,true,true,true]}
+static var LOGROS_OBTENIDOS: Dictionary = {
+		3: [false,false,false,false,false,false,false,false,false,false,false,false], 
+		4: [false,false,false,false,false,false,false,false,false,false,false,false]}
 static var tablero_3: Array[int]
 static var tablero_4: Array[int]
 static var dimension_actual: int = 3
+
+static func get_mensaje_logro_imposible() -> String:
+	if dia:
+		return ["Logro imposible en modo día", "Impossible achievement in day mode" ][idioma]
+	else:
+		return ["Logro imposible en modo noche", "Impossible achievement in night mode"][idioma]
 
 static func update_tablero(nuevo: Array[int]):
 	match dimension_actual:
@@ -27,16 +35,7 @@ static func update_tablero(nuevo: Array[int]):
 		4: tablero_4 = nuevo
 
 static func obtener_numero_de_logros_conseguidos() -> int:
-	var contador = 0
-	var obtenidos: Array[bool]
-	match dimension_actual:
-		3: obtenidos = logros_obtenidos_3
-		4: obtenidos = logros_obtenidos_4
-		_: obtenidos = logros_obtenidos_5
-	for i in NUMERO_DE_LOGROS:
-		if obtenidos[i]:
-			contador += 1
-	return contador
+	return LOGROS_OBTENIDOS[dimension_actual].count(true)
 
 static func get_acronimo(texto: String) -> String:
 	return texto.substr(texto.find(":") - 3, 3)

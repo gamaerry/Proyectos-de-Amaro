@@ -1,7 +1,7 @@
 class_name Nivel3x3 extends Nivel
 	
 func on_posible_orden_terminado(orden: Array[int]) -> void:
-	match orden: 
+	match orden:  # TODO: borrar esta clase al implementar el 5x5
 		LINEAL_HORIZONTAL_3: _set_logro(1)
 		ESPIRAL_CRECIENTE_HORARIO_3: _set_logro(2)
 		SERPENTEADO_HORIZONTAL_3: _set_logro(3)

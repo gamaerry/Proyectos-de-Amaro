@@ -15,6 +15,8 @@ func _ready() -> void:
 
 func set_numero(n: int) -> void:
 	numero = n
+	if n == 0:
+		return
 	var ruta: String = "res://assets/imagenes/dia/" + str(n) + ".png"
 	if !Global.dia:
 		ruta = "res://assets/imagenes/noche/" + str(n) + "_noche.png"

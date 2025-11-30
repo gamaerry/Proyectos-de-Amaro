@@ -124,7 +124,6 @@ func activar_mensaje_logros(bloqueado: bool):
 		color2.color = Color("0000007d")
 	else:
 		color2.color = Color("#82ff00a9")
-	
 
 func desactivar_mensaje_logros():
 	label2.modulate.a = 0

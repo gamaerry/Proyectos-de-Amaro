@@ -9,6 +9,7 @@ var indice: int
 var indice_nulo: int
 var tablero_actual: Array[int]
 var dia_guardado: bool
+var correccion_de_posicion: Vector2i
 signal posible_orden_terminado(orden)
 
 func _ready() -> void:
@@ -31,19 +32,21 @@ func _init_variables() -> void:
 	dimension = Global.dimension_actual
 	numero_de_fichas = dimension*dimension - 1
 	menos_dimension = -dimension
-	match dimension:
+	match dimension: # TODO: usar diccionarios globales cuando se haga el 5x5
 		3: 
 			tablero_actual = Global.tablero_3
 			dia_guardado = Global.dia_guardado_3
+			correccion_de_posicion = Vector2i(16,16)
 		4: 
 			tablero_actual = Global.tablero_4
 			dia_guardado = Global.dia_guardado_4
+			correccion_de_posicion = Vector2i(32,32)
 
 func ordenar_posiciones() -> void:
 	for i in numero_de_fichas:
 		get_child(i).set_numero(orden_de_fichas[i])
 		if orden_de_fichas[i] == 0:
-			get_child(i).position = Vector2i(16,16)
+			get_child(i).position = correccion_de_posicion
 			get_child(i).set_numero(orden_de_fichas[numero_de_fichas])
 
 func _input(event: InputEvent) -> void:
