@@ -192,6 +192,7 @@ func ordenar_logros() -> void:
 		logros.get_child(i).set_imposible(Global.ORDEN_LOGROS[Global.dimension_actual][i] != Global.dia)
 
 func regresar_al_menu():
+	contenedor_texto.desactivar_mensaje_logros()
 	if _nivel_instanciado:
 		controlador_partida.guardar_partida()
 		_nivel_instanciado.queue_free()

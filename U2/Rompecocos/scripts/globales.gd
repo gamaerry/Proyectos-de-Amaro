@@ -16,7 +16,6 @@ const ORDEN_LOGROS: Dictionary = {
 static var LOGROS_OBTENIDOS: Dictionary = {
 		3: [true,true,true,true,true,true,true,true,true,true,true,true], 
 		4: [true,true,true,true,true,true,true,true,true,true,true,true]}
-#static var LOGROS_OBTENIDOS: Dictionary = {
 #		3: [false,false,false,false,false,false,false,false,false,false,false,false], 
 #		4: [false,false,false,false,false,false,false,false,false,false,false,false]}
 static var tablero_3: Array[int]
