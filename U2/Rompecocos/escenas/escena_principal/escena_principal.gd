@@ -42,7 +42,7 @@ func _init_variables() -> void:
 	boton_regresar.visible = false
 	
 func _salir() -> void:
-	controlador_partida.guardar_partida()
+	controlador_partida.guardar_partida(false)
 	get_tree().quit()
 
 func _cambiar_idioma() -> void:

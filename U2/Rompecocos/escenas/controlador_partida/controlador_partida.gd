@@ -4,14 +4,15 @@ class_name ControladorPartida extends Node
 
 const RUTA: String = "user://partida.tres"
 
-func guardar_partida():
+func guardar_partida(desde_partida: bool = true):
 	datos_partida.logros_obtenidos = Global.LOGROS_OBTENIDOS
 	datos_partida.tablero_3 = Global.tablero_3
 	datos_partida.tablero_4 = Global.tablero_4
-	datos_partida.dia = Global.dia
-	datos_partida.dia_guardado_3 = Global.dia_guardado_3
-	datos_partida.dia_guardado_4 = Global.dia_guardado_4
 	datos_partida.idioma = Global.idioma
+	if desde_partida:
+		datos_partida.dia = Global.dia
+		datos_partida.dia_guardado_3 = Global.dia_guardado_3
+		datos_partida.dia_guardado_4 = Global.dia_guardado_4
 	ResourceSaver.save(datos_partida, RUTA)
 
 func cargar_partida(dimension: int):
