@@ -105,7 +105,6 @@ func _ready() -> void:
 func _rellenar_bolsa() -> void:
 	bolsa = CONSEJOS.duplicate()
 	bolsa.shuffle()
-	printerr(bolsa.size())
 
 func _espera(segundos: int) -> void:
 	await get_tree().create_timer(segundos).timeout
