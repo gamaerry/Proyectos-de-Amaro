@@ -8,17 +8,17 @@ static var idioma: int = 0 # español por defecto
 static var gano_logro: int = 0
 static var dia_guardado_3: bool
 static var dia_guardado_4: bool
-static var dimension_desbloqueada: Dictionary[int, bool] = {3: true, 4: false, 5:false}
+static var dimension_desbloqueada: Dictionary[int, bool] = {3: true, 4: true, 5:false}
 const NUMERO_DE_LOGROS: int = 12
 const ORDEN_LOGROS: Dictionary = {
 		3: [true,false,false,true,false,false,false,true,true,false,true,true], 
 		4: [true,true,false,false,false,true,true,true,false,false,false,true]}
-#static var LOGROS_OBTENIDOS: Dictionary = {
-#		3: [true,true,true,true,true,true,true,true,true,true,true,true], 
-#		4: [true,true,true,true,true,true,true,true,true,true,true,true]}
 static var LOGROS_OBTENIDOS: Dictionary = {
-		3: [false,false,false,false,false,false,false,false,false,false,false,false], 
-		4: [false,false,false,false,false,false,false,false,false,false,false,false]}
+		3: [true,true,true,true,true,true,true,true,true,true,true,true], 
+		4: [true,true,true,true,true,true,true,true,true,true,true,true]}
+#static var LOGROS_OBTENIDOS: Dictionary = {
+#		3: [false,false,false,false,false,false,false,false,false,false,false,false], 
+#		4: [false,false,false,false,false,false,false,false,false,false,false,false]}
 static var tablero_3: Array[int]
 static var tablero_4: Array[int]
 static var dimension_actual: int = 3

@@ -126,7 +126,7 @@ func _seleccion_de_dimension_de_logros() -> void:
 			logros.get_child(i).visible = false
 
 func _cambiar_a_selector_de_dimension(logro: Node, dimension: int) -> void:
-	logro.set_tema_bloqueado()
+	logro.set_imposible(true) # para que el tema bloqueado se aplique bien
 	logro.text = str(dimension) + "x" + str(dimension)
 	_desconectar_listener(logro)
 	if !Global.dimension_desbloqueada[dimension]:
@@ -137,6 +137,7 @@ func _cambiar_a_selector_de_dimension(logro: Node, dimension: int) -> void:
 		return
 	if not Global.LOGROS_OBTENIDOS[3].has(false):
 		logro.set_tema_desbloqueado()
+	logro.set_imposible(false)
 	logro.pressed.connect(_mostrar_logros_especificos.bind(dimension), CONNECT_ONE_SHOT)
 		
 

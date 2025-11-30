@@ -5,22 +5,24 @@ const MENSAJE_LOGRO_SECRETO: Array[String] = ["Logro secreto bloqueado", "Secret
 const CONSEJOS: Array[Dictionary] = [{
 		0: "Consejo: En la primera casilla siempre irá el número más alto o el uno, ningún otro será digno.",
 		1: "Tip: The first tile should always hold the highest number or the number one — nothing else is worthy."},{
-		0: "Consejo: Como es arriba es abajo.",
-		1: "Tip: As above, so below."},{
+		0: "Como es arriba es abajo.",
+		1: "As above, so below."},{
 		0: "Consejo: Come frutas y verduras.",
 		1: "Tip: Eat fruits and vegetables."},{
-		0: "Consejo: ¿Cuantas fichas debería tener el tablero de 1x1?",
-		1: "Tip: How many tiles should a 1x1 board have?"},{
+		0: "¿Cuantas fichas debería tener el tablero de 1x1?",
+		1: "How many tiles should a 1x1 board have?"},{
 		0: "Consejo: Piensa fuera de la caja. . . pero dentro del tablero. . .",
 		1: "Tip: Think outside the box. . . but inside the board. . ."},{
+		0: "Si el Diablo existe, Dios existe.",
+		1: "If the Devil exists, then God exists."},{
 		0: "Consejo: Vive el presente.",
 		1: "Tip: Live in the present."},{
 		0: "Consejo: Es imposible conseguir los logros de día en modo noche.",
 		1: "Tip: It's impossible to obtain daytime achievements in night mode."},{
-		0: "Consejo: Cada que sales tu partida se guarda automáticamente, pero solo puedes guardar una.",
-		1: "Tip: Every time you exit, your game is saved automatically — but you can only have one save."},{
-		0: "Consejo: Sí, tambien tus logros se guardan al salir.",
-		1: "Tip: Yes, your achievements are saved when you exit as well."},{
+		0: "Consejo: Cada que sales tu partida se guarda automáticamente, pero solo puedes guardar una por tamaño de tablero.",
+		1: "Tip: Every time you exit, your game is saved automatically — but you can only have one save per board size."},{
+		0: "Consejo: Si el modo noche se cambia solo al cargar una partida, es porque esa partida la guardaste de noche.",
+		1: "Tip: If night mode switches automatically when loading a game, it's because you saved that game at night."},{
 		0: "Consejo: Practica la gratitud.",
 		1: "Tip: Practice gratitude."},{
 		0: "Consejo: La solución trivial siempre se resuelve de día.",
@@ -29,12 +31,28 @@ const CONSEJOS: Array[Dictionary] = [{
 		1: "Tip: Half of the achievements are always earned during the day, and the other half at night."},{
 		0: "Consejo: Si alguna vez te sientes perdido, intenta voltear el tablero. . . mentalmente, no literalmente.",
 		1: "Tip: If you ever feel lost, try flipping the board — mentally, not literally."},{
-		0: "Consejo: El modo noche no hace los rompecabezas más difíciles. . . ¿o sí?",
-		1: "Tip: Night mode doesn’t make the puzzles harder. . . or does it?"},{
-		0: "Consejo: El término técnico del Serpenteado es Boustrofédon. . . A mí tampoco me salió a la primera.",
-		1: "Tip: The technical term for the Serpentine pattern is Boustrophedon. . . I didn't get it right the first time either."},{
+		0: "El modo noche no hace los rompecabezas más difíciles. . . ¿o sí?",
+		1: "Night mode doesn’t make the puzzles harder. . . or does it?"},{
+		0: "El término técnico del Serpenteado es Boustrofédon. . . A mí tampoco me salió a la primera.",
+		1: "The technical term for the Serpentine pattern is Boustrophedon. . . I didn't get it right the first time either."},{
 		0: "Consejo: Si no puedes resolverlo, quizá estás resolviendo el problema equivocado.",
-		1: "Tip: If you can’t solve it, maybe you’re solving the wrong problem."}
+		1: "Tip: If you can’t solve it, maybe you’re solving the wrong problem."},{
+		0: "Consejo: El acrónimo del logro secreto es más revelador de lo que crees.",
+		1: "Tip: The acronym for the secret achievement is more revealing than you think."},{
+		0: "Consejo: Cuando todo falle, reinicia. . . tu mente, no el juego.",
+		1: "Tip: When all else fails, restart. . . your mind, not the game."},{
+		0: "Consejo: ¿Y si le preguntas a la IA?",
+		1: "Tip: Thought about asking the AI for help?"},{
+		0: "¡Mover fichas no quema calorias!",
+		1: "Sliding tiles burns zero calories!"},{
+		0: "Consejo: Sé el tablero.",
+		1: "Tip: Be the board."},{
+		0: "Es más probable que te caiga un rayo. . . varias veces. . . a que el tablero 4x4 aparezca resuelto al azar. (1 en 2.1 billones).",
+		1: "You're more likely to be struck by lightning. . . multiple times. . . than to get a randomly solved 4x4 board. (1 in 2.1 trillion)."},{
+		0: "El sol viene y se va porque en esta vida no hay luz sin oscuridad.",
+		1: "The sun come and go because in this life there is no dawn without dusk."},{
+		0: "El vacío es una ficha muy importante: Lo escencial es invisible a los ojos. . .",
+		1: "The empty space is a very important tile: What is essential is invisible to the eye. . ."}
 ]
 
 const LOGROS: Array[Dictionary] = [{
@@ -87,6 +105,7 @@ func _ready() -> void:
 func _rellenar_bolsa() -> void:
 	bolsa = CONSEJOS.duplicate()
 	bolsa.shuffle()
+	printerr(bolsa.size())
 
 func _espera(segundos: int) -> void:
 	await get_tree().create_timer(segundos).timeout
@@ -130,7 +149,7 @@ func desactivar_mensaje_logros():
 	color2.modulate.a = 0
 
 func aparecer_consejo() -> void:
-	label.text = bolsa.pop_front()[Global.idioma]
+	label.text = bolsa.pop_back()[Global.idioma]
 	tween = create_tween()
 	tween.tween_property(label, "modulate:a", 1.0, 1.0)
 	tween.parallel().tween_property(color, "modulate:a", 1.0, 1.0)
