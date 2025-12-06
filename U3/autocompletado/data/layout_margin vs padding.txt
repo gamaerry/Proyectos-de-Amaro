@@ -1,0 +1,2 @@
+margin-> fuera del contenedor
+paddong-> dentro del contenedor

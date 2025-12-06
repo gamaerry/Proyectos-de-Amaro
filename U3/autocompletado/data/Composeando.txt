@@ -1,0 +1,48 @@
+1) 
+la linea 
+'var estaExpandido by remember { mutableStateOf(false) }'
+ es una abreviacion para
+'var estaExpandido: MutableState<Boolean> = remember { mutableStateOf(false) }' 
+en donde la variable boolean está envuelto en un 'MutableState' que la implementa de manera especial (a la variable), por ello podemos expresar explicitamente su tipo como 
+'var estaExpandido: Boolean by remember { mutableStateOf(false) }'
+(al declararse como un MutableState necesitaríamos acceder a su valor explicitamente con 'estaExpandido.value', ie la palabra clave 'by' simplifica la notación '.value')
+
+2)
+el modificador Modifier.fillMaxSize() se coloca en el setContent del onCreate y no en ContenidoPrincipal() (cualquier otro componible secundario) para que no se renderice la pantalla completa en el preview pero sí en el onCreate() de la app
+
+3)
+La diferencia entre Column y LazyColumn es que al igual que el RecyclerView LazyColumn no muestra todos los elementos a la vez, sino únicamente los que se necesitan mostrar en pantalla
+
+4)
+en el enlace
+https://developer.android.com/jetpack/compose/animation/quick-guide
+hay información bastante util sobre las animaciones en compose
+
+5)
+Cambiar la altura minima en Modifier.heightIn en lugar de una altura fija con Modifier.height es que se tiene más accesibilidad al permitir que el usuario con un font size incrementada pueda tambien incrementar el font size de dicho elemento (observación: no tiene sentido hacerlo con el size de las imágenes)
+
+6)
+Se recomienda espaciar el texto a partir de su linea base ya que esto tiene implicaciones positivas de diseño, ie el lugar del Modifier.padding, se recomienda Modifier.paddingFrom(top= , bottom= )
+
+7)
+en https://www.youtube.com/watch?v=EOQB8PTLkpY
+se dan recomendaciones de performance en aplicaciones compose importantes que vale la pena repasar y considerar
+
+8)
+usar Spacers en lugar de padding hace que en pantallas en donde se requiera hacer scroll ese espacio se quede arriba y no ermanezca como el margen de un cuadro
+
+9)
+en la página
+https://fonts.google.com/icons
+hay una lista inmensa de iconos usables para android de google (cambiar ?attr/colorControlNormal por ?android:colorControlNormal de los xml descargados)
+
+10) 
+Notese que en el ejecicio de la app YogaMain la navegacion inferior tiene como containerColor el surfaceVariant, y la navegación lateral tiene el background, habrá que corroborar si esto a nivel de diseño es lo adecuado
+
+11) en el fragmento:
+LazyColumn {
+    items(items = lista, key = { objeto -> objeto.id }) { objeto -> 
+	ItemObjeto(objeto)
+    }
+}
+el key se especifica por cuestiones de optimización pues internamente sin un key o id cada item se le identifica por su posición en la columna, es decir que si hay una modificacion que altere esa posición en varios items se aplicaran multiples cambios innecesarios que no serán buenos para el rendimiento

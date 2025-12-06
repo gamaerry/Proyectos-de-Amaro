@@ -1,0 +1,6 @@
+El contexto de una corrutina tiene varios elementos, entre ellos el Job y los Dispatcher. A continuacion se listan los cuatro tipos de dispatchers
+
+Main: Se usa cuando se tenga que actualizar alguna vista (o elemento de la interfaz de usuario)
+IO: Se usa cuando se realicen operaciones de entrada y salida
+Default: Se usa para operaciones de larga ejecucion (algun algoritmo). Genera un nuevo hilo completo
+Unconfined: Toma el hilo o subproceso libre

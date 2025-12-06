@@ -1,6 +1,12 @@
+#include <algorithm>
 #include <cctype>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <string>
+#include <unordered_map>
 #include <vector>
+namespace fs = std::filesystem;
 
 std::vector<std::string> tokenizar(const std::string &texto) {
   std::vector<std::string> palabras;
@@ -14,6 +20,7 @@ std::vector<std::string> tokenizar(const std::string &texto) {
 
   const size_t n = texto.size();
   bool punto_valido, caracter_valido, dos_puntos;
+  unsigned char siguiente_de_acentos;
 
   for (size_t i = 0; i < n; i++) {
     unsigned char c = texto[i];
@@ -21,7 +28,10 @@ std::vector<std::string> tokenizar(const std::string &texto) {
     // 1. Acentos españoles (C3 xx)
     if (c == 0xC3 && i + 1 < n) {
       palabra += c;
-      palabra += texto[++i];
+      siguiente_de_acentos = texto[++i];
+      if (siguiente_de_acentos >= 0x81 && siguiente_de_acentos <= 0x9C) // si es mayúscula
+        siguiente_de_acentos += 0x20; // 0x20 es la distancia de su correspondiente minúscula
+      palabra += siguiente_de_acentos;
       continue;
     }
 
@@ -30,7 +40,7 @@ std::vector<std::string> tokenizar(const std::string &texto) {
     punto_valido = c == '.' && i > 0 && i + 1 < n && std::isalnum(texto[i - 1]) && std::isalnum(texto[i + 1]);
     dos_puntos = c == ':' && i > 0 && i + 1 < n && (texto[i + 1] == '\'' || texto[i + 1] == '/');
     if (caracter_valido || punto_valido || dos_puntos) {
-      palabra += c;
+      palabra += std::tolower(c);
       continue;
     }
 
@@ -54,26 +64,45 @@ std::vector<std::string> tokenizar(const std::string &texto) {
   return palabras;
 }
 
-#include <iostream>
+void procesar_archivo(const std::string &ruta, std::unordered_map<std::string, int> &frecuencias) {
+  std::ifstream archivo(ruta);
+  if (!archivo.is_open()) {
+    std::cerr << "Error abriendo: " << ruta << std::endl;
+    return;
+  }
+  std::string linea;
+  while (std::getline(archivo, linea)) {
+    std::vector<std::string> palabras = tokenizar(linea);
+    for (const auto &palabra : palabras) {
+      frecuencias[palabra]++;
+    }
+  }
+  archivo.close();
+}
 
 int main() {
-  std::string test = R"(¿¡Realmente podrás tokenizar correctamente este texto?! —preguntó María—. 
-'¡Claro que sí!', respondió él. 
-El pingüino soñoliento comió piña, ñoquis y tomó café con azúcar. 
-Programación-orientada-a-objetos es diferente de programación funcional; 
-sin embargo, ambos paradigmas coexisten en 2025.
-
-Además: «¿cuántas palabras separarás aquí, eh?»; palabras como “rápido”, “niña”, “año”, “pingüino”, "vergüenza" y "maíz" deben mantenerse íntegras.
-También hay casos extraños: emojis 😊😂🔥, símbolos matemáticos (≈ ≤ ≥ ± ÷ ×), 
-y otros caracteres unicode que NO deben formar palabras: © ® ™ § ¶ † ‡ · • ¥ € £.
-
-¿Y qué pasa con direcciones como https://ejemplo.com/test?id=123 o e-mails como correo.prueba+utf8@dominio.es?
-¿O con números mezclados, como 4x4, 3.1416, 1. y 2.?
-
-Finalmente… ¡prueba-extrema-final-del-tokenizador-español!)";
-  auto palabras = tokenizar(test);
-
-  for (const auto &palabra : palabras) {
-    std::cout << palabra << std::endl;
+  std::unordered_map<std::string, int> frecuencias;
+  // Procesar todos los .txt en la carpeta "textos/"
+  for (const auto &entrada : fs::directory_iterator("../data/")) {
+    if (entrada.path().extension() == ".txt") {
+      std::cout << "Procesando: " << entrada.path() << std::endl;
+      procesar_archivo(entrada.path().string(), frecuencias);
+    }
   }
+  std::cout << "\nTotal palabras únicas: " << frecuencias.size() << std::endl;
+  // Crear un vector de pares (palabra, frecuencia) para ordenar
+  std::vector<std::pair<std::string, int>> palabras_ordenadas;
+  for (const auto &[palabra, freq] : frecuencias) {
+    palabras_ordenadas.push_back({palabra, freq});
+  }
+  // Ordenar por frecuencia (mayor a menor)
+  std::sort(palabras_ordenadas.begin(), palabras_ordenadas.end(),
+            [](const auto &a, const auto &b) { return a.second > b.second; });
+  // Imprimir las 20 más frecuentes
+  std::cout << "\nTop 30 palabras más frecuentes:\n";
+  for (int i = 0; i < 30 && i < palabras_ordenadas.size(); i++) {
+    std::cout << i + 1 << ". " << palabras_ordenadas[i].first
+              << ": " << palabras_ordenadas[i].second << std::endl;
+  }
+  return 0;
 }
