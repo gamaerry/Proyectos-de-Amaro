@@ -39,7 +39,7 @@ void Trie::destruir(NodoTrie *nodo) {
   delete nodo;
 }
 
-// Métodos poco eficientes:
+// Métodos que obtienen todos los resultados:
 void Trie::recolectar(NodoTrie *nodo, const std::string &prefijo, std::vector<std::pair<std::string, int>> &resultados) const {
   if (!nodo)
     return;
@@ -69,7 +69,7 @@ std::vector<std::pair<std::string, int>> Trie::obtener_sugerencias(const std::st
   return resultados;
 }
 
-// Métodos más optimizado (hacen lo mismo que recolectar() y obtener_sugerencias() pero delimitado a un k, ie. más eficientes):
+// Métodos que hacen lo mismo que recolectar() y obtener_sugerencias() pero delimitado a un k:
 std::vector<std::pair<int, std::string>> Trie::obtener_topk(const std::string &prefijo, int k) const {
   NodoTrie *nodo = buscar_prefijo(prefijo);
   if (!nodo)

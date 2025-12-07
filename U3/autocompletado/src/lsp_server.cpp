@@ -2,6 +2,7 @@
 #include "entrenador.hpp"
 #include "json.hpp"
 #include "trie.hpp"
+#include "utf8_es.hpp"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -99,20 +100,6 @@ private:
     return linea.substr(inicio, columna - inicio);
   }
 
-  int utf16_to_utf8_index(const std::string &s, int col16) { // regresa el indice de acuerdo a longitud
-    int i = 0, count16 = 0;
-    while (i < s.size() && count16 < col16) {
-      unsigned char c = s[i];
-      int bytes = (c < 0x80) ? 1 : ((c & 0xE0) == 0xC0) ? 2
-                               : ((c & 0xF0) == 0xE0)   ? 3
-                               : ((c & 0xF8) == 0xF0)   ? 4
-                                                        : 1;
-      i += bytes;
-      count16 += (bytes == 4) ? 2 : 1;
-    }
-    return i;
-  }
-
   // Maneja el request "textDocument/completion"
   void manejar_completion(const json &peticion) {
     try {
@@ -155,17 +142,23 @@ private:
       int byte_index = utf16_to_utf8_index(texto_linea, columna);
       // Extraer prefijo
       std::string prefijo = extraer_prefijo(texto_linea, byte_index);
+      // Detectar patrón de capitalización del prefijo
+      PatronCapitalizacion patron = detectar_patron(prefijo);
+      // Normalizar prefijo a minúsculas para buscar en el Trie
+      std::string prefijo_normalizado = utf8_to_lower_es(prefijo);
       std::cerr << "Prefijo extraído: '" << prefijo << "'" << std::endl; // prints utiles durante el debugueo
       // Obtener sugerencias del Trie
-      auto sugerencias = trie.obtener_topk(prefijo, 10);
+      auto sugerencias = trie.obtener_topk(prefijo_normalizado, 10);
       std::cerr << "Sugerencias encontradas: " << sugerencias.size() << std::endl;
       // Construir items de completion
       json items = json::array();
       for (const auto &[freq, palabra] : sugerencias) {
-        items.push_back({{"label", palabra},
+        // Aplicar el patrón detectado al texto sugerido
+        std::string palabra_final = aplicar_patron(palabra, patron);
+        items.push_back({{"label", palabra_final},
                          {"kind", 1}, // 1 = Text
                          {"detail", "freq: " + std::to_string(freq)},
-                         {"textEdit", {{"range", {{"start", {{"line", linea}, {"character", columna - (int)prefijo.length()}}}, {"end", {{"line", linea}, {"character", columna}}}}}, {"newText", palabra}}}});
+                         {"textEdit", {{"range", {{"start", {{"line", linea}, {"character", columna - utf8_to_utf16_length(prefijo)}}}, {"end", {{"line", linea}, {"character", columna}}}}}, {"newText", palabra_final}}}});
       }
       json respuesta = {
           {"jsonrpc", "2.0"},
