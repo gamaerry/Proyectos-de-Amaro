@@ -2,7 +2,7 @@
 #include "entrenador.hpp"
 #include "json.hpp"
 #include "trie.hpp"
-#include "utf8_es.hpp"
+#include "utf8_es.hpp" // mini librería para operaciones utf8 con soporte para español
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -148,6 +148,15 @@ private:
       std::string prefijo_normalizado = utf8_to_lower_es(prefijo);
       std::cerr << "Prefijo extraído: '" << prefijo << "'" << std::endl; // prints utiles durante el debugueo
       // Obtener sugerencias del Trie
+      if (contar_caracteres_utf8(prefijo) < 2) { // esto util para editores que inician los txt con un espacio y un salto de linea que se lee como prefijo
+        std::cerr << "Prefijo muy corto, no sugiriendo" << std::endl;
+        json respuesta = {
+            {"jsonrpc", "2.0"},
+            {"id", peticion["id"]},
+            {"result", {"items", json::array()}}};
+        enviar_mensaje(respuesta);
+        return;
+      }
       auto sugerencias = trie.obtener_topk(prefijo_normalizado, 10);
       std::cerr << "Sugerencias encontradas: " << sugerencias.size() << std::endl;
       // Construir items de completion
