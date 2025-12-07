@@ -31,7 +31,7 @@ std::vector<std::string> tokenizar(const std::string &texto) {
       continue;
     }
     // 2. ASCII letra/número/guion/apóstrofe/punto válido
-    caracter_valido = std::isalnum(c) || c == '-' || c == '\'' || c == '/';
+    caracter_valido = std::isalnum(c) || c == '-' || c == '\'' || c == '/' || c == '@' || c == '_';
     punto_valido = c == '.' && i > 0 && i + 1 < n && std::isalnum(texto[i - 1]) && std::isalnum(texto[i + 1]);
     dos_puntos = c == ':' && i > 0 && i + 1 < n && (texto[i + 1] == '\'' || texto[i + 1] == '/');
     if (caracter_valido || punto_valido || dos_puntos) {
@@ -75,7 +75,7 @@ void procesar_archivo(const std::string &ruta, std::unordered_map<std::string, i
 std::unordered_map<std::string, int> entrenar_desde_archivos() {
   std::unordered_map<std::string, int> frecuencias;
   // Procesar todos los .txt en la carpeta "textos/"
-  for (const auto &entrada : fs::directory_iterator("../data/")) {
+  for (const auto &entrada : fs::directory_iterator("/home/lg/Documents/EstructuraDeDatos/U3/autocompletado/data/")) {
     if (entrada.path().extension() == ".txt") {
       std::cout << "Procesando: " << entrada.path() << std::endl;
       procesar_archivo(entrada.path().string(), frecuencias);
