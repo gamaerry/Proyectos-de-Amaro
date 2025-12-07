@@ -1,4 +1,5 @@
 #include "entrenador.hpp"
+#include "utf8_es.hpp"
 #include <cctype>
 #include <filesystem>
 #include <fstream>
@@ -12,7 +13,7 @@ std::vector<std::string> tokenizar(const std::string &texto) {
   std::vector<std::string> palabras;
   std::string palabra;
   auto guardar = [&]() {
-    if (palabra.size() >= 3)
+    if (contar_caracteres_utf8(palabra) >= 3)
       palabras.push_back(std::move(palabra));
     palabra.clear();
   };
