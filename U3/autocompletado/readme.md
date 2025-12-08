@@ -1,4 +1,4 @@
-# Autocompletado Gamaerry
+# Autocompletado gamaerry
 
 Sistema de autocompletado personalizado para editores de texto entrenado con tus propios textos en español/inglés.
 
@@ -41,14 +41,14 @@ autocompletado/
 
 Coloca tus archivos `.txt` en el directorio `data/`:
 ```bash
-cp ~/mis_textos/*.txt data/
+cp ~/mis_textos/*.txt autocompletado/data/
 ```
 
 Mientras más texto agregues, mejores serán las sugerencias.
 
 ### Compilar el LSP Server
 ```bash
-cd src
+cd autocompletado/src
 g++ -std=c++17 lsp_server.cpp utf8_es.hpp trie.cpp entrenador.cpp -o out/autocompletado-lsp -O2
 ```
 
@@ -102,9 +102,11 @@ El sistema extrae palabras considerando:
  Apóstrofes (`can't`)  
  Palabras de 3+ caracteres 
 
+ (Nota importante: este language server no verifica gramática ni ortografía, los txt de entrenamiento deben estar bien escritos para sugerencias correctas)
+
 ##  Autor
 
-Desarrollado por @gamaerry como proyecto educativo de Estructuras de Datos.
+Desarrollado por @gamaerry como proyecto para Estructuras de Datos.
 
 ---
 
