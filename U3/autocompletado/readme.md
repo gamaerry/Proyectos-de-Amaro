@@ -80,7 +80,7 @@ language-servers = ["autocompletado-gamaerry"]
 
 En `src/lsp_server.cpp`
 ```cpp
-auto sugerencias = trie.obtener_topk(prefijo_lower, 10);  // Cambiar el 10
+auto sugerencias = trie.obtener_topk(prefijo_normalizado, 10);  // Cambiar el 10
 ```
 
 ### Re-entrenar con Nuevos Textos
