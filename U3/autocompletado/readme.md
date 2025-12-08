@@ -15,6 +15,16 @@ Sistema de autocompletado personalizado para editores de texto entrenado con tus
 - **Trie optimizado**: Búsquedas O(m) donde m = longitud del prefijo
 - **Extensión propia .gama**: El autocompletado puede usar para archivos .txt o cualquier otra extensión personalizada
 
+## Representación visual de la estructura del Trie (Árbol N-ario)
+
+El núcleo del sistema es un **Trie** (árbol de prefijos) que permite búsquedas eficientes:
+
+<div align="center">
+  <img width="300" alt="Estructura del Trie" src="https://github.com/user-attachments/assets/20d623b1-daca-4849-9718-12b89c3acd77" />
+  <br>
+  <em>Cada nodo almacena un carácter, sus hijos, frecuencia y si es final de palabra o no</em>
+</div>
+
 ## Estructura del Proyecto
 ```
 autocompletado/
